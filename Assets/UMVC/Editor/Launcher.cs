@@ -9,5 +9,11 @@ namespace UMVC
         {
             Windows.CreateMVCWindow.ShowWindow();
         }
+
+        [MenuItem("UMVC/Create a Model")]
+        public static void CreateModelWindow()
+        {
+            Windows.CreateModelWindow.ShowWindow();
+        }
     }
 }

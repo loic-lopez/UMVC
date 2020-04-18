@@ -3,16 +3,15 @@ using UnityEngine;
 
 namespace UMVC.Windows
 {
-    public class CreateMVCWindow : Window
+    public class CreateModelWindow : Window
     {
         public static void ShowWindow()
         {
-            Window.ShowWindow(typeof(CreateMVCWindow));
+            Window.ShowWindow(typeof(CreateModelWindow));
             
-            Instance.titleContent = new GUIContent("Create an MVC pattern");
+            Instance.titleContent = new GUIContent("Create a Model");
         }
         
-
         private void OnGUI()
         {
             
