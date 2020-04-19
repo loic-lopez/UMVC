@@ -5,8 +5,11 @@
 </p>
 
 <h3 align="center" style="text-align:center;">
-	MVC Generator Simple and built for Unity
+	Model-View-Controller Generator built for Unity
 </h3>
+<p align="center">
+	Fast, Simple and intuitive
+</p>
 
 <hr>
 <p align="center">	
