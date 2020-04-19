@@ -1,7 +1,7 @@
 <br />
 
 <p align="center">
-    UMVC
+     <img src="/Docs/logo_transparent.jpg" alt="UMVC">
 </p>
 
 <h3 align="center" style="text-align:center;">
