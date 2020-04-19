@@ -13,7 +13,7 @@
 
 <hr>
 <p align="center">	
-	<a href="https://odininspector.com/download">
+	<a href="">
 		<img src="/Docs/BtnDownload.png" alt="Download">
 	</a>
 </p>
