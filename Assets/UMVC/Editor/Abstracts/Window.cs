@@ -10,7 +10,9 @@ namespace UMVC.Abstracts
 
         protected static void ShowWindow(Type typeToCreate)
         {
-            Instance = (EditorWindow) CreateInstance(typeToCreate);
+            if (!Instance)
+                Instance = (EditorWindow) CreateInstance(typeToCreate);
+
             Instance.position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
             Instance.ShowUtility();
         }
