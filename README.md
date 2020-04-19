@@ -22,6 +22,7 @@
 
 ## The library is following the MVC pattern
 
+<br />
 <p align="center">	
 	<img src="/Docs/MVC_Pattern.png" alt="Download">
 </p>
