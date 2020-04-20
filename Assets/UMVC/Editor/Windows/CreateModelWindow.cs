@@ -5,18 +5,16 @@ namespace UMVC.Windows
 {
     public class CreateModelWindow : Window
     {
-        public static void ShowWindow()
+        public override void ShowWindow()
         {
-            Window.ShowWindow(typeof(CreateModelWindow));
+            base.ShowWindow();
             
-            Instance.titleContent = new GUIContent("Create a Model");
+            titleContent = new GUIContent("Create a Model");
         }
         
-        private void OnGUI()
+        protected override void OnGUI()
         {
-            
-            if (GUILayout.Button("Close"))
-                Close();
+            base.OnGUI();
         }
     }
 }
