@@ -1,23 +1,34 @@
+using System;
+using System.IO;
+using System.Reflection;
 using UMVC.Abstracts;
+using UnityEditor;
 using UnityEngine;
 
 namespace UMVC.Windows
 {
-    public class CreateMVCWindow : Window
+    public sealed class CreateMVCWindow : Window
     {
-        public static void ShowWindow()
-        {
-            Window.ShowWindow(typeof(CreateMVCWindow));
-            
-            Instance.titleContent = new GUIContent("Create an MVC pattern");
-        }
-        
 
-        private void OnGUI()
+        public override void ShowWindow()
         {
-            
-            if (GUILayout.Button("Close"))
-                Close();
+            base.ShowWindow();
+
+            var script = MonoScript.FromScriptableObject(this);
+            var path = AssetDatabase.GetAssetPath(script);
+            Debug.LogWarning(path);
+
+            titleContent = new GUIContent
+            {
+                text = "Create an MVC pattern",
+                image = (Texture) EditorGUIUtility.Load("Assets/Scripts/Editor/video-icon.png")
+            };
+        }
+
+
+        protected override void OnGUI()
+        {
+            base.OnGUI();
         }
     }
 }

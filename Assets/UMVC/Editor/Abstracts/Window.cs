@@ -1,4 +1,5 @@
 using System;
+using UMVC.Extensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,20 +7,22 @@ namespace UMVC.Abstracts
 {
     public abstract class Window : EditorWindow
     {
-        protected static EditorWindow Instance;
 
-        protected static void ShowWindow(Type typeToCreate)
+        public virtual void ShowWindow()
         {
-            if (!Instance)
-                Instance = (EditorWindow) CreateInstance(typeToCreate);
-
-            Instance.position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
-            Instance.ShowUtility();
+            position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
+            ShowUtility();
         }
 
         private void OnInspectorUpdate()
         {
             Repaint();
+        }
+
+        protected virtual void OnGUI()
+        {
+            if (GUILayout.Button("Close"))
+                Close();
         }
     }
 }
