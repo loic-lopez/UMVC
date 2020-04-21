@@ -1,17 +1,16 @@
 using System;
 using UMVC.Extensions;
+using UMVC.Interfaces;
 using UnityEditor;
 using UnityEngine;
 
 namespace UMVC.Abstracts
 {
-    public abstract class Window : EditorWindow
+    public abstract class Window : EditorWindow, IWindow
     {
-
-        public virtual void ShowWindow()
+        public virtual void SetupWindow()
         {
-            position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
-            ShowUtility();
+            titleContent.image = (Texture) EditorGUIUtility.Load(Singleton.UMVC.Instance.LogoPath);
         }
 
         private void OnInspectorUpdate()
