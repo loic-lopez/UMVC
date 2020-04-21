@@ -1,29 +1,45 @@
 using UMVC.Abstracts;
+using UMVC.Interfaces;
 using UMVC.Windows;
 using UnityEditor;
 using UnityEngine;
 
 namespace UMVC
 {
-    public static class Launcher 
+    public static class Launcher
     {
-        
-        private static void InstantiateWindow<T>() where T : Window
+
+        /*
+        static Launcher()
         {
-            T window = (T) ScriptableObject.CreateInstance(typeof(T));
-            window.ShowWindow();
+            Debug.Log("[UMVC] Initialize UMVC");
+            Singleton.UMVC.SetupInstance();
+            Debug.Log("[UMVC] Initialized UMVC");
+        }
+        */
+        
+        private static void InstantiateWindow<T>() where T : IWindow
+        {
+            IWindow window = (IWindow) EditorWindow.GetWindow(typeof(T));
+            window.SetupWindow();
         }
         
         [MenuItem("UMVC/Create an MVC pattern")]
-        public static void CreateMVCWindow()
+        private static void CreateMVCWindow()
         {
             InstantiateWindow<CreateMVCWindow>();
         }
 
         [MenuItem("UMVC/Create a Model")]
-        public static void CreateModelWindow()
+        private static void CreateModelWindow()
         {
             InstantiateWindow<CreateModelWindow>();
+        }
+        
+        [MenuItem("UMVC/Configure UMVC")]
+        private static void ShowWindow()
+        {
+            InstantiateWindow<SettingsWindow>();
         }
     }
 }
