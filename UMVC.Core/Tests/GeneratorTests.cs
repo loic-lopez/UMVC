@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
 using NUnit.Framework;
-using UMVC.Templating;
+using UMVC.Core.Templating;
 
 namespace Tests
 {

@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using UMVC.Templating.Templates;
+// ReSharper disable once RedundantUsingDirective
+using UMVC.Core.Templating.Templates;
 
 
-namespace UMVC.Templating
+namespace UMVC.Core.Templating
 {
+  
+    
     public static class Generator
     {
         public static void GenerateModel(string modelName, string namespaceName, string outputDir)
