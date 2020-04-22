@@ -2,10 +2,11 @@
 <#@ output extension=".cs" #>
 <#@ parameter type="System.String" name="Namespace" #>
 <#@ parameter type="System.String" name="Class" #>
+<#@ parameter type="System.String" name="Extends" #>
 
 namespace <#= Namespace #> 
 {
-    public class <#= Class #> {
+    public class <#= Class #> : <#= Extends #> {
 
     }
 }

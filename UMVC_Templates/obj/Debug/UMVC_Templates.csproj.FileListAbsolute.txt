@@ -1,2 +1,0 @@
-D:\Projects\UMVC\UMVC_Templates\obj\Debug\UMVC_Templates.csprojAssemblyReference.cache
-D:\Projects\UMVC\UMVC_Templates\obj\Debug\UMVC_Templates.csproj.CoreCompileInputs.cache

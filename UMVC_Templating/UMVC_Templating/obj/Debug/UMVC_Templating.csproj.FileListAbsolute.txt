@@ -1,0 +1,4 @@
+D:\Projects\UMVC\UMVC_Templating\obj\Debug\UMVC_Templating.csprojAssemblyReference.cache
+D:\Projects\UMVC\UMVC_Templating\obj\Debug\UMVC_Templating.csproj.CoreCompileInputs.cache
+D:\Projects\UMVC\UMVC_Templating\UMVC_Templating\obj\Debug\UMVC_Templating.csprojAssemblyReference.cache
+D:\Projects\UMVC\UMVC_Templating\UMVC_Templating\obj\Debug\UMVC_Templating.csproj.CoreCompileInputs.cache

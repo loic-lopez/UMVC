@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\LoicL\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\LoicL\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_UMVC_Templating.-335353883.00" t="ExcludeRecursive" />
+    <e p="D:\Projects\UMVC\UMVC_Templating" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="UMVC_Templating" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Generator.cs" t="Include" />
+        <e p="LayersGeneratorInterface.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Templates" t="Include">
+          <e p=".gitignore" t="Include" />
+          <e p="LayersGenerator.tt" t="Include" />
+          <e p="LayersGeneratorDemo.tt" t="Include" />
+          <e p="ModelTemplate.tt" t="Include" />
+          <e p="ModelTemplateTest.cs" t="Include" />
+          <e p="ModelTemplateTest.tt" t="Include" />
+        </e>
+        <e p="UMVC_Templating.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="UMVC_Templating.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>
