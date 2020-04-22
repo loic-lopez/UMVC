@@ -1,0 +1,7 @@
+﻿<#@ template debug="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#
+    _ClassNameField = "Model";
+    _NamespaceField = "MyNamespace";
+#>
+<#@ include file="$(ProjectDir)\Templates\ModelTemplate.tt"#>

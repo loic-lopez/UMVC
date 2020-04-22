@@ -18,6 +18,7 @@ namespace UMVC.Editor.Singleton
 
 
         public string LogoPath => $"{RelativePath}/{SettingsModel.spritesDirectory}/{SettingsModel.logo}";
+        public string GeneratedPath => $"{RelativePath}/Templates/Generated";
         
         
         #region Static

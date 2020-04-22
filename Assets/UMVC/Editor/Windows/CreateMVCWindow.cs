@@ -2,6 +2,7 @@ using UMVC.Editor.Abstracts;
 using UMVC.Editor.Styles;
 using UnityEditor;
 using UnityEngine;
+using Microsoft.VisualStudio.TextTemplating;
 
 namespace UMVC.Editor.Windows
 {
@@ -43,9 +44,7 @@ namespace UMVC.Editor.Windows
             GUILayout.Label($"Generated Model: {generatedModelName}");
             GUILayout.Label($"Generated View: {generatedViewName}");
             GUILayout.Label($"Generated Model: {generatedControllerName}");
-            
-            
-            
+
             base.OnGUI();
         }
     }
