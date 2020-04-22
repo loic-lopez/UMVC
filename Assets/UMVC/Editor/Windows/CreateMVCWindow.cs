@@ -39,10 +39,16 @@ namespace UMVC.Windows
 
             // Output
             GUILayout.Label("Output", Label.Header);
+
+            var generatedModelName = _generatedModelName == ModelPrefix ? null : _generatedModelName;
+            var generatedViewName = _generatedViewName == ViewPrefix ? null : _generatedViewName;
+            var generatedControllerName = _generatedControllerName == ControllerPrefix ? null : _generatedControllerName;
             
-            GUILayout.Label($"Generated Model: {_generatedModelName}");
-            GUILayout.Label($"Generated View: {_generatedViewName}");
-            GUILayout.Label($"Generated Model: {_generatedControllerName}");
+            GUILayout.Label($"Generated Model: {generatedModelName}");
+            GUILayout.Label($"Generated View: {generatedViewName}");
+            GUILayout.Label($"Generated Model: {generatedControllerName}");
+            
+            
             
             base.OnGUI();
         }
