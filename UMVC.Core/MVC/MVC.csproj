@@ -7,7 +7,7 @@
         <ProjectGuid>{C588BFD9-8B97-44E7-91D4-9A1B3A26AAF0}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>MVC</RootNamespace>
+        <RootNamespace>UMVC.Core.MVC</RootNamespace>
         <AssemblyName>MVC</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
@@ -36,8 +36,15 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
+        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\Temp\bin\Debug\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="BaseController.cs" />
+        <Compile Include="BaseModel.cs" />
+        <Compile Include="BaseView.cs" />
+        <Compile Include="Interfaces\IBaseModel.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
