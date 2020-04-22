@@ -1,13 +1,9 @@
-using System;
-using System.IO;
-using System.Reflection;
-using UMVC.Abstracts;
-using UMVC.Interfaces;
-using UMVC.Styles;
+using UMVC.Editor.Abstracts;
+using UMVC.Editor.Styles;
 using UnityEditor;
 using UnityEngine;
 
-namespace UMVC.Windows
+namespace UMVC.Editor.Windows
 {
     public sealed class CreateMVCWindow : Window
     {

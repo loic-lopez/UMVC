@@ -1,11 +1,11 @@
-<#@ template debug="false" hostspecific="true" language="C#" #>
+﻿<#@ template language="C#" #>
 <#@ output extension=".cs" #>
 <#@ parameter type="System.String" name="Namespace" #>
 <#@ parameter type="System.String" name="Class" #>
 
 namespace <#= Namespace #> 
 {
-    public class <#= Class #> {
+    public abstract class <#= Class #> {
 
     }
 }

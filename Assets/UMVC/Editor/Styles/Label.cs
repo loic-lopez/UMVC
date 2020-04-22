@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace UMVC.Styles
+namespace UMVC.Editor.Styles
 {
     public static class Label
     {

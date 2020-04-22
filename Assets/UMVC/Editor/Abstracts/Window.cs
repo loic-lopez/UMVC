@@ -1,10 +1,8 @@
-using System;
-using UMVC.Extensions;
-using UMVC.Interfaces;
+using UMVC.Editor.Interfaces;
 using UnityEditor;
 using UnityEngine;
 
-namespace UMVC.Abstracts
+namespace UMVC.Editor.Abstracts
 {
     public abstract class Window : EditorWindow, IWindow
     {

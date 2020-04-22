@@ -1,4 +1,4 @@
-namespace UMVC.Interfaces
+namespace UMVC.Editor.Interfaces
 {
     public interface IWindow
     {
