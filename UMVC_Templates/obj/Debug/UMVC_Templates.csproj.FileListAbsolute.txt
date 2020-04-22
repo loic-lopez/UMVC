@@ -1,6 +1,2 @@
-D:\Projects\UMVC\UMVC_Templates\bin\Debug\UMVC_Templates.dll
-D:\Projects\UMVC\UMVC_Templates\bin\Debug\UMVC_Templates.pdb
 D:\Projects\UMVC\UMVC_Templates\obj\Debug\UMVC_Templates.csprojAssemblyReference.cache
 D:\Projects\UMVC\UMVC_Templates\obj\Debug\UMVC_Templates.csproj.CoreCompileInputs.cache
-D:\Projects\UMVC\UMVC_Templates\obj\Debug\UMVC_Templates.dll
-D:\Projects\UMVC\UMVC_Templates\obj\Debug\UMVC_Templates.pdb

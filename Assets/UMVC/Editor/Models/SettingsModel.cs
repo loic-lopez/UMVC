@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace UMVC.Models
+namespace UMVC.Editor.Models
 {
     public class SettingsModel : ScriptableObject
     {

@@ -1,10 +1,8 @@
-using UMVC.Abstracts;
-using UMVC.Interfaces;
-using UMVC.Windows;
+using UMVC.Editor.Interfaces;
+using UMVC.Editor.Windows;
 using UnityEditor;
-using UnityEngine;
 
-namespace UMVC
+namespace UMVC.Editor
 {
     public static class WindowsManager
     {

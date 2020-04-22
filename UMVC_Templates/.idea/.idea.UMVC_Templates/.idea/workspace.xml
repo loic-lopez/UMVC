@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="353a4f2e-c793-452b-bc3d-53fa4f514f41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Editor.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Editor/DotNetZip.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Editor/DotNetZip.dll.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Editor/NugetForUnity.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Editor/NugetForUnity.dll.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/LICENSE.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/README.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/README.pdf.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Resources.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Resources/defaultIcon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/ThirdParty/NuGet/Resources/defaultIcon.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Templates/Model.tt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/.idea.UMVC_Templates.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/riderModule.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model.tt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMVC_Templates.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMVC_Templates.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.csprojAssemblyReference.cache" afterDir="false" />
+    <list default="true" id="681bbf6d-228c-4e3e-ac93-94bc8a5366d5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/BaseController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/BaseController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/BaseModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/BaseModel.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/BaseView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/BaseView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/Interfaces.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/Interfaces/IBaseModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Assets/UMVC/Architecture/MVC/Interfaces/IBaseModel.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test.tt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assembly-CSharp-Editor.csproj.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/../Assembly-CSharp-Editor.csproj.DotSettings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Abstracts/Window.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Abstracts/Window.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Extensions/SystemExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Extensions/SystemExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Interfaces/IWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Interfaces/IWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Models/SettingsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Models/SettingsModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Singleton/UMVC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Singleton/UMVC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Styles/Label.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Styles/Label.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Templates/Model.tt" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Templates/Model.tt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Utils/Asset.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Utils/Asset.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Windows/CreateMVCWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Windows/CreateMVCWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/Windows/CreateModelWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/Windows/CreateModelWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UMVC/Editor/WindowsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UMVC/Editor/WindowsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UMVC_Templates/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model.tt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UMVC_Templates.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UMVC_Templates.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UMVC_Templates.sln" beforeDir="false" afterPath="$PROJECT_DIR$/UMVC_Templates.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/UMVC_Templates.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/UMVC_Templates.dll" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="T4 File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Model.tt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Test.tt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/App.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Test.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Model.tt" />
+        <option value="$PROJECT_DIR$/Test.tt" />
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="1atHSg76sVyAna64X8x9U8VrfOO" />
+  <component name="ProjectId" id="1atLGElGWKZzzafpiGuyo1ZJ7Na" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -66,17 +68,37 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
+  <component name="RunManager">
+    <configuration name="UMVC_Templates" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/UMVC_Templates.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Console" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="353a4f2e-c793-452b-bc3d-53fa4f514f41" name="Default Changelist" comment="" />
-      <created>1587547970964</created>
+      <changelist id="681bbf6d-228c-4e3e-ac93-94bc8a5366d5" name="Default Changelist" comment="" />
+      <created>1587549846371</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1587547970964</updated>
-      <workItem from="1587547981773" duration="293000" />
+      <updated>1587549846371</updated>
+      <workItem from="1587549855564" duration="848000" />
     </task>
     <servers />
   </component>
@@ -84,5 +106,23 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1587550048099">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587550048099" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1587550048099">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587550048099" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1587550048099">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587550048099" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1587550048099">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587550048099" />
   </component>
 </project>
