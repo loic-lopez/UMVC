@@ -6,18 +6,8 @@ using UnityEngine;
 
 namespace UMVC
 {
-    public static class Launcher
+    public static class WindowsManager
     {
-
-        /*
-        static Launcher()
-        {
-            Debug.Log("[UMVC] Initialize UMVC");
-            Singleton.UMVC.SetupInstance();
-            Debug.Log("[UMVC] Initialized UMVC");
-        }
-        */
-        
         private static void InstantiateWindow<T>() where T : IWindow
         {
             IWindow window = (IWindow) EditorWindow.GetWindow(typeof(T));
@@ -34,12 +24,6 @@ namespace UMVC
         private static void CreateModelWindow()
         {
             InstantiateWindow<CreateModelWindow>();
-        }
-        
-        [MenuItem("UMVC/Configure UMVC")]
-        private static void ShowWindow()
-        {
-            InstantiateWindow<SettingsWindow>();
         }
     }
 }
