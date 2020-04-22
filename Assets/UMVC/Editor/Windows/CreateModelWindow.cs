@@ -12,8 +12,6 @@ namespace UMVC.Windows
         public override void SetupWindow()
         {
             base.SetupWindow();
-
-            //_settingsModel = Asset.CreateAssetIfNotExists<SettingsModel>("Settings", "");
         }
         
         protected override void OnGUI()
