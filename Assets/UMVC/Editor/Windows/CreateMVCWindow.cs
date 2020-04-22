@@ -2,7 +2,6 @@ using UMVC.Editor.Abstracts;
 using UMVC.Editor.Styles;
 using UnityEditor;
 using UnityEngine;
-using Microsoft.VisualStudio.TextTemplating;
 
 namespace UMVC.Editor.Windows
 {
