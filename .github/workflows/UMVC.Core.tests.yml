@@ -23,12 +23,6 @@ jobs:
         with:
           dotnet-version: 3.1.101
 
-      - name: Setup Nuget.exe
-        uses: warrenbuckley/Setup-Nuget@v1
-
-      - name: Install nuget dependencies
-        run: nuget restore ./UMVC.Core/UMVC.Core.sln
-
       - name: Install dotnet dependencies
         run: dotnet restore ./UMVC.Core/UMVC.Core.sln
 
