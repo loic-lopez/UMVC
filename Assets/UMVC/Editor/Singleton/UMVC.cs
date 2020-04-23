@@ -1,10 +1,9 @@
+using UMVC.Editor.Models;
+using UMVC.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
-using System;
-using UMVC.Models;
-using UMVC.Utils;
 
-namespace UMVC.Singleton
+namespace UMVC.Editor.Singleton
 {
     public class UMVC : ScriptableObject
     {
@@ -19,6 +18,7 @@ namespace UMVC.Singleton
 
 
         public string LogoPath => $"{RelativePath}/{SettingsModel.spritesDirectory}/{SettingsModel.logo}";
+        public string GeneratedPath => $"{RelativePath}/Templates/Generated";
         
         
         #region Static
