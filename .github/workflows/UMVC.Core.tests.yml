@@ -1,0 +1,30 @@
+name: .NET Core
+
+on:
+  push:
+    branches: 
+    - master
+    - release/*
+    - staging/*
+    - pre-release/*
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore ./UMVC.Core/UMVC.Core.sln
+    - name: Build
+      run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
+    - name: Test
+      run: dotnet test ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore --verbosity normal
