@@ -2,9 +2,8 @@
 
 namespace MyNamespace 
 {
-    public class Model : BaseModel
+    public class TestController : BaseController<Model>
     {
 
     }
 }
-
