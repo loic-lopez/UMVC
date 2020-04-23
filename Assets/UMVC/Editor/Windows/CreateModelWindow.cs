@@ -1,22 +1,17 @@
-using UMVC.Abstracts;
-using UnityEngine;
+using UMVC.Editor.Abstracts;
 
-namespace UMVC.Windows
+namespace UMVC.Editor.Windows
 {
     public class CreateModelWindow : Window
     {
-        public static void ShowWindow()
+        public override void SetupWindow()
         {
-            Window.ShowWindow(typeof(CreateModelWindow));
-            
-            Instance.titleContent = new GUIContent("Create a Model");
+            base.SetupWindow();
         }
         
-        private void OnGUI()
+        protected override void OnGUI()
         {
-            
-            if (GUILayout.Button("Close"))
-                Close();
+            base.OnGUI();
         }
     }
 }

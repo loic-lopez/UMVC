@@ -1,25 +1,25 @@
-using System;
+using UMVC.Editor.Interfaces;
 using UnityEditor;
 using UnityEngine;
 
-namespace UMVC.Abstracts
+namespace UMVC.Editor.Abstracts
 {
-    public abstract class Window : EditorWindow
+    public abstract class Window : EditorWindow, IWindow
     {
-        protected static EditorWindow Instance;
-
-        protected static void ShowWindow(Type typeToCreate)
+        public virtual void SetupWindow()
         {
-            if (!Instance)
-                Instance = (EditorWindow) CreateInstance(typeToCreate);
-
-            Instance.position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
-            Instance.ShowUtility();
+            titleContent.image = (Texture) EditorGUIUtility.Load(Singleton.UMVC.Instance.LogoPath);
         }
 
         private void OnInspectorUpdate()
         {
             Repaint();
+        }
+
+        protected virtual void OnGUI()
+        {
+            if (GUILayout.Button("Close"))
+                Close();
         }
     }
 }
