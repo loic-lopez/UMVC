@@ -18,8 +18,8 @@ namespace UMVC.Core.Generation
                 Session = new Dictionary<string, object>()
             };
 
-            model.Session["_ClassNameField"] = modelName;
-            model.Session["_NamespaceField"] = namespaceName;
+            model.Session["ClassName"] = modelName;
+            model.Session["Namespace"] = namespaceName;
 
             model.Initialize();
 

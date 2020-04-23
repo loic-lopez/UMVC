@@ -11,6 +11,11 @@
     &lt;TestId&gt;NUnit3x::80941A73-4E8C-4F9B-8859-D14531BBB811::.NETFramework,Version=v4.8::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=58147a31_002D81a1_002D44de_002D82dd_002D7c44c09d0851/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::80941A73-4E8C-4F9B-8859-D14531BBB811::.NETFramework,Version=v4.6.1::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=87096343_002Dca31_002D4e77_002Dbe69_002D78a7af6801fc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::80941A73-4E8C-4F9B-8859-D14531BBB811::.NETFramework,Version=v4.6.1::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
