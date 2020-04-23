@@ -10,4 +10,10 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::80941A73-4E8C-4F9B-8859-D14531BBB811::.NETFramework,Version=v4.8::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=928709b6_002Da378_002D4eae_002D97ab_002D12d516c4f5ca/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestIfModelAsBeenGenerated" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::80941A73-4E8C-4F9B-8859-D14531BBB811::.NETFramework,Version=v4.6.1::Tests.GeneratorTests.TestIfModelAsBeenGenerated&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>
