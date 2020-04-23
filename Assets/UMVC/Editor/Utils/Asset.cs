@@ -1,10 +1,9 @@
-using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UMVC.Utils
+namespace UMVC.Editor.Utils
 {
     public class Asset
     {

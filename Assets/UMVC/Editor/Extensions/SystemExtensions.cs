@@ -1,6 +1,6 @@
 using System;
 
-namespace UMVC.Extensions
+namespace UMVC.Editor.Extensions
 {
     public static class Extensions
     {
