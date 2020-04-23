@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 // ReSharper disable once RedundantUsingDirective
-using UMVC.Core.Templating.Templates;
+using UMVC.Core.Templates;
 
 
-namespace UMVC.Core.Templating
+namespace UMVC.Core.Generation
 {
   
     

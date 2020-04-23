@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" linePragmas="false" #>
+﻿<#@ template language="C#" linePragmas="false" hostspecific="false" #>
 <#@ parameter name="ClassName" type="System.String"#>
 <#@ parameter name="Namespace" type="System.String"#>
 
