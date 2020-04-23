@@ -36,9 +36,4 @@ jobs:
         run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore --verbosity normal --logger:nunit
-
-      - uses: MirrorNG/nunit-reporter@v1.0.9
-        with:
-          path: Tests/*.xml
-          access-token: ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet test ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore --verbosity normal
