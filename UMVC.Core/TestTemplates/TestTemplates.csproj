@@ -46,7 +46,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="ModelTemplateTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelTemplateTest.cs</LastGenOutput>
@@ -63,16 +62,4 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-  <PropertyGroup>
-    <TransformOnBuild>true</TransformOnBuild>
-    <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
-    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
-  </PropertyGroup>
-  <ItemGroup>
-    <T4ParameterValues Include="ProjectDir">
-      <Value>$(ProjectDir)</Value>
-      <Visible>false</Visible>
-    </T4ParameterValues>
-  </ItemGroup>
-  <Import Project="..\Deps\TextTemplating\Microsoft.TextTemplating.targets" />
 </Project>
