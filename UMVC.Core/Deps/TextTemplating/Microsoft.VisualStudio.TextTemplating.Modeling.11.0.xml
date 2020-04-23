@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.VisualStudio.TextTemplating.Modeling.11.0</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.VisualStudio.TextTemplating.Modeling.ModelBusEnabledTextTransformation">
+      <summary>To access Visual Studio ModelBus in the code of a text template, specify this class in the inherits attribute of the template directive of the template, and set the hostspecific attribute to true. In the template code, you can get the SModelBus and SComponentModel services.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.ModelBusEnabledTextTransformation.#ctor"></member>
+    <member name="P:Microsoft.VisualStudio.TextTemplating.Modeling.ModelBusEnabledTextTransformation.ModelBus">
+      <summary>Get the Visual Studio ModelBus service that this base class provides.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.ModelBusEnabledTextTransformation.OnSessionChanged(Microsoft.VisualStudio.TextTemplating.ITextTemplatingSession,Microsoft.VisualStudio.TextTemplating.ITextTemplatingSession)">
+      <summary>Called whenever a session is provided that isn't the same as the last remembered session. Clears the static modelbus instance to prepare for a new snapshot of model files to be read.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.ModelBusEnabledTextTransformation.ReportError(Microsoft.VisualStudio.Modeling.Integration.ErrorCategory,System.String)">
+      <summary>Converts from ModelBus errors to Text Template errors. Calls this.Error or this.Warning depending on the category value.</summary>
+      <param name="category">ModelBus ErrorCategory</param>
+      <param name="message">Message string</param>
+    </member>
+    <member name="P:Microsoft.VisualStudio.TextTemplating.Modeling.ModelBusEnabledTextTransformation.ServiceProvider">
+      <summary>Return a service provider containing the Visual Studio ModelBus. Do not use the service provider from the Host.</summary>
+    </member>
+    <member name="T:Microsoft.VisualStudio.TextTemplating.Modeling.SessionStoreCache">
+      <summary>Maintains a cache of Stores during a T4 user session. Each Store is identified by a key string.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.SessionStoreCache.CacheSessionStore(System.String,Microsoft.VisualStudio.Modeling.Store)">
+      <summary>Cache a Store with a given key string.</summary>
+      <param name="storeKey">The key identifying this Store. It must not be already in use.</param>
+      <param name="store">A Store.</param>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.SessionStoreCache.DisposeSessionStoreMap">
+      <summary>Dispose the cache and its Stores.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.SessionStoreCache.GetSessionStore(System.String)">
+      <summary>Get the store identified by the given key, or null if the key is not found.</summary>
+      <returns>The Store identified by the storeKey, or null if the key was not found.</returns>
+      <param name="storeKey">A string identifying the Store.</param>
+    </member>
+    <member name="T:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager">
+      <summary>Creates and manages Model Bus Adapters representing Domain-Specific Language models inside a text templating AppDomain in Visual Studio.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.#ctor"></member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.ClearState">
+      <summary>Clear the store state for all adapters.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.CreateDocumentHandler(Microsoft.VisualStudio.Modeling.Integration.ModelingAdapterReference,System.IServiceProvider)">
+      <summary>Create a ModelingDocumentHandler given a ModelingAdapterReference.</summary>
+      <returns>The new ModelingDocumentHandler.</returns>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.CreateLoadStore(Microsoft.VisualStudio.Modeling.Store,Microsoft.VisualStudio.Modeling.Integration.ModelingAdapterReference,System.IServiceProvider)">
+      <summary>Load a Store with the model for the given adapter reference. If the given Store is null then create the Store as well.</summary>
+      <returns>The root element of the loaded model.</returns>
+      <param name="store">The Store in which to load the model. Null to create a new Store.</param>
+      <param name="adapterReference">An adapter reference to an element in the model that will be loaded.</param>
+      <param name="serviceProvider">A service provider in which to load the Store.</param>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.CreateSerializerLocator"></member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.DoCreateAdapter(Microsoft.VisualStudio.Modeling.Integration.ModelBusReference,System.IServiceProvider)">
+      <summary>Creates a ModelBusAdapter from a ModelBusReference.</summary>
+      <returns>A new ModelBusAdapter instance.</returns>
+      <param name="reference">Reference from which to create the adapter.</param>
+      <param name="serviceProvider">Service provider used to create an association between the caller and the referenced model.</param>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.FindStoreRoot(Microsoft.VisualStudio.Modeling.Store,Microsoft.VisualStudio.Modeling.Integration.ModelingAdapterReference,System.IServiceProvider)">
+      <summary>Given a cached store, find the model root within it for the given adapter reference.</summary>
+      <returns>The root element or null, if the adapter reference is not found.</returns>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.GetAdapterReferenceStoreKey(Microsoft.VisualStudio.Modeling.Integration.ModelingAdapterReference)">
+      <summary>Given an AdapterReference, provide a key that uniquely represents the Store that should be used for loading/dereferencing it.</summary>
+      <param name="adapterReference">A ModelingAdapterReference.</param>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.GetView(Microsoft.VisualStudio.Modeling.Integration.ModelBusAdapter,Microsoft.VisualStudio.Modeling.Integration.ModelBusReference)">
+      <summary>Not supported in the context of text templates.</summary>
+    </member>
+    <member name="F:Microsoft.VisualStudio.TextTemplating.Modeling.VsTextTemplatingModelingAdapterManager.HostName">
+      <summary>A constant string identifying this as the Visual Studio Text Templating Model Bus host.</summary>
+    </member>
+    <member name="T:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation">
+      <summary>Use this base class for text transformations from domain-specific language models.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.#ctor"></member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.AddDomainModel(System.Type)">
+      <summary>Add a domain model type to be loaded by the Store. Call this for each domain model before calling Initialize().</summary>
+      <param name="modelType">Domain model type defined by a domain-specific language.</param>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.ConvertModelRelativePathToTemplateRelativePath(System.String,System.String,System.String)">
+      <summary>[SECURITY CRITICAL] Convert a path expressed relative to a model file to one expressed relative to a template.</summary>
+      <param name="modelPath">The full path of the model file.</param>
+      <param name="templatePath">The full path of the template file.</param>
+      <param name="path">The path to be converted.</param>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.Dispose(System.Boolean)"></member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.Initialize">
+      <summary>Loads the models specified using AddModel() and makes the host ready to process the template.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.OnSessionChanged(Microsoft.VisualStudio.TextTemplating.ITextTemplatingSession,Microsoft.VisualStudio.TextTemplating.ITextTemplatingSession)"></member>
+    <member name="P:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.ServiceProvider"></member>
+    <member name="P:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.Session"></member>
+    <member name="P:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.SessionId"></member>
+    <member name="P:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.SkipValidation">
+      <summary>If true, ValidateStore() does not run validation and returns false. Defaults to false. </summary>
+    </member>
+    <member name="P:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.Store">
+      <summary>Gets the modeling Store.</summary>
+    </member>
+    <member name="M:Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation.ValidateStore(System.String,System.CodeDom.Compiler.CompilerErrorCollection)">
+      <summary>Validates the store with the given validation categories. Returns true if there are errors.</summary>
+      <param name="categories">The categories of validation to apply. Use 'open', 'load', 'save', and 'menu'. Separate multiple categories with '|'.</param>
+      <param name="errors">Error reports will be placed in this collection.</param>
+    </member>
+  </members>
+</doc>
