@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
 using NUnit.Framework;
-using UMVC.Core.Templating;
+using UMVC.Core.Generation;
 
 namespace Tests
 {
@@ -70,7 +70,7 @@ namespace Tests
                     // create instance of the desired class and call the desired function
                     Type type = assembly.GetType(desiredClass);
                     object obj = Activator.CreateInstance(type);
-                    Console.WriteLine(obj);
+                    Assert.IsTrue(obj.GetType() == type);
                 }
             }
 
