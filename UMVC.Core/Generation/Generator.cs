@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 // ReSharper disable once RedundantUsingDirective
-using UMVC.Core.Templating.Templates;
+using UMVC.Core.Templates;
 
 
-namespace UMVC.Core.Templating
+namespace UMVC.Core.Generation
 {
   
     
@@ -18,8 +18,8 @@ namespace UMVC.Core.Templating
                 Session = new Dictionary<string, object>()
             };
 
-            model.Session["_ClassNameField"] = modelName;
-            model.Session["_NamespaceField"] = namespaceName;
+            model.Session["ClassName"] = modelName;
+            model.Session["Namespace"] = namespaceName;
 
             model.Initialize();
 

@@ -6,14 +6,15 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\Unity\Hub\Editor\2019.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0e7949e9_002Dc547_002D44ad_002D9770_002D67241892072b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=668dea82_002Da3ef_002D450b_002Dae9e_002Dc165d43e5bb9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::80941A73-4E8C-4F9B-8859-D14531BBB811::.NETFramework,Version=v4.8::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=928709b6_002Da378_002D4eae_002D97ab_002D12d516c4f5ca/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestIfModelAsBeenGenerated" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::80941A73-4E8C-4F9B-8859-D14531BBB811::.NETFramework,Version=v4.6.1::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	
+	
 	</wpf:ResourceDictionary>
