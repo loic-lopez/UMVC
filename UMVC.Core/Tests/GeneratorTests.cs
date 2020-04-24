@@ -1,79 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Emit;
+﻿using System.IO;
 using NUnit.Framework;
-using UMVC.Core.Generation;
+using UMVC.Core.MVC;
 
-namespace Tests
+namespace UMVC.Core.Tests
 {
     [TestFixture]
     public class GeneratorTests
     {
         [Test]
-        public void TestIfModelAsBeenGenerated()
+        public void TestIfControllerHasBeenGenerated()
         {
+            const string namespaceName = "TestNamespace";
+            const string modelName = "TestModel";
+            const string controllerName = "TestController";
             var currentDir = Directory.GetCurrentDirectory();
-            var namespaceName = "TestNamespace";
-            var modelName = "TestModel";
+
+            var generatedObj = TestsUtils.GenerateController(controllerName, modelName, namespaceName, currentDir);
+
+            UMVCAssert.HasSameBaseClass(generatedObj.GetType(), typeof(BaseController<>));
+            var desiredClass = $"{namespaceName}.{controllerName}";
+            Assert.IsTrue(generatedObj.GetType().ToString() == desiredClass);
+        }
+
+        [Test]
+        public void TestIfModelHasBeenGenerated()
+        {
+            const string namespaceName = "TestNamespace";
+            const string modelName = "TestModel";
+            var currentDir = Directory.GetCurrentDirectory();
+
+            var generatedObj = TestsUtils.GenerateModel(modelName, namespaceName, currentDir);
             
-            Generator.GenerateModel(modelName, namespaceName, currentDir);
-            var generatedFile = currentDir + "/TestModel.cs";
-            Assert.IsTrue(File.Exists(generatedFile));
-            
-            //SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(generatedFile));
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(generatedFile));
-            
-            // define other necessary objects for compilation
-            string assemblyName = Path.GetRandomFileName();
-            MetadataReference[] references = {
-                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location)
-            };
+            UMVCAssert.HasSameBaseClass(generatedObj.GetType(), typeof(BaseModel));
+            var desiredClass = $"{namespaceName}.{modelName}";
+            Assert.IsTrue(generatedObj.GetType().ToString() == desiredClass);
+        }
 
-            // analyse and generate IL code from syntax tree
-            CSharpCompilation compilation = CSharpCompilation.Create(
-                assemblyName,
-                new[] { syntaxTree },
-                references,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        // WONTFIX: We can't call Activator.CreateInstance() because BaseView extends Monobehavior 
+        [Test]
+        public void TestIfViewHasBeenGenerated()
+        {
+            const string namespaceName = "TestNamespace";
+            const string modelName = "TestModel";
+            const string controllerName = "TestController";
+            const string viewName = "TestView";
+            var currentDir = Directory.GetCurrentDirectory();
 
-            using (var ms = new MemoryStream())
-            {
-                // write IL code into memory
-                EmitResult result = compilation.Emit(ms);
-                
-                if (!result.Success)
-                {
-                    // handle exceptions
-                    IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic => 
-                        diagnostic.IsWarningAsError || 
-                        diagnostic.Severity == DiagnosticSeverity.Error);
-
-                    foreach (Diagnostic diagnostic in failures)
-                    {
-                        Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
-                    }
-                    Assert.Fail("See compiler errors!");
-                }
-                else
-                {
-                    // load this 'virtual' DLL so that we can use
-                    ms.Seek(0, SeekOrigin.Begin);
-                    Assembly assembly = Assembly.Load(ms.ToArray());
-
-                    var desiredClass = $"{namespaceName}.{modelName}";
-                    // create instance of the desired class and call the desired function
-                    Type type = assembly.GetType(desiredClass);
-                    object obj = Activator.CreateInstance(type);
-                    Assert.IsTrue(obj.GetType() == type);
-                }
-            }
-
+            var generatedType = TestsUtils.GenerateView(viewName, controllerName, modelName, namespaceName, currentDir);
+            var desiredClass = $"{namespaceName}.{viewName}";
+            UMVCAssert.HasSameBaseClass(generatedType, typeof(BaseView<,>));
+            Assert.IsTrue(generatedType.ToString() == desiredClass);
         }
     }
 }

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UMVC.Core.TestTemplates</RootNamespace>
-    <AssemblyName>TestTemplates</AssemblyName>
+    <AssemblyName>UMVC.Core.TestTemplates</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,8 +36,21 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Dlls\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewTemplateTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewTemplateTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControllerTemplateTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControllerTemplateTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelTemplateTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -46,6 +59,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ViewTemplateTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewTemplateTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="ControllerTemplateTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ControllerTemplateTest.cs</LastGenOutput>
+    </Content>
     <Content Include="ModelTemplateTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelTemplateTest.cs</LastGenOutput>
@@ -53,6 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MVC\MVC.csproj">
+      <Project>{c588bfd9-8b97-44e7-91d4-9a1b3a26aaf0}</Project>
+      <Name>MVC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

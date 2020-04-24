@@ -76,3 +76,8 @@ crashlytics-build.properties
 /MSBuild/Output/
 /Assets/UMVC/Dependencies.meta
 /Assets/Dependencies.meta
+/Dependencies/
+/Assets/UMVC/Editor/EditorDependencies/Dependencies/
+/Assets/UMVC/PlayerDependencies/Dependencies/
+/Assets/UMVC/PlayerDependencies/Dependencies.meta
+/Assets/UMVC/Editor/EditorDependencies/Dependencies.meta

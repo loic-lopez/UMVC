@@ -2,9 +2,8 @@
 
 namespace UMVC.Core.TestTemplates 
 {
-    public class Model : BaseModel
+    public class TestView : BaseView<Model, TestController>
     {
 
     }
 }
-

@@ -1,0 +1,9 @@
+﻿﻿<#@ template debug="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#
+    _ClassNameField = "TestView";
+    _NamespaceField = "MyNamespace";
+    _ModelField = "Model";
+    _ControllerField = "TestController";
+#>
+<#@ include file="$(ProjectDir)\..\Templates\ViewTemplate.tt"#>
