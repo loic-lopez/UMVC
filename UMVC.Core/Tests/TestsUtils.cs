@@ -10,7 +10,7 @@ using UMVC.Core.Generation;
 using UMVC.Core.MVC;
 using UnityEngine;
 
-namespace Tests
+namespace UMVC.Core.Tests
 {
     public static class TestsUtils
     {

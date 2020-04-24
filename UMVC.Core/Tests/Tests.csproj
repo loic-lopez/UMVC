@@ -4,6 +4,10 @@
         <TargetFramework>net461</TargetFramework>
 
         <IsPackable>false</IsPackable>
+
+        <RootNamespace>UMVC.Core.Tests</RootNamespace>
+
+        <AssemblyName>UMVC.Core.Tests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

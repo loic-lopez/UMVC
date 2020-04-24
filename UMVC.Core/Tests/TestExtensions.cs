@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Tests
+namespace UMVC.Core.Tests
 {
     public static class UMVCAssert
     {

@@ -33,8 +33,7 @@
   <Import Project="$(MSBuildForUnityGeneratedProjectDirectory)\$(MSBuildProjectName).g.props" />
   
   <ItemGroup>
-    <ProjectReference Include="..\..\UMVC.Core\MVC\MVC.csproj" />
-    <ProjectReference Include="..\..\UMVC.Core\Generation\Generation.csproj" />
+    <ProjectReference Include="$(UnityProjectAssetsPath)\..\UMVC.Core\MVC\MVC.csproj" />
   </ItemGroup>
 
   <!-- SDK.targets is imported inside this props file -->

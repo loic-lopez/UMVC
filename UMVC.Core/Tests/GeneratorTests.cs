@@ -1,10 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using NUnit.Framework;
 using UMVC.Core.MVC;
 
-namespace Tests
+namespace UMVC.Core.Tests
 {
     [TestFixture]
     public class GeneratorTests
