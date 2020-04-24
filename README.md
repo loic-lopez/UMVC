@@ -12,13 +12,21 @@
 </p>
 
 <hr>
-<p align="center">	
+<p align="center">
+	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3A%22UMVC+Generation+Tests%22">
+		<img src="https://github.com/loic-lopez/UMVC/workflows/UMVC%20Generation%20Tests/badge.svg" alt="Download">
+	</a>
 	<a href="">
 		<img src="/Docs/BtnDownload.png" alt="Download">
 	</a>
 </p>
 <hr>
 
+## Features
+
+✔️ Customizable T4 Templates
+
+✔️ Generate your architecture directly in the Unity Editor
 
 ## The library is following the MVC pattern
 
