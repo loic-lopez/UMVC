@@ -1,29 +1,27 @@
-﻿using System.Collections.Generic;
+﻿// ReSharper disable once RedundantUsingDirective
+using System.Collections.Generic;
 using System.IO;
-// ReSharper disable once RedundantUsingDirective
 using UMVC.Core.Templates;
 
 
 namespace UMVC.Core.Generation
 {
-  
-    
-    public static class Generator
+    public static partial class Generator
     {
         public static void GenerateModel(string modelName, string namespaceName, string outputDir)
         {
-            ModelTemplate model = new ModelTemplate
+            ModelTemplate template = new ModelTemplate
             {
                 //Create our session.
                 Session = new Dictionary<string, object>()
             };
 
-            model.Session["ClassName"] = modelName;
-            model.Session["Namespace"] = namespaceName;
+            template.Session["ClassName"] = modelName;
+            template.Session["Namespace"] = namespaceName;
 
-            model.Initialize();
+            template.Initialize();
 
-            string classDef = model.TransformText();
+            string classDef = template.TransformText();
 
             File.WriteAllText($"{outputDir}/{modelName}.cs", classDef);
         }

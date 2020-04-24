@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace UMVC.Core.MVC
 {
-    public abstract class BaseView<TModel, TController> : MonoBehaviour 
+    public abstract class BaseView<TModel, TController> : MonoBehaviour
         where TModel : IBaseModel, new()
         where TController : BaseController<TModel>, new()
     {
         protected readonly TController Controller = new TController();
 
         public TModel Model = new TModel();
-        
+
         protected virtual void Awake()
         {
             Controller.Setup(Model);

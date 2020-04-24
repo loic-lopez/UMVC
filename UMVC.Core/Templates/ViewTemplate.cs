@@ -15,7 +15,7 @@ namespace UMVC.Core.Templates
     /// Class to produce the template output
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class ModelTemplate : ModelTemplateBase
+    public partial class ViewTemplate : ViewTemplateBase
     {
         /// <summary>
         /// Create the template output
@@ -26,7 +26,11 @@ namespace UMVC.Core.Templates
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             this.Write(" \r\n{\r\n    public class ");
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
-            this.Write(" : BaseModel\r\n    {\r\n\r\n    }\r\n}\r\n\r\n");
+            this.Write(" : BaseView<");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model));
+            this.Write(", ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Controller));
+            this.Write(">\r\n    {\r\n\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
 
@@ -53,6 +57,32 @@ private string Namespace
     get
     {
         return this._NamespaceField;
+    }
+}
+
+private string _ModelField;
+
+/// <summary>
+/// Access the Model parameter of the template.
+/// </summary>
+private string Model
+{
+    get
+    {
+        return this._ModelField;
+    }
+}
+
+private string _ControllerField;
+
+/// <summary>
+/// Access the Controller parameter of the template.
+/// </summary>
+private string Controller
+{
+    get
+    {
+        return this._ControllerField;
     }
 }
 
@@ -92,6 +122,34 @@ if ((NamespaceValueAcquired == false))
         this._NamespaceField = ((string)(data));
     }
 }
+bool ModelValueAcquired = false;
+if (this.Session.ContainsKey("Model"))
+{
+    this._ModelField = ((string)(this.Session["Model"]));
+    ModelValueAcquired = true;
+}
+if ((ModelValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Model");
+    if ((data != null))
+    {
+        this._ModelField = ((string)(data));
+    }
+}
+bool ControllerValueAcquired = false;
+if (this.Session.ContainsKey("Controller"))
+{
+    this._ControllerField = ((string)(this.Session["Controller"]));
+    ControllerValueAcquired = true;
+}
+if ((ControllerValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Controller");
+    if ((data != null))
+    {
+        this._ControllerField = ((string)(data));
+    }
+}
 
 
     }
@@ -104,7 +162,7 @@ if ((NamespaceValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ModelTemplateBase
+    public class ViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
