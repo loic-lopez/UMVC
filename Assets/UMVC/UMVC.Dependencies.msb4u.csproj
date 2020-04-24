@@ -34,7 +34,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\UMVC.Core\MVC\MVC.csproj" />
-    <ProjectReference Include="..\..\UMVC.Core\Templating\Templating.csproj" />
+    <ProjectReference Include="..\..\UMVC.Core\Generation\Generation.csproj" />
   </ItemGroup>
 
   <!-- SDK.targets is imported inside this props file -->

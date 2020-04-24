@@ -6,7 +6,17 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\Unity\Hub\Editor\2019.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=225d77a3_002Dbe27_002D468d_002D81a0_002D603feb01deb4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=668dea82_002Da3ef_002D450b_002Dae9e_002Dc165d43e5bb9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f33d88f3_002D7090_002D47cc_002D8e3b_002Dd35a5403b21e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::Tests.GeneratorTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
