@@ -47,6 +47,11 @@
             <DependentUpon>ModelTemplate.tt</DependentUpon>
         </Compile>
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="ViewTemplate.cs">
+          <AutoGen>True</AutoGen>
+          <DesignTime>True</DesignTime>
+          <DependentUpon>ViewTemplate.tt</DependentUpon>
+        </Compile>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <ItemGroup>
@@ -64,6 +69,10 @@
         <Content Include="ModelTemplate.tt">
             <Generator>TextTemplatingFilePreprocessor</Generator>
             <LastGenOutput>ModelTemplate.cs</LastGenOutput>
+        </Content>
+        <Content Include="ViewTemplate.tt">
+          <Generator>TextTemplatingFilePreprocessor</Generator>
+          <LastGenOutput>ViewTemplate.cs</LastGenOutput>
         </Content>
     </ItemGroup>
 </Project>

@@ -8,28 +8,30 @@ namespace UMVC.Core.Generation
 {
     public static partial class Generator
     {
-        public static void GenerateController(
+        public static void GenerateView(
+            string viewName,
             string controllerName, 
             string modelName, 
             string namespaceName,
             string outputDir
         )
         {
-            ControllerTemplate template = new ControllerTemplate
+            ViewTemplate template = new ViewTemplate
             {
                 //Create our session.
                 Session = new Dictionary<string, object>()
             };
 
-            template.Session["ClassName"] = controllerName;
+            template.Session["ClassName"] = viewName;
             template.Session["Namespace"] = namespaceName;
             template.Session["Model"] = modelName;
+            template.Session["Controller"] = controllerName;
 
             template.Initialize();
 
             string classDef = template.TransformText();
 
-            File.WriteAllText($"{outputDir}/{controllerName}.cs", classDef);
+            File.WriteAllText($"{outputDir}/{viewName}.cs", classDef);
         }
     }
 }

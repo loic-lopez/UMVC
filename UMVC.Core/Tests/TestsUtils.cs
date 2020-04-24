@@ -8,12 +8,13 @@ using Microsoft.CodeAnalysis.CSharp;
 using NUnit.Framework;
 using UMVC.Core.Generation;
 using UMVC.Core.MVC;
+using UnityEngine;
 
 namespace Tests
 {
     public static class TestsUtils
     {
-        private static object CompileInRAMGeneratedClass(
+        private static Type CompileInRAMGeneratedClass(
             string generatedFile,
             string desiredClass,
             IReadOnlyCollection<Type> additionalAssemblies = null
@@ -24,7 +25,7 @@ namespace Tests
             return CompileFiles(new[] {syntaxTree}, desiredClass, additionalAssemblies);
         }
 
-        private static object CompileInRAMGeneratedClasses(
+        private static Type CompileInRAMGeneratedClasses(
             IEnumerable<string> generatedFiles,
             string desiredClass,
             IReadOnlyCollection<Type> additionalAssemblies = null
@@ -37,7 +38,7 @@ namespace Tests
             return CompileFiles(syntaxTreeList, desiredClass, additionalAssemblies);
         }
 
-        private static object CompileFiles(
+        private static Type CompileFiles(
             IEnumerable<SyntaxTree> syntaxTreeList,
             string desiredClass,
             IReadOnlyCollection<Type> additionalAssemblies = null
@@ -87,8 +88,7 @@ namespace Tests
                     var assembly = Assembly.Load(ms.ToArray());
 
                     // create instance of the desired class and call the desired function
-                    var type = assembly.GetType(desiredClass);
-                    return Activator.CreateInstance(type);
+                    return assembly.GetType(desiredClass);
                 }
             }
 
@@ -106,7 +106,7 @@ namespace Tests
 
             var additionalTypesToCompile = new List<Type> {typeof(BaseModel)};
 
-            return CompileInRAMGeneratedClass(generatedFile, desiredClass, additionalTypesToCompile);
+            return Activator.CreateInstance(CompileInRAMGeneratedClass(generatedFile, desiredClass, additionalTypesToCompile));
         }
 
         public static object GenerateController(
@@ -127,8 +127,39 @@ namespace Tests
 
             var additionalTypesToCompile = new List<Type> {typeof(BaseModel)};
 
-            return CompileInRAMGeneratedClasses(
+            return Activator.CreateInstance(CompileInRAMGeneratedClasses(
                 new[] {generatedFile, generatedModelFile},
+                desiredClass,
+                additionalTypesToCompile
+            ));
+        }
+        
+        public static Type GenerateView(
+            string viewName,
+            string controllerName,
+            string modelName,
+            string namespaceName,
+            string currentDir
+        )
+        {
+            // Generate View
+            Generator.GenerateView(viewName, controllerName, modelName, namespaceName, currentDir);
+            var generatedFile = currentDir + $"/{viewName}.cs";
+            var desiredClass = $"{namespaceName}.{viewName}";
+            Assert.IsTrue(File.Exists(generatedFile));
+            
+            // Generate controller
+            Generator.GenerateController(controllerName, modelName, namespaceName, currentDir);
+            var generatedControllerFile = currentDir + $"/{controllerName}.cs";
+
+            // Generate Model
+            Generator.GenerateModel(modelName, namespaceName, currentDir);
+            var generatedModelFile = currentDir + $"/{modelName}.cs";
+
+            var additionalTypesToCompile = new List<Type> {typeof(BaseModel), typeof(MonoBehaviour)};
+
+            return CompileInRAMGeneratedClasses(
+                new[] {generatedFile, generatedModelFile, generatedControllerFile},
                 desiredClass,
                 additionalTypesToCompile
             );
