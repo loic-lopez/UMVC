@@ -1,6 +1,6 @@
 ﻿using UMVC.Core.MVC;
 
-namespace UMVC.Core.TestTemplates 
+namespace MyNamespace 
 {
     public class TestView : BaseView<Model, TestController>
     {

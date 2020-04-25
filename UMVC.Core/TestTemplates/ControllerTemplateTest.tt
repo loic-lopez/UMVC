@@ -4,5 +4,6 @@
     _ClassNameField = "TestController";
     _NamespaceField = "MyNamespace";
     _ModelField = "Model";
+    _ExtendsField = "BaseController";
 #>
 <#@ include file="$(ProjectDir)\..\Templates\ControllerTemplate.tt"#>

@@ -3,5 +3,6 @@
 <#
     _ClassNameField = "Model";
     _NamespaceField = "MyNamespace";
+    _ExtendsField = "BaseModel";
 #>
 <#@ include file="$(ProjectDir)\..\Templates\ModelTemplate.tt"#>
