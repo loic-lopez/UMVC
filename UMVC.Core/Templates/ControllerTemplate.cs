@@ -26,7 +26,9 @@ namespace UMVC.Core.Templates
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             this.Write(" \r\n{\r\n    public class ");
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
-            this.Write(" : BaseController<");
+            this.Write(" : ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Extends));
+            this.Write("<");
             this.Write(this.ToStringHelper.ToStringWithCulture(Model));
             this.Write(">\r\n    {\r\n\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
@@ -68,6 +70,19 @@ private string Model
     get
     {
         return this._ModelField;
+    }
+}
+
+private string _ExtendsField;
+
+/// <summary>
+/// Access the Extends parameter of the template.
+/// </summary>
+private string Extends
+{
+    get
+    {
+        return this._ExtendsField;
     }
 }
 
@@ -119,6 +134,20 @@ if ((ModelValueAcquired == false))
     if ((data != null))
     {
         this._ModelField = ((string)(data));
+    }
+}
+bool ExtendsValueAcquired = false;
+if (this.Session.ContainsKey("Extends"))
+{
+    this._ExtendsField = ((string)(this.Session["Extends"]));
+    ExtendsValueAcquired = true;
+}
+if ((ExtendsValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Extends");
+    if ((data != null))
+    {
+        this._ExtendsField = ((string)(data));
     }
 }
 

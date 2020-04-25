@@ -8,7 +8,7 @@ namespace UMVC.Core.Generation
 {
     public static partial class Generator
     {
-        public static void GenerateModel(string modelName, string namespaceName, string outputDir)
+        public static void GenerateModel(string modelName, string namespaceName, string extends, string outputDir)
         {
             ModelTemplate template = new ModelTemplate
             {
@@ -18,6 +18,7 @@ namespace UMVC.Core.Generation
 
             template.Session["ClassName"] = modelName;
             template.Session["Namespace"] = namespaceName;
+            template.Session["Extends"] = extends;
 
             template.Initialize();
 
