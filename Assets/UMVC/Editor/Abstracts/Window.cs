@@ -1,4 +1,5 @@
 using UMVC.Editor.Interfaces;
+using UMVC.Editor.Styles;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace UMVC.Editor.Abstracts
 
         protected virtual void OnGUI()
         {
-            if (GUILayout.Button("Close"))
+            if (GUILayout.Button("Close", Button.WithMargin))
                 Close();
         }
     }
