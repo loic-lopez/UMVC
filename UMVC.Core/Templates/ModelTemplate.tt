@@ -1,11 +1,12 @@
 ﻿<#@ template language="C#" hostspecific="false" linePragmas="false" #>
 <#@ parameter name="ClassName" type="System.String"#>
 <#@ parameter name="Namespace" type="System.String"#>
+<#@ parameter name="Extends" type="System.String"#>
 using UMVC.Core.MVC;
 
 namespace <#= Namespace #> 
 {
-    public class <#= ClassName #> : BaseModel
+    public class <#= ClassName #> : <#= Extends #>
     {
 
     }

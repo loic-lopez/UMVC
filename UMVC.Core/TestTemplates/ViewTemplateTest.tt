@@ -5,5 +5,6 @@
     _NamespaceField = "MyNamespace";
     _ModelField = "Model";
     _ControllerField = "TestController";
+    _ExtendsField = "BaseView";
 #>
 <#@ include file="$(ProjectDir)\..\Templates\ViewTemplate.tt"#>

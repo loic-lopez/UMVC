@@ -96,10 +96,10 @@ namespace UMVC.Core.Tests
         }
 
 
-        public static object GenerateModel(string modelName, string namespaceName, string currentDir)
+        public static object GenerateModel(string modelName, string namespaceName, string extends, string currentDir)
         {
             // Generate Model
-            Generator.GenerateModel(modelName, namespaceName, currentDir);
+            Generator.GenerateModel(modelName, namespaceName, extends, currentDir);
             var generatedFile = currentDir + $"/{modelName}.cs";
             var desiredClass = $"{namespaceName}.{modelName}";
             Assert.IsTrue(File.Exists(generatedFile));
@@ -113,16 +113,17 @@ namespace UMVC.Core.Tests
             string controllerName,
             string modelName,
             string namespaceName,
+            string extends,
             string currentDir
         )
         {
-            Generator.GenerateController(controllerName, modelName, namespaceName, currentDir);
+            Generator.GenerateController(controllerName, modelName, namespaceName, extends, currentDir);
             var generatedFile = currentDir + $"/{controllerName}.cs";
             var desiredClass = $"{namespaceName}.{controllerName}";
             Assert.IsTrue(File.Exists(generatedFile));
 
             // Generate Model
-            Generator.GenerateModel(modelName, namespaceName, currentDir);
+            Generator.GenerateModel(modelName, namespaceName, "BaseModel", currentDir);
             var generatedModelFile = currentDir + $"/{modelName}.cs";
 
             var additionalTypesToCompile = new List<Type> {typeof(BaseModel)};
@@ -139,21 +140,22 @@ namespace UMVC.Core.Tests
             string controllerName,
             string modelName,
             string namespaceName,
+            string extends,
             string currentDir
         )
         {
             // Generate View
-            Generator.GenerateView(viewName, controllerName, modelName, namespaceName, currentDir);
+            Generator.GenerateView(viewName, controllerName, modelName, namespaceName, extends, currentDir);
             var generatedFile = currentDir + $"/{viewName}.cs";
             var desiredClass = $"{namespaceName}.{viewName}";
             Assert.IsTrue(File.Exists(generatedFile));
             
             // Generate controller
-            Generator.GenerateController(controllerName, modelName, namespaceName, currentDir);
+            Generator.GenerateController(controllerName, modelName, namespaceName, "BaseController", currentDir);
             var generatedControllerFile = currentDir + $"/{controllerName}.cs";
 
             // Generate Model
-            Generator.GenerateModel(modelName, namespaceName, currentDir);
+            Generator.GenerateModel(modelName, namespaceName, "BaseModel", currentDir);
             var generatedModelFile = currentDir + $"/{modelName}.cs";
 
             var additionalTypesToCompile = new List<Type> {typeof(BaseModel), typeof(MonoBehaviour)};

@@ -3,11 +3,12 @@
 <#@ parameter name="Namespace" type="System.String"#>
 <#@ parameter name="Model" type="System.String"#>
 <#@ parameter name="Controller" type="System.String"#>
+<#@ parameter name="Extends" type="System.String"#>
 using UMVC.Core.MVC;
 
 namespace <#= Namespace #> 
 {
-    public class <#= ClassName #> : BaseView<<#= Model #>, <#= Controller #>>
+    public class <#= ClassName #> : <#= Extends #><<#= Model #>, <#= Controller #>>
     {
 
     }

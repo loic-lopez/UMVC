@@ -12,6 +12,7 @@ namespace UMVC.Core.Generation
             string controllerName, 
             string modelName, 
             string namespaceName,
+            string extends,
             string outputDir
         )
         {
@@ -24,6 +25,7 @@ namespace UMVC.Core.Generation
             template.Session["ClassName"] = controllerName;
             template.Session["Namespace"] = namespaceName;
             template.Session["Model"] = modelName;
+            template.Session["Extends"] = extends;
 
             template.Initialize();
 
