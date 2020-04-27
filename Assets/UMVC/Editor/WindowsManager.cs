@@ -8,10 +8,10 @@ namespace UMVC.Editor
     {
         private static void InstantiateWindow<T>() where T : IWindow
         {
-            IWindow window = (IWindow) EditorWindow.GetWindow(typeof(T));
+            var window = (IWindow) EditorWindow.GetWindow(typeof(T));
             window.SetupWindow();
         }
-        
+
         [MenuItem("UMVC/Create an MVC pattern")]
         private static void CreateMVCWindow()
         {

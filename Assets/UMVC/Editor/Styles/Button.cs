@@ -7,7 +7,7 @@ namespace UMVC.Editor.Styles
     {
         public static readonly GUIStyle WithMargin;
 
-        
+
         static Button()
         {
             WithMargin = EditorStyles.miniButton;

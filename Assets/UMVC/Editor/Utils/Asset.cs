@@ -1,7 +1,6 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace UMVC.Editor.Utils
 {
@@ -20,14 +19,15 @@ namespace UMVC.Editor.Utils
                 AssetDatabase.ImportAsset(assetFile); // force a save
             }
         }
- 
+
         /// <summary>
-        /// will create a new asset of the type, save it and return a reference to it. 
-        /// assetFile should be a relative path to the file to store the new asset in
-        /// if createNewIfExist then a unique name will be generated if the file allready
-        /// exist and the asset will be saved there
+        ///     will create a new asset of the type, save it and return a reference to it.
+        ///     assetFile should be a relative path to the file to store the new asset in
+        ///     if createNewIfExist then a unique name will be generated if the file allready
+        ///     exist and the asset will be saved there
         /// </summary>
-        public static T CreateAssetIfNotExists<T>(string objectName, string assetFile, bool createNewIfExist = false) where T : ScriptableObject
+        public static T CreateAssetIfNotExists<T>(string objectName, string assetFile, bool createNewIfExist = false)
+            where T : ScriptableObject
         {
             T obj;
 
@@ -43,7 +43,7 @@ namespace UMVC.Editor.Utils
                 {
                     obj = ScriptableObject.CreateInstance<T>();
                     obj.name = objectName;
-                    string fn = AssetDatabase.GenerateUniqueAssetPath(assetFile);
+                    var fn = AssetDatabase.GenerateUniqueAssetPath(assetFile);
                     AssetDatabase.CreateAsset(obj, fn);
                 }
                 else
@@ -51,7 +51,7 @@ namespace UMVC.Editor.Utils
                     obj = AssetDatabase.LoadAssetAtPath<T>(assetFile);
                 }
             }
- 
+
             return obj;
         }
     }

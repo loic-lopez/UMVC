@@ -8,7 +8,7 @@ namespace UMVC.Editor.Windows
         {
             base.SetupWindow();
         }
-        
+
         protected override void OnGUI()
         {
             base.OnGUI();
