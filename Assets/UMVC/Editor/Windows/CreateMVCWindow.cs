@@ -37,6 +37,8 @@ namespace UMVC.Editor.Windows
         
         protected override void OnGUI()
         {
+            if (GUI.changed) return;
+
             GUILayout.Label("Base Settings", Label.Header);
             _componentName = EditorGUILayout.TextField("New component name", _componentName);
 
