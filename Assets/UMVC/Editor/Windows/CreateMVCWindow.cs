@@ -23,7 +23,7 @@ namespace UMVC.Editor.Windows
         private string _newSubdir;
         private string _outputPath;
         private bool _wantCreateSubDir;
-        //private Trie<>
+        private string _previousComponentName;
 
 
         public override void SetupWindow()
@@ -33,19 +33,17 @@ namespace UMVC.Editor.Windows
         }
 
 
-        private string _previousComponentName;
         
         protected override void OnGUI()
         {
             if (GUI.changed) return; //Returns true if any controls changed the value of the input data.
 
             GUILayout.Label("Base Settings", Label.Header);
-            _componentName = EditorGUILayout.TextField("New component name", _componentName);
+            var componentName = EditorGUILayout.TextField("New component name", _componentName);
 
-            if (_componentName.IsNotNullOrEmpty() && _previousComponentName != _componentName)
+            if (componentName != _componentName)
             {
-                var componentName = _componentName.Replace("[^A-Za-z0-9]", "");
-                var wordList = componentName.Split(' ');
+                var wordList = componentName.Replace("[^A-Za-z0-9]", "").Split(' ');
                 _componentName = string.Empty;
                 foreach (var word in wordList)
                 {

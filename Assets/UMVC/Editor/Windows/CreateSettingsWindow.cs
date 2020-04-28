@@ -31,7 +31,7 @@ namespace UMVC.Editor.Windows
         {
             var outputNamespace = EditorGUILayout.TextField("Output Namespace", _outputNamespace);
 
-            if (outputNamespace.IsNotNullOrEmpty() && outputNamespace != _outputNamespace)
+            if (outputNamespace != _outputNamespace)
             {
                 _outputNamespace = outputNamespace;
             }
@@ -42,10 +42,8 @@ namespace UMVC.Editor.Windows
             if (GUILayout.Button("Save", Button.WithMargin))
             {
                 Singleton.UMVC.Instance.Settings.outputNamespace = _outputNamespace;
-                Singleton.UMVC.Instance.Settings.Save(out var updatedModel);
-                Singleton.UMVC.Instance.Settings = updatedModel;
+                Singleton.UMVC.Instance.UpdateSettingsModel();
             }
-                
         }
     }
 }

@@ -9,10 +9,11 @@ namespace UMVC.Editor.Models
     {
         public string logo = "logo.jpg";
         public string spritesDirectory = "Sprites";
-        public string outputNamespace = "MyNamespace";
+        
+        public string outputNamespace;
 
+        
         private string _settingsAssetPath;
-
         private const string ObjName = "Settings";
 
         public static SettingsModel Initialize(string settingsAssetPath)

@@ -23,6 +23,12 @@ namespace UMVC.Editor.Singleton
 
         public string LogoPath => $"{RelativePath}/{Settings.spritesDirectory}/{Settings.logo}";
 
+        public void UpdateSettingsModel()
+        {
+            Settings.Save(out var updatedModel);
+            Settings = updatedModel;
+        }
+
         #region Static
 
         private static UMVC _instance;
