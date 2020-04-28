@@ -37,7 +37,7 @@ namespace UMVC.Editor.Windows
         
         protected override void OnGUI()
         {
-            if (GUI.changed) return;
+            if (GUI.changed) return; //Returns true if any controls changed the value of the input data.
 
             GUILayout.Label("Base Settings", Label.Header);
             _componentName = EditorGUILayout.TextField("New component name", _componentName);
@@ -62,6 +62,12 @@ namespace UMVC.Editor.Windows
             DisplayOutputSettings();
 
             base.OnGUI();
+        }
+
+        protected override void DisplayEndButton()
+        {
+            if (GUILayout.Button("Create", Button.WithMargin))
+                Close();
         }
 
         private void DisplayGenerated()

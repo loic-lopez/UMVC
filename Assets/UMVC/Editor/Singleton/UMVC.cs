@@ -18,10 +18,10 @@ namespace UMVC.Editor.Singleton
         private string RootPath { get; set; }
         private string RelativePath { get; set; }
 
-        private SettingsModel SettingsModel { get; set; }
+        public SettingsModel Settings { get; set; }
 
 
-        public string LogoPath => $"{RelativePath}/{SettingsModel.spritesDirectory}/{SettingsModel.logo}";
+        public string LogoPath => $"{RelativePath}/{Settings.spritesDirectory}/{Settings.logo}";
 
         #region Static
 
@@ -48,7 +48,7 @@ namespace UMVC.Editor.Singleton
 
             var settingsAssetPath = $"{_instance.RelativePath}/{SettingsFolder}/SettingsAsset.asset";
 
-            _instance.SettingsModel = Asset.CreateAssetIfNotExists<SettingsModel>("Settings", settingsAssetPath);
+            _instance.Settings = SettingsModel.Initialize(settingsAssetPath);
         }
 
         #endregion

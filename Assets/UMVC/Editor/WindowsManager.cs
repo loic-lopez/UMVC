@@ -18,10 +18,10 @@ namespace UMVC.Editor
             InstantiateWindow<CreateMVCWindow>();
         }
 
-        [MenuItem("UMVC/Create a Model")]
+        [MenuItem("UMVC/Settings")]
         private static void CreateModelWindow()
         {
-            InstantiateWindow<CreateModelWindow>();
+            InstantiateWindow<CreateSettingsWindow>();
         }
     }
 }

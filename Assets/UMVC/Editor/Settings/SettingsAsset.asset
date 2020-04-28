@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d711a0927a641a1a8bda2d6799ff1c9, type: 3}
   m_Name: SettingsAsset
   m_EditorClassIdentifier: 
-  spritesDirectory: Sprites
   logo: logo.jpg
+  spritesDirectory: Sprites
+  outputNamespace: UMVC.TestO
