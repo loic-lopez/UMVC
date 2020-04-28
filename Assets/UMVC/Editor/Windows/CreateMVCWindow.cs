@@ -1,7 +1,5 @@
-using System;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
+using System.IO;
+using UMVC.Core.Generation;
 using UMVC.Editor.Abstracts;
 using UMVC.Editor.Extensions;
 using UMVC.Editor.Styles;
@@ -21,9 +19,9 @@ namespace UMVC.Editor.Windows
         private string _generatedModelName;
         private string _generatedViewName;
         private string _newSubdir;
-        private string _outputPath;
-        private bool _wantCreateSubDir;
+        private string _outputDir;
         private string _previousComponentName;
+        private bool _wantCreateSubDir;
 
 
         public override void SetupWindow()
@@ -33,7 +31,6 @@ namespace UMVC.Editor.Windows
         }
 
 
-        
         protected override void OnGUI()
         {
             if (GUI.changed) return; //Returns true if any controls changed the value of the input data.
@@ -45,15 +42,12 @@ namespace UMVC.Editor.Windows
             {
                 var wordList = componentName.Replace("[^A-Za-z0-9]", "").Split(' ');
                 _componentName = string.Empty;
-                foreach (var word in wordList)
-                {
-                    _componentName += word.Capitalize();
-                }
+                foreach (var word in wordList) _componentName += word.Capitalize();
+
+                UpdateNewSubdir();
             }
 
             _previousComponentName = _componentName;
-
-            UpdateNewSubdir();
 
             DisplayGenerated();
 
@@ -64,8 +58,52 @@ namespace UMVC.Editor.Windows
 
         protected override void DisplayEndButton()
         {
-            if (GUILayout.Button("Create", Button.WithMargin))
-                Close();
+            if (GUILayout.Button("Create", Button.WithMargin) && _componentName.IsNotNullOrEmpty())
+            {
+                var outputNamespace = GenerateOutputNamespace();
+                var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
+                if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
+
+                var baseModel = Singleton.UMVC.Instance.Settings.baseModelExtends;
+                var baseController = Singleton.UMVC.Instance.Settings.baseControllerExtends;
+                var baseView = Singleton.UMVC.Instance.Settings.baseViewExtends;
+                Generator.GenerateModel(_generatedModelName, outputNamespace, baseModel, outputDir);
+                Generator.GenerateController(
+                    _generatedControllerName,
+                    _generatedModelName,
+                    outputNamespace,
+                    baseController,
+                    outputDir
+                );
+                Generator.GenerateView(
+                    _generatedViewName,
+                    _generatedControllerName,
+                    _generatedModelName,
+                    outputNamespace,
+                    baseView,
+                    outputDir
+                );
+
+                AssetDatabase.Refresh();
+                EditorUtility.DisplayDialog("MVC Generated!", $"Generated to {outputDir}", "Got it!");
+            }
+        }
+
+        private string GenerateOutputNamespace()
+        {
+            string outputNamespace;
+            if (Singleton.UMVC.Instance.Settings.outputNamespace.IsNotNullOrEmpty())
+            {
+                outputNamespace = Singleton.UMVC.Instance.Settings.outputNamespace;
+            }
+            else
+            {
+                var basePath = Application.dataPath + "/";
+                outputNamespace = _wantCreateSubDir ? _newSubdir : _outputDir;
+                outputNamespace = outputNamespace.Replace(basePath, "").Replace('/', '.');
+            }
+
+            return outputNamespace;
         }
 
         private void DisplayGenerated()
@@ -94,20 +132,21 @@ namespace UMVC.Editor.Windows
 
             if (GUILayout.Button("Choose an Output directory", Button.WithMargin))
             {
-                _outputPath = EditorUtility.OpenFolderPanel("Choose an Output directory", Application.dataPath, null);
+                _outputDir = EditorUtility.OpenFolderPanel("Choose an Output directory", Application.dataPath, null);
                 UpdateNewSubdir();
             }
 
             _wantCreateSubDir = GUILayout.Toggle(_wantCreateSubDir, "Create subdirectory");
             if (_wantCreateSubDir) GUILayout.Label($"New directory: {_newSubdir}");
 
-            GUILayout.Label($"Output directory: {_outputPath}");
+            var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
+            GUILayout.Label($"Output directory: {outputDir}");
         }
 
         private void UpdateNewSubdir()
         {
-            if (_newSubdir.IsNotNullOrEmpty() && _componentName.IsNotNullOrEmpty())
-                _newSubdir = _outputPath + $"/{_componentName}";
+            if (_componentName.IsNotNullOrEmpty())
+                _newSubdir = _outputDir + $"/{_componentName}";
         }
     }
 }
