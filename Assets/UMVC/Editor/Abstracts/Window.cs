@@ -18,8 +18,9 @@ namespace UMVC.Editor.Abstracts
 
         protected virtual void OnGUI()
         {
-            if (GUILayout.Button("Close"))
-                Close();
+            DisplayEndButton();
         }
+
+        protected abstract void DisplayEndButton();
     }
 }
