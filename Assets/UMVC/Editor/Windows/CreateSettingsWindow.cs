@@ -1,3 +1,4 @@
+using System;
 using UMVC.Editor.Abstracts;
 using UMVC.Editor.Styles;
 using UnityEditor;
@@ -16,6 +17,11 @@ namespace UMVC.Editor.Windows
         {
             base.SetupWindow();
             titleContent.text = "UMVC Settings";
+        }
+
+
+        private void Awake()
+        {
             _outputNamespace = Singleton.UMVC.Instance.Settings.outputNamespace;
             _baseModelExtends = Singleton.UMVC.Instance.Settings.baseModelExtends;
             _baseControllerExtends = Singleton.UMVC.Instance.Settings.baseControllerExtends;

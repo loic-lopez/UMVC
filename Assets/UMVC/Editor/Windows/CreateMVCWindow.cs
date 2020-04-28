@@ -20,7 +20,6 @@ namespace UMVC.Editor.Windows
         private string _generatedViewName;
         private string _newSubdir;
         private string _outputDir;
-        private string _previousComponentName;
         private bool _wantCreateSubDir;
 
 
@@ -46,8 +45,6 @@ namespace UMVC.Editor.Windows
 
                 UpdateNewSubdir();
             }
-
-            _previousComponentName = _componentName;
 
             DisplayGenerated();
 
