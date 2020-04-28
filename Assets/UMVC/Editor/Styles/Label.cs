@@ -10,7 +10,7 @@ namespace UMVC.Editor.Styles
         static Label()
         {
             Header = EditorStyles.boldLabel;
-            Header.margin = new RectOffset(0,0,10, 0);
+            Header.margin.top = 10;
         }
     }
 }
