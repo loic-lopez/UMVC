@@ -4,5 +4,6 @@
     _ClassNameField = "Model";
     _NamespaceField = "MyNamespace";
     _ExtendsField = "BaseModel";
+    _BaseNamespaceField = "UMVC.Core.MVC";
 #>
 <#@ include file="$(ProjectDir)\..\Templates\ModelTemplate.tt"#>

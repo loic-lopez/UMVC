@@ -39,9 +39,11 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Generator.GenerateController.cs" />
-        <Compile Include="Generator.GenerateModel.cs" />
-        <Compile Include="Generator.GenerateView.cs" />
+        <Compile Include="GeneratorParameters\GeneratorParameters.cs" />
+        <Compile Include="Generator\Generator.GenerateController.cs" />
+        <Compile Include="Generator\Generator.GenerateModel.cs" />
+        <Compile Include="Generator\Generator.GenerateMVC.cs" />
+        <Compile Include="Generator\Generator.GenerateView.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>

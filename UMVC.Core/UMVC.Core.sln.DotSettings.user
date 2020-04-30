@@ -7,6 +7,11 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\Unity\Hub\Editor\2019.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=33b51252_002D07f4_002D4757_002Da0c9_002Dc2edc8c4ad0e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::UMVC.Core.Tests.GeneratorTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d0543ecb_002D21e3_002D4f87_002Da5c6_002Db14e735fff1a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;And&gt;&#xD;
     &lt;Project Location="D:\Projects\UMVC\UMVC.Core\Tests" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
