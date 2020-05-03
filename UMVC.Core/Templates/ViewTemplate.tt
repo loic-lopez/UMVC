@@ -4,7 +4,8 @@
 <#@ parameter name="Model" type="System.String"#>
 <#@ parameter name="Controller" type="System.String"#>
 <#@ parameter name="Extends" type="System.String"#>
-using UMVC.Core.MVC;
+<#@ parameter name="BaseNamespace" type="System.String"#>
+using <#= BaseNamespace #>;
 
 namespace <#= Namespace #> 
 {

@@ -2,7 +2,8 @@
 <#@ parameter name="ClassName" type="System.String"#>
 <#@ parameter name="Namespace" type="System.String"#>
 <#@ parameter name="Extends" type="System.String"#>
-using UMVC.Core.MVC;
+<#@ parameter name="BaseNamespace" type="System.String"#>
+using <#= BaseNamespace #>;
 
 namespace <#= Namespace #> 
 {

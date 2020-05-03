@@ -1,10 +1,13 @@
 using System.IO;
-using UMVC.Core.Generation;
+using UMVC.Core.Generation.Generator;
+using UMVC.Core.Generation.GeneratorParameters;
 using UMVC.Editor.Abstracts;
 using UMVC.Editor.Extensions;
 using UMVC.Editor.Styles;
 using UnityEditor;
 using UnityEngine;
+
+using Component = UMVC.Core.Components.Component;
 
 namespace UMVC.Editor.Windows
 {
@@ -61,26 +64,35 @@ namespace UMVC.Editor.Windows
                 var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
                 if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
 
-                var baseModel = Singleton.UMVC.Instance.Settings.baseModelExtends;
-                var baseController = Singleton.UMVC.Instance.Settings.baseControllerExtends;
-                var baseView = Singleton.UMVC.Instance.Settings.baseViewExtends;
-                Generator.GenerateModel(_generatedModelName, outputNamespace, baseModel, outputDir);
-                Generator.GenerateController(
-                    _generatedControllerName,
-                    _generatedModelName,
-                    outputNamespace,
-                    baseController,
-                    outputDir
+                var baseModelSettings = Singleton.UMVC.Instance.Settings.model;
+                var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
+                var baseViewSettings = Singleton.UMVC.Instance.Settings.view;
+                
+                Generator.GenerateMVC(
+                    new GeneratorParameters.Builder()
+                    .WithView(new Component
+                    {
+                        BaseNamespace = baseViewSettings.BaseNamespace,
+                        Extends = baseViewSettings.Extends,
+                        Name = _generatedViewName
+                    })
+                    .WithController(new Component
+                    {
+                        BaseNamespace = baseControllerSettings.BaseNamespace,
+                        Extends = baseControllerSettings.Extends,
+                        Name = _generatedControllerName
+                    })
+                    .WithModel(new Component
+                    {
+                        BaseNamespace = baseViewSettings.BaseNamespace,
+                        Extends = baseModelSettings.Extends,
+                        Name = _generatedModelName
+                    })
+                    .WithNamespaceName(outputNamespace)
+                    .WithOutputDir(outputDir)
+                    .Build()
                 );
-                Generator.GenerateView(
-                    _generatedViewName,
-                    _generatedControllerName,
-                    _generatedModelName,
-                    outputNamespace,
-                    baseView,
-                    outputDir
-                );
-
+                
                 AssetDatabase.Refresh();
                 EditorUtility.DisplayDialog("MVC Generated!", $"Generated to {outputDir}", "Got it!");
             }
@@ -97,7 +109,17 @@ namespace UMVC.Editor.Windows
             {
                 var basePath = Application.dataPath + "/";
                 outputNamespace = _wantCreateSubDir ? _newSubdir : _outputDir;
-                outputNamespace = outputNamespace.Replace(basePath, "").Replace('/', '.');
+                basePath = outputNamespace.Replace(basePath, "");
+
+                if (basePath == Application.dataPath) // if the path is /Assets
+                {
+                    outputNamespace = Application.productName;
+                }
+                else
+                {
+                    outputNamespace = basePath.Replace('/', '.');
+                }
+                
             }
 
             return outputNamespace;
