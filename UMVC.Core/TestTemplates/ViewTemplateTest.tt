@@ -6,5 +6,6 @@
     _ModelField = "Model";
     _ControllerField = "TestController";
     _ExtendsField = "BaseView";
+    _BaseNamespaceField = "UMVC.Core.MVC";
 #>
 <#@ include file="$(ProjectDir)\..\Templates\ViewTemplate.tt"#>

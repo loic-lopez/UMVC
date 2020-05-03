@@ -7,6 +7,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using NUnit.Framework;
 using UMVC.Core.Generation;
+using UMVC.Core.Generation.Generator;
+using UMVC.Core.Generation.GeneratorParameters;
 using UMVC.Core.MVC;
 using UnityEngine;
 
@@ -14,6 +16,8 @@ namespace UMVC.Core.Tests
 {
     public static class TestsUtils
     {
+        private const string DefaultBaseNamespace = "UMVC.Core.MVC";
+        
         private static Type CompileInRAMGeneratedClass(
             string generatedFile,
             string desiredClass,
@@ -96,12 +100,12 @@ namespace UMVC.Core.Tests
         }
 
 
-        public static object GenerateModel(string modelName, string namespaceName, string extends, string currentDir)
+        public static object GenerateModel(GeneratorParameters generatorParameters)
         {
             // Generate Model
-            Generator.GenerateModel(modelName, namespaceName, extends, currentDir);
-            var generatedFile = currentDir + $"/{modelName}.cs";
-            var desiredClass = $"{namespaceName}.{modelName}";
+            Generator.GenerateModel(generatorParameters);
+            var generatedFile = generatorParameters.OutputDir + $"/{generatorParameters.Model.Name}.cs";
+            var desiredClass = $"{generatorParameters.NamespaceName}.{generatorParameters.Model.Name}";
             Assert.IsTrue(File.Exists(generatedFile));
 
             var additionalTypesToCompile = new List<Type> {typeof(BaseModel)};
@@ -109,22 +113,16 @@ namespace UMVC.Core.Tests
             return Activator.CreateInstance(CompileInRAMGeneratedClass(generatedFile, desiredClass, additionalTypesToCompile));
         }
 
-        public static object GenerateController(
-            string controllerName,
-            string modelName,
-            string namespaceName,
-            string extends,
-            string currentDir
-        )
+        public static object GenerateController(GeneratorParameters generatorParameters)
         {
-            Generator.GenerateController(controllerName, modelName, namespaceName, extends, currentDir);
-            var generatedFile = currentDir + $"/{controllerName}.cs";
-            var desiredClass = $"{namespaceName}.{controllerName}";
+            Generator.GenerateController(generatorParameters);
+            var generatedFile = generatorParameters.OutputDir + $"/{generatorParameters.Controller.Name}.cs";
+            var desiredClass = $"{generatorParameters.NamespaceName}.{generatorParameters.Controller.Name}";
             Assert.IsTrue(File.Exists(generatedFile));
 
             // Generate Model
-            Generator.GenerateModel(modelName, namespaceName, "BaseModel", currentDir);
-            var generatedModelFile = currentDir + $"/{modelName}.cs";
+            Generator.GenerateModel(generatorParameters);
+            var generatedModelFile = generatorParameters.OutputDir + $"/{generatorParameters.Model.Name}.cs";
 
             var additionalTypesToCompile = new List<Type> {typeof(BaseModel)};
 
@@ -135,28 +133,21 @@ namespace UMVC.Core.Tests
             ));
         }
         
-        public static Type GenerateView(
-            string viewName,
-            string controllerName,
-            string modelName,
-            string namespaceName,
-            string extends,
-            string currentDir
-        )
+        public static Type GenerateView(GeneratorParameters generatorParameters)
         {
             // Generate View
-            Generator.GenerateView(viewName, controllerName, modelName, namespaceName, extends, currentDir);
-            var generatedFile = currentDir + $"/{viewName}.cs";
-            var desiredClass = $"{namespaceName}.{viewName}";
+            Generator.GenerateView(generatorParameters);
+            var generatedFile = generatorParameters.OutputDir + $"/{generatorParameters.View.Name}.cs";
+            var desiredClass = $"{generatorParameters.NamespaceName}.{generatorParameters.View.Name}";
             Assert.IsTrue(File.Exists(generatedFile));
             
             // Generate controller
-            Generator.GenerateController(controllerName, modelName, namespaceName, "BaseController", currentDir);
-            var generatedControllerFile = currentDir + $"/{controllerName}.cs";
+            Generator.GenerateController(generatorParameters);
+            var generatedControllerFile = generatorParameters.OutputDir + $"/{generatorParameters.Controller.Name}.cs";
 
             // Generate Model
-            Generator.GenerateModel(modelName, namespaceName, "BaseModel", currentDir);
-            var generatedModelFile = currentDir + $"/{modelName}.cs";
+            Generator.GenerateModel(generatorParameters);
+            var generatedModelFile = generatorParameters.OutputDir + $"/{generatorParameters.Model.Name}.cs";
 
             var additionalTypesToCompile = new List<Type> {typeof(BaseModel), typeof(MonoBehaviour)};
 

@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using NUnit.Framework;
+using UMVC.Core.Components;
+using UMVC.Core.Generation.GeneratorParameters;
 using UMVC.Core.MVC;
 
 namespace UMVC.Core.Tests
@@ -7,34 +9,63 @@ namespace UMVC.Core.Tests
     [TestFixture]
     public class GeneratorTests
     {
+        private const string DefaultBaseNamespace = "UMVC.Core.MVC";
+        private const string NamespaceName = "TestNamespace";
+        private const string ModelName = "TestModel";
+        private const string ControllerName = "TestController";
+        private const string ViewName = "TestView";
+
+
         [Test]
         public void TestIfControllerHasBeenGenerated()
         {
-            const string namespaceName = "TestNamespace";
-            const string modelName = "TestModel";
-            const string controllerName = "TestController";
-            const string extends = "BaseController";
             var currentDir = Directory.GetCurrentDirectory();
 
-            var generatedObj = TestsUtils.GenerateController(controllerName, modelName, namespaceName, extends, currentDir);
+            var parameters = new GeneratorParameters.Builder()
+                .WithModel(
+                    new Component
+                    {
+                        BaseNamespace = DefaultBaseNamespace,
+                        Extends = "BaseModel",
+                        Name = ModelName
+                    })
+                .WithController(
+                    new Component
+                    {
+                        BaseNamespace = DefaultBaseNamespace,
+                        Extends = "BaseController",
+                        Name = ControllerName
+                    })
+                .WithNamespaceName(NamespaceName)
+                .WithOutputDir(currentDir);
+
+            var generatedObj = TestsUtils.GenerateController(parameters.Build());
 
             UMVCAssert.HasSameBaseClass(generatedObj.GetType(), typeof(BaseController<>));
-            var desiredClass = $"{namespaceName}.{controllerName}";
+            var desiredClass = $"{NamespaceName}.{ControllerName}";
             Assert.IsTrue(generatedObj.GetType().ToString() == desiredClass);
         }
 
         [Test]
         public void TestIfModelHasBeenGenerated()
         {
-            const string namespaceName = "TestNamespace";
-            const string modelName = "TestModel";
-            const string extends = "BaseModel";
             var currentDir = Directory.GetCurrentDirectory();
 
-            var generatedObj = TestsUtils.GenerateModel(modelName, namespaceName, extends, currentDir);
-            
+            var parameters = new GeneratorParameters.Builder()
+                .WithModel(
+                    new Component
+                    {
+                        BaseNamespace = DefaultBaseNamespace,
+                        Extends = "BaseModel",
+                        Name = ModelName
+                    })
+                .WithNamespaceName(NamespaceName)
+                .WithOutputDir(currentDir);
+
+            var generatedObj = TestsUtils.GenerateModel(parameters.Build());
+
             UMVCAssert.HasSameBaseClass(generatedObj.GetType(), typeof(BaseModel));
-            var desiredClass = $"{namespaceName}.{modelName}";
+            var desiredClass = $"{NamespaceName}.{ModelName}";
             Assert.IsTrue(generatedObj.GetType().ToString() == desiredClass);
         }
 
@@ -42,16 +73,35 @@ namespace UMVC.Core.Tests
         [Test]
         public void TestIfViewHasBeenGenerated()
         {
-            const string namespaceName = "TestNamespace";
-            const string modelName = "TestModel";
-            const string controllerName = "TestController";
-            const string viewName = "TestView";
-            const string extends = "BaseView";
-            
             var currentDir = Directory.GetCurrentDirectory();
 
-            var generatedType = TestsUtils.GenerateView(viewName, controllerName, modelName, namespaceName, extends, currentDir);
-            var desiredClass = $"{namespaceName}.{viewName}";
+            var parameters = new GeneratorParameters.Builder()
+                .WithModel(
+                    new Component
+                    {
+                        BaseNamespace = DefaultBaseNamespace,
+                        Extends = "BaseModel",
+                        Name = ModelName
+                    })
+                .WithController(
+                    new Component
+                    {
+                        BaseNamespace = DefaultBaseNamespace,
+                        Extends = "BaseController",
+                        Name = ControllerName
+                    })
+                .WithView(
+                    new Component
+                    {
+                        BaseNamespace = DefaultBaseNamespace,
+                        Extends = "BaseView",
+                        Name = ViewName
+                    })
+                .WithNamespaceName(NamespaceName)
+                .WithOutputDir(currentDir);
+
+            var generatedType = TestsUtils.GenerateView(parameters.Build());
+            var desiredClass = $"{NamespaceName}.{ViewName}";
             UMVCAssert.HasSameBaseClass(generatedType, typeof(BaseView<,>));
             Assert.IsTrue(generatedType.ToString() == desiredClass);
         }

@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Components\Components.csproj" />
         <ProjectReference Include="..\Generation\Generation.csproj" />
         <ProjectReference Include="..\MVC\MVC.csproj" />
     </ItemGroup>

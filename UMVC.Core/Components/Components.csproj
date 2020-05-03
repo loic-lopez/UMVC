@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{427F3B0C-C22A-4787-B62B-4C88CD99B9A2}</ProjectGuid>
+        <ProjectGuid>{2EDC5796-3284-4EC0-96AC-521288D5144B}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>UMVC.Core.Generation</RootNamespace>
-        <AssemblyName>UMVC.Core.Generation</AssemblyName>
+        <RootNamespace>UMVC.Core.Components</RootNamespace>
+        <AssemblyName>UMVC.Core.Components</AssemblyName>
         <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -39,22 +38,9 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="GeneratorParameters\GeneratorParameters.cs" />
-        <Compile Include="Generator\Generator.GenerateController.cs" />
-        <Compile Include="Generator\Generator.GenerateModel.cs" />
-        <Compile Include="Generator\Generator.GenerateMVC.cs" />
-        <Compile Include="Generator\Generator.GenerateView.cs" />
+        <Compile Include="BaseComponent.cs" />
+        <Compile Include="Component.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\Components\Components.csproj">
-          <Project>{2edc5796-3284-4ec0-96ac-521288d5144b}</Project>
-          <Name>Components</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\Templates\Templates.csproj">
-            <Project>{2734c74d-f5f8-4b8e-8b19-16209153402e}</Project>
-            <Name>Templates</Name>
-        </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -64,4 +50,5 @@
     <Target Name="AfterBuild">
     </Target>
     -->
+
 </Project>

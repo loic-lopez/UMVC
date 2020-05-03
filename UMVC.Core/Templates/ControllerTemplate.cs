@@ -22,7 +22,9 @@ namespace UMVC.Core.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using UMVC.Core.MVC;\r\n\r\nnamespace ");
+            this.Write("using ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(BaseNamespace));
+            this.Write(";\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             this.Write(" \r\n{\r\n    public class ");
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
@@ -83,6 +85,19 @@ private string Extends
     get
     {
         return this._ExtendsField;
+    }
+}
+
+private string _BaseNamespaceField;
+
+/// <summary>
+/// Access the BaseNamespace parameter of the template.
+/// </summary>
+private string BaseNamespace
+{
+    get
+    {
+        return this._BaseNamespaceField;
     }
 }
 
@@ -148,6 +163,20 @@ if ((ExtendsValueAcquired == false))
     if ((data != null))
     {
         this._ExtendsField = ((string)(data));
+    }
+}
+bool BaseNamespaceValueAcquired = false;
+if (this.Session.ContainsKey("BaseNamespace"))
+{
+    this._BaseNamespaceField = ((string)(this.Session["BaseNamespace"]));
+    BaseNamespaceValueAcquired = true;
+}
+if ((BaseNamespaceValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("BaseNamespace");
+    if ((data != null))
+    {
+        this._BaseNamespaceField = ((string)(data));
     }
 }
 
