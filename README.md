@@ -14,7 +14,7 @@
 <hr>
 <p align="center">
 	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3A%22UMVC+Generation+Tests%22">
-		<img src="https://github.com/loic-lopez/UMVC/workflows/UMVC%20Generation%20Tests/badge.svg" alt="Download">
+		<img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Core%20Tests/badge.svg" alt="Download">
 	</a>
 	<a href="">
 		<img src="/Docs/BtnDownload.png" alt="Download">
