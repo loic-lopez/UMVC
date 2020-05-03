@@ -47,6 +47,10 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
+        <ProjectReference Include="..\Components\Components.csproj">
+          <Project>{2edc5796-3284-4ec0-96ac-521288d5144b}</Project>
+          <Name>Components</Name>
+        </ProjectReference>
         <ProjectReference Include="..\Templates\Templates.csproj">
             <Project>{2734c74d-f5f8-4b8e-8b19-16209153402e}</Project>
             <Name>Templates</Name>

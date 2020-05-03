@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
+using UMVC.Core.Components;
 using UMVC.Core.Generation.GeneratorParameters;
 using UMVC.Core.MVC;
 
@@ -22,14 +23,14 @@ namespace UMVC.Core.Tests
 
             var parameters = new GeneratorParameters.Builder()
                 .WithModel(
-                    new GeneratorParameters.Component
+                    new Component
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseModel",
                         Name = ModelName
                     })
                 .WithController(
-                    new GeneratorParameters.Component
+                    new Component
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseController",
@@ -52,7 +53,7 @@ namespace UMVC.Core.Tests
 
             var parameters = new GeneratorParameters.Builder()
                 .WithModel(
-                    new GeneratorParameters.Component
+                    new Component
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseModel",
@@ -76,21 +77,21 @@ namespace UMVC.Core.Tests
 
             var parameters = new GeneratorParameters.Builder()
                 .WithModel(
-                    new GeneratorParameters.Component
+                    new Component
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseModel",
                         Name = ModelName
                     })
                 .WithController(
-                    new GeneratorParameters.Component
+                    new Component
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseController",
                         Name = ControllerName
                     })
                 .WithView(
-                    new GeneratorParameters.Component
+                    new Component
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseView",

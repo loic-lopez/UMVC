@@ -1,5 +1,5 @@
-using System;
 using UMVC.Editor.Abstracts;
+using UMVC.Editor.EditorDependencies.Implementations;
 using UMVC.Editor.Styles;
 using UnityEditor;
 using UnityEngine;
@@ -8,10 +8,16 @@ namespace UMVC.Editor.Windows
 {
     public class CreateSettingsWindow : Window
     {
-        private string _baseControllerExtends;
-        private string _baseModelExtends;
-        private string _baseViewExtends;
         private string _outputNamespace;
+        
+        [SerializeField]
+        private BaseComponentSettings model;
+        
+        [SerializeField]
+        private BaseComponentSettings view;
+        
+        [SerializeField]
+        private BaseComponentSettings controller;
 
         public override void SetupWindow()
         {
@@ -23,9 +29,9 @@ namespace UMVC.Editor.Windows
         private void Awake()
         {
             _outputNamespace = Singleton.UMVC.Instance.Settings.outputNamespace;
-            _baseModelExtends = Singleton.UMVC.Instance.Settings.baseModelExtends;
-            _baseControllerExtends = Singleton.UMVC.Instance.Settings.baseControllerExtends;
-            _baseViewExtends = Singleton.UMVC.Instance.Settings.baseViewExtends;
+            model = Singleton.UMVC.Instance.Settings.model;
+            controller = Singleton.UMVC.Instance.Settings.controller;
+            view = Singleton.UMVC.Instance.Settings.view;
         }
 
         protected override void OnGUI()
@@ -43,14 +49,16 @@ namespace UMVC.Editor.Windows
 
         private void DisplayBaseExtends()
         {
-            var baseModelExtends = EditorGUILayout.TextField("Base model extends", _baseModelExtends);
-            if (baseModelExtends != _baseModelExtends) _baseModelExtends = baseModelExtends;
-
-            var baseControllerExtends = EditorGUILayout.TextField("Base controller extends", _baseControllerExtends);
-            if (baseControllerExtends != _baseControllerExtends) _baseControllerExtends = baseControllerExtends;
-
-            var baseViewExtends = EditorGUILayout.TextField("Base view extends", _baseViewExtends);
-            if (baseViewExtends != _baseViewExtends) _baseViewExtends = baseViewExtends;
+            SerializedObject so = new SerializedObject (this);
+            SerializedProperty serializedModel = so.FindProperty("model");
+            SerializedProperty serializedController = so.FindProperty("controller");
+            SerializedProperty serializedView = so.FindProperty("view");
+            EditorGUILayout.PropertyField(serializedModel);
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(serializedView);
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(serializedController);
+            so.ApplyModifiedProperties();
         }
 
         private void DisplayOutputNamespace()
@@ -65,9 +73,9 @@ namespace UMVC.Editor.Windows
             if (GUILayout.Button("Save", Button.WithMargin))
             {
                 Singleton.UMVC.Instance.Settings.outputNamespace = _outputNamespace;
-                Singleton.UMVC.Instance.Settings.baseModelExtends = _baseModelExtends;
-                Singleton.UMVC.Instance.Settings.baseControllerExtends = _baseControllerExtends;
-                Singleton.UMVC.Instance.Settings.baseViewExtends = _baseViewExtends;
+                Singleton.UMVC.Instance.Settings.model = model;
+                Singleton.UMVC.Instance.Settings.controller = controller;
+                Singleton.UMVC.Instance.Settings.view = view;
                 Singleton.UMVC.Instance.UpdateSettingsModel();
             }
         }

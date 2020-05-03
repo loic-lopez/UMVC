@@ -1,7 +1,7 @@
-﻿namespace UMVC.Core.Generation.GeneratorParameters
-{
-    
+﻿using UMVC.Core.Components;
 
+namespace UMVC.Core.Generation.GeneratorParameters
+{
     public class GeneratorParameters
     {
         public Component View { get; private set; }
@@ -9,15 +9,7 @@
         public Component Controller { get; private set; }
         public string NamespaceName { get; private set; }
         public string OutputDir { get; private set; }
-        
-        
-        public struct Component
-        {
-            public string Name;
-            public string Extends;
-            public string BaseNamespace;
-        }
-        
+
         public class Builder
         {
 

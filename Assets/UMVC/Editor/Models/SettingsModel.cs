@@ -1,6 +1,9 @@
+using UMVC.Core.Components;
+using UMVC.Editor.EditorDependencies.Implementations;
 using UMVC.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
+
 
 namespace UMVC.Editor.Models
 {
@@ -9,10 +12,12 @@ namespace UMVC.Editor.Models
         private const string ObjName = "Settings";
 
         private string _settingsAssetPath;
-        public string baseControllerExtends = "BaseController";
-        public string baseModelExtends = "BaseModel";
-        public string baseViewExtends = "BaseView";
         public string logo = "logo.jpg";
+        
+        public BaseComponentSettings model;
+        public BaseComponentSettings view;
+        public BaseComponentSettings controller;
+
 
         public string outputNamespace;
         public string spritesDirectory = "Sprites";
@@ -41,9 +46,9 @@ namespace UMVC.Editor.Models
             obj.logo = logo;
             obj.spritesDirectory = spritesDirectory;
             obj._settingsAssetPath = _settingsAssetPath;
-            obj.baseModelExtends = baseModelExtends;
-            obj.baseControllerExtends = baseControllerExtends;
-            obj.baseViewExtends = baseViewExtends;
+            obj.model = model;
+            obj.view = view;
+            obj.controller = controller;
 
             updatedModel = obj;
 

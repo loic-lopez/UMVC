@@ -1,4 +1,4 @@
-name: UMVC Generation Tests
+name: UMVC.Core Tests
 
 on:
   push:
