@@ -3,10 +3,8 @@
 namespace UMVC.Core.Components
 {
     [Serializable]
-    public class Component
+    public class Component : BaseComponent
     {
         public string Name;
-        public string Extends;
-        public string BaseNamespace;
     }
 }
