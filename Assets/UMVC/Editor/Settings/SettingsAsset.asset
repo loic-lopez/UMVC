@@ -22,5 +22,5 @@ MonoBehaviour:
   controller:
     Extends: BaseController
     BaseNamespace: UMVC.Core.MVC
-  outputNamespace: UMVC.Impl
+  outputNamespace: 
   spritesDirectory: Sprites

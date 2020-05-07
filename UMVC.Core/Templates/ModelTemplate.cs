@@ -22,11 +22,11 @@ namespace UMVC.Core.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using ");
+            this.Write("using System;\r\nusing ");
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseNamespace));
             this.Write(";\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
-            this.Write(" \r\n{\r\n    public class ");
+            this.Write(" \r\n{\r\n    [Serializable]\r\n    public class ");
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
             this.Write(" : ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Extends));

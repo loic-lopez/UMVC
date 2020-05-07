@@ -27,7 +27,16 @@ jobs:
         run: dotnet restore ./UMVC.Core/UMVC.Core.sln
 
       - name: Build
-        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
+        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Debug --no-restore
 
       - name: Test
-        run: dotnet test ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore --verbosity normal
+        run: dotnet test ./UMVC.Core/UMVC.Core.sln --configuration Debug --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=".\\coverage" /p:CoverletOutputFormat=opencover /p:ExcludeByFile=\"**/Templates/*.cs\"
+
+      - name: Codecov
+        uses: codecov/codecov-action@v1.0.7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./UMVC.Core/Tests/coverage.opencover.xml
+          name: codecov-umbrella
+          fail_ci_if_error: true
+        

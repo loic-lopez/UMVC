@@ -4,10 +4,13 @@ using UMVC.Core.MVC.Interfaces;
 namespace UMVC.Core.MVC
 {
     [Serializable]
-    public abstract class BaseModel : IBaseModel
+    // MarshalByRefObject are necessary in order to RealProxy be able to work
+    public abstract class BaseModel : MarshalByRefObject, IBaseModel
     {
         public virtual void Initialize()
         {
         }
+
+       
     }
 }
