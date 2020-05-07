@@ -2,7 +2,7 @@
 {
     public static class Delegates
     {
-        public delegate void OnFieldUpdate(string field, object value);
+        public delegate void OnFieldUpdate(string field, object newObject, object oldObject);
         public delegate void OnFieldUpdated(string field, object value);
     }
 }

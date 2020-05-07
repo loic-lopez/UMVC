@@ -59,10 +59,12 @@ namespace UMVC.Core.MVC
 
         private void BeforeFieldUpdate(IReadOnlyList<object> arguments)
         {
-            OnFieldUpdate?.Invoke((string) arguments[1], arguments[2]);
+            var field = (string) arguments[1];
+            
+            OnFieldUpdate?.Invoke(field, arguments[2], _instance.GetType().GetField(field).GetValue(_instance));
         }
 
-        private void AfterFieldUpdate(object[] arguments)
+        private void AfterFieldUpdate(IReadOnlyList<object> arguments)
         {
             OnFieldUpdated?.Invoke((string) arguments[1], arguments[2]);
         }

@@ -16,13 +16,29 @@ namespace UMVC.Core.Tests
     {
         
         [Test]
-        public void TestEvent()
+        public void TestEvents()
         {
             ModelProxy<TestModel> modelProxy = ModelProxy<TestModel>.Bind(new TestModel());
             TestModel testModel = modelProxy.GetTransparentProxy();
+            int newValue = new Random().Next();
+            const string fieldName = "value";
+            
+            modelProxy.OnFieldUpdate += (field, newObject, oldObject) =>
+            {
+                Assert.True((int)oldObject == 0);
+                Assert.True(field == fieldName);
+                Assert.True(newObject != oldObject);
+                Assert.True((int)newObject == newValue);
+            };
 
-            testModel.value = 2;
-            Assert.True(testModel.value == 2);
+            modelProxy.OnFieldUpdated += (field, value) =>
+            {
+                Assert.True(field == fieldName);
+                Assert.True((int)value == newValue);
+            };
+
+            testModel.value = newValue;
+            Assert.True(testModel.value == newValue);
         }
     }
 }

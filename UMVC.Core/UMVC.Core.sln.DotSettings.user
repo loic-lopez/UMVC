@@ -7,32 +7,15 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\Unity\Hub\Editor\2019.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=33b51252_002D07f4_002D4757_002Da0c9_002Dc2edc8c4ad0e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GeneratorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::UMVC.Core.Tests.GeneratorTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=538009a1_002D4aaf_002D4bb1_002D8c5d_002Df99a00a1248e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestEvent" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::UMVC.Core.Tests.MVCTests.TestEvent&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d0543ecb_002D21e3_002D4f87_002Da5c6_002Db14e735fff1a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;And&gt;&#xD;
     &lt;Project Location="D:\Projects\UMVC\UMVC.Core\Tests" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
     &lt;Namespace&gt;UMVC.Core.Tests&lt;/Namespace&gt;&#xD;
   &lt;/And&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fef52a14_002Dfbcf_002D44a6_002Da545_002D4875def2737d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ComponentTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::UMVC.Core.Tests.MVCTests&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::UMVC.Core.Tests.GeneratorTests&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-  &lt;/Or&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
 	
 	
 	

@@ -23,7 +23,7 @@ namespace UMVC.Core.MVC
         
         public TModel Model() => model;
 
-        public abstract void OnFieldUpdate(string field, object value);
+        public abstract void OnFieldUpdate(string field, object newObject, object oldObject);
         public abstract void OnFieldUpdated(string field, object value);
     }
 }
