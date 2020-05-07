@@ -2,20 +2,33 @@ using UMVC.Core.MVC.Interfaces;
 
 namespace UMVC.Core.MVC
 {
-    public abstract class BaseController<TModel> where TModel : IBaseModel
+
+    public abstract class BaseController<TModel> where TModel : BaseModel
     {
         protected TModel Model { get; set; }
+        protected IBaseView<TModel> View;
+        protected ModelProxy<TModel> ModelProxy;
 
-        /// <param name="model"></param>
-        /// <param></param>
-        public virtual void Setup(TModel model)
+        public virtual void Setup(IBaseView<TModel> view)
         {
-            model.Initialize();
-            Model = model;
+            View = view;
+            ModelProxy<TModel> modelProxy = ModelProxy<TModel>.Bind(View.Model());
+            Model = modelProxy.GetTransparentProxy();
+            Model.Initialize();
+            ModelProxy = modelProxy;
+            SubscribeEvents();
         }
 
         public virtual void LateSetup()
         {
         }
+
+        protected virtual void SubscribeEvents()
+        {
+            ModelProxy.OnFieldUpdate += View.OnFieldUpdate;
+            ModelProxy.OnFieldUpdated += View.OnFieldUpdated;
+        }
+
+
     }
 }

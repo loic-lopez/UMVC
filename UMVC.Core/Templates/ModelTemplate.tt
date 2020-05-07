@@ -3,10 +3,12 @@
 <#@ parameter name="Namespace" type="System.String"#>
 <#@ parameter name="Extends" type="System.String"#>
 <#@ parameter name="BaseNamespace" type="System.String"#>
+using System;
 using <#= BaseNamespace #>;
 
 namespace <#= Namespace #> 
 {
+    [Serializable]
     public class <#= ClassName #> : <#= Extends #>
     {
 
