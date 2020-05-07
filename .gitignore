@@ -81,3 +81,6 @@ crashlytics-build.properties
 /Assets/UMVC/PlayerDependencies/Dependencies/
 /Assets/UMVC/PlayerDependencies/Dependencies.meta
 /Assets/UMVC/Editor/EditorDependencies/Dependencies.meta
+/UMVC.Core/Tests/coverage.opencover.xml
+/UMVC.Core/Tests/TestController.cs
+/UMVC.Core/Tests/TestView.cs
