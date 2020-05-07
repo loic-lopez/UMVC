@@ -30,7 +30,7 @@ jobs:
         run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=".\\coverage" /p:CoverletOutputFormat=opencover
+        run: dotnet test ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=".\\coverage" /p:CoverletOutputFormat=opencover /p:ExcludeByFile=\"**/Templates/*.cs\"
 
       - name: Codecov
         uses: codecov/codecov-action@v1.0.7
