@@ -16,7 +16,7 @@ env:
 jobs:
   test:
     name: Test UMVC.Editor
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         testMode:
