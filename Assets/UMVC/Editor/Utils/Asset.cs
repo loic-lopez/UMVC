@@ -9,7 +9,7 @@ namespace UMVC.Editor.Utils
         public static T CreateAssetIfNotExists<T>(string objectName, string assetFile) where T : ScriptableObject
         {
             T obj;
-
+            
             if (!File.Exists(assetFile))
             {
                 obj = ScriptableObject.CreateInstance<T>();
