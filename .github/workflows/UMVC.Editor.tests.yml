@@ -23,7 +23,7 @@ jobs:
           - editmode
     steps:
       - uses: actions/checkout@v2
-      - uses: webbertakken/unity-test-runner@v1.4
+      - uses: webbertakken/unity-test-runner@v1.6
         id: tests
         with:
           testMode: ${{ matrix.testMode }}
