@@ -14,23 +14,22 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   
 jobs:
-  jobs:
-    testAllModes:
-      name: Test in ${{ matrix.testMode }} on version ${{ matrix.unityVersion }}
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          testMode:
-            - editmode
-      steps:
-        - uses: actions/checkout@v2
-        - uses: webbertakken/unity-test-runner@v1.4
-          id: tests
-          with:
-            testMode: ${{ matrix.testMode }}
-            artifactsPath: ${{ matrix.testMode }}-artifacts
-        - uses: actions/upload-artifact@v1
-          with:
-            name: Test results for ${{ matrix.testMode }}
-            path: ${{ steps.tests.outputs.artifactsPath }}
+  test:
+    name: Test UMVC.Editor
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        testMode:
+          - editmode
+    steps:
+      - uses: actions/checkout@v2
+      - uses: webbertakken/unity-test-runner@v1.4
+        id: tests
+        with:
+          testMode: ${{ matrix.testMode }}
+          artifactsPath: ${{ matrix.testMode }}-artifacts
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Test results for ${{ matrix.testMode }}
+          path: ${{ steps.tests.outputs.artifactsPath }}
   
