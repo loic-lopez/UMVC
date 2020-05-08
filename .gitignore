@@ -69,7 +69,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /.idea/
-/MSBuild/Projects/
 /Assets/UMVC/.idea/
 /Assets/Dependencies/
 /Assets/UMVC/Dependencies/
