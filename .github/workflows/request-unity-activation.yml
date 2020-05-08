@@ -15,6 +15,9 @@ jobs:
         - name: Request manual activation file
           id: getManualLicenseFile
           uses: webbertakken/unity-request-manual-activation-file@v1.1
+          with:
+          # Version of unity to use for building the project.
+            unityVersion: 2019.3.13f1
         
         # Upload artifact (Unity_v20XX.X.XXXX.alf)
         - name: Expose as artifact
