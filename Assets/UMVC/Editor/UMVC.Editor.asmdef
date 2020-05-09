@@ -1,0 +1,6 @@
+{
+  "name": "UMVC.Editor",
+  "includePlatforms": [
+    "Editor"
+  ]
+}
