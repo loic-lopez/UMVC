@@ -36,14 +36,20 @@ jobs:
 #        uses: codecov/codecov-action@v1.0.7
 #        with:
 #          token: ${{ secrets.CODECOV_TOKEN }}
-#          file: ./UMVC.Core/Tests/coverage.opencover.xml
+#          file: coverage.xml
 #          name: codecov-umbrella
 #          fail_ci_if_error: true
         
-      - name: Download Coveralls
-        run: dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage.xml
         
-      - name: Upload to Coveralls
-        run: .\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --useRelativePaths
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+#      - name: Download Coveralls
+#        run: dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
+#        
+#      - name: Upload to Coveralls
+#        run: .\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --useRelativePaths
+#        env:
+#          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
