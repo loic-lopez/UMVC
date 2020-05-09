@@ -41,9 +41,6 @@ jobs:
           license="${license//$'\n'/'%0A'}"
           license="${license//$'\r'/'%0D'}"
           echo "::set-env name=UNITY_LICENSE::$license"
-#      # Delete unity version file (test runner will crash otherwise)
-#      - name: Delete ProjectVersion.txt
-#        run: sudo rm ./${{ matrix.projectPath }}/ProjectSettings/ProjectVersion.txt
 
       - name: Activate license
         uses: MirrorNG/unity-runner@2.0.0
