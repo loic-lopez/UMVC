@@ -19,8 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        unityVersion:
-          - 2019.3.12f1
         targetPlatform:
           - StandaloneWindows64
         testMode:
@@ -53,7 +51,6 @@ jobs:
         uses: webbertakken/unity-test-runner@v1.5
         with:
           projectPath: ${{ matrix.projectPath }}
-          unityVersion: ${{ matrix.unityVersion }}
           artifactsPath: ./testReports/${{ matrix.targetPlatform }}
           testMode: editmode
   
