@@ -32,22 +32,22 @@ jobs:
       - name: Test
         run: .\UMVC.Core\packages\OpenCover\4.7.922\tools\OpenCover.Console.exe -register:user -filter:"+[*]* -[*]*.Templates.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.11.1\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net461\UMVC.Core.Tests.dll" -output:coverage.xml
 
-#      - name: Codecov
-#        uses: codecov/codecov-action@v1.0.7
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          file: coverage.xml
-#          name: codecov-umbrella
-#          fail_ci_if_error: true
-        
-      - name: Convert OpenCover format to lcov
-        run: dotnet .\UMVC.Core\packages\reportgenerator\4.5.8\tools\netcoreapp3.0\ReportGenerator.dll "-reports:coverage.xml" -reporttypes:lcov "-targetdir:coveragereport"
-        
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Codecov
+        uses: codecov/codecov-action@v1.0.7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./coveragereport/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage.xml
+          name: codecov-umbrella
+          fail_ci_if_error: true
+        
+#      - name: Convert OpenCover format to lcov
+#        run: dotnet .\UMVC.Core\packages\reportgenerator\4.5.8\tools\netcoreapp3.0\ReportGenerator.dll "-reports:coverage.xml" -reporttypes:lcov "-targetdir:coveragereport"
+#        
+#      - name: Coveralls
+#        uses: coverallsapp/github-action@master
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          path-to-lcov: ./coveragereport/lcov.info
         
 #      - name: Download Coveralls
 #        run: dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
