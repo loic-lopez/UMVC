@@ -38,7 +38,9 @@ jobs:
       - name: Activate Unity
         uses: webbertakken/unity-activate@v1.2
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}    
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}   
+        with:
+          unityVersion: 2019.3.12f1
       
       - uses: webbertakken/unity-test-runner@v1.6
         id: tests
