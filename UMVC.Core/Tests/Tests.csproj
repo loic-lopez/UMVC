@@ -11,13 +11,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.msbuild" Version="2.8.1" />
+        <PackageReference Include="coveralls.io" Version="1.4.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.5.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.5.0" />
         <PackageReference Include="NUnit" Version="3.12.0" />
+        <PackageReference Include="NUnit.Runners" Version="3.11.1" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+        <PackageReference Include="OpenCover" Version="4.7.922" />
     </ItemGroup>
 
     <ItemGroup>
