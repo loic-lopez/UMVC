@@ -9,9 +9,6 @@ on:
       - pre-release/*
   pull_request:
     branches: [ master ]
-    
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   
 jobs:
   test:
@@ -37,12 +34,20 @@ jobs:
 #          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
 
       - uses: actions/checkout@v2
+
+      - name: Activate Unity
+        uses: webbertakken/unity-activate@v1.2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}    
+      
       - uses: webbertakken/unity-test-runner@v1.6
         id: tests
         with:
           unityVersion: 2019.3.12f1
           testMode: ${{ matrix.testMode }}
           artifactsPath: ${{ matrix.testMode }}-artifacts
+          
+
       - uses: actions/upload-artifact@v1
         with:
           name: Test results for ${{ matrix.testMode }}
