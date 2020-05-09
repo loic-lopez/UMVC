@@ -22,19 +22,19 @@ jobs:
         testMode:
           - editmode
     steps:
-      - name: Request manual activation file
-        id: getManualLicenseFile
-        uses: webbertakken/unity-request-manual-activation-file@v1.1
-        with:
-          unityVersion: 2019.3.12f1
-
-
-      # Upload artifact (Unity_v20XX.X.XXXX.alf)
-      - name: Expose as artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+#      - name: Request manual activation file
+#        id: getManualLicenseFile
+#        uses: webbertakken/unity-request-manual-activation-file@v1.1
+#        with:
+#          unityVersion: 2019.3.12f1
+#
+#
+#      # Upload artifact (Unity_v20XX.X.XXXX.alf)
+#      - name: Expose as artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+#          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
 
       - uses: actions/checkout@v2
       - uses: webbertakken/unity-test-runner@v1.6
