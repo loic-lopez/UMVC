@@ -40,11 +40,14 @@ jobs:
 #          name: codecov-umbrella
 #          fail_ci_if_error: true
         
+      - name: Convert OpenCover format to lcov
+        run: dotnet .\UMVC.Core\packages\reportgenerator\4.5.8\tools\netcoreapp3.0\ReportGenerator.dll "-reports:coverage.xml" -reporttypes:lcov "-targetdir:coveragereport"
+        
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./coverage.xml
+          path-to-lcov: ./coveragereport/lcov.info
         
 #      - name: Download Coveralls
 #        run: dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
