@@ -10,8 +10,8 @@ on:
   pull_request:
     branches: [ master ]
     
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+#env:
+#  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   
 jobs:
   test:
@@ -26,21 +26,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-#      # Set the UNITY_LICENSE environment variable
-#      - name: Setup license
-#        # This step:
-#        #   - Grabs the license file contents from the $LICENSE_FILE_PATH
-#        #   - Uses substitution to escape newline characters for GitHub Actions set-env.
-#        #     (from: https://github.community/t5/GitHub-Actions/set-output-Truncates-Multiline-Strings/td-p/37870)
-#        #   - Set the UNITY_LICENSE env var for all future steps using special GitHub Actions syntax
-#        env:
-#          LICENSE_FILE_PATH: ./Licences/Unity_v2019.x.ulf
-#        run: |
-#          license=$(<"$LICENSE_FILE_PATH")
-#          license="${license//'%'/'%25'}"
-#          license="${license//$'\n'/'%0A'}"
-#          license="${license//$'\r'/'%0D'}"
-#          echo "::set-env name=UNITY_LICENSE::$license"
+      # Set the UNITY_LICENSE environment variable
+      - name: Setup license
+        # This step:
+        #   - Grabs the license file contents from the $LICENSE_FILE_PATH
+        #   - Uses substitution to escape newline characters for GitHub Actions set-env.
+        #     (from: https://github.community/t5/GitHub-Actions/set-output-Truncates-Multiline-Strings/td-p/37870)
+        #   - Set the UNITY_LICENSE env var for all future steps using special GitHub Actions syntax
+        env:
+          LICENSE_FILE_PATH: ./Licences/Unity_v2019.x.ulf
+        run: |
+          license=$(<"$LICENSE_FILE_PATH")
+          license="${license//'%'/'%25'}"
+          license="${license//$'\n'/'%0A'}"
+          license="${license//$'\r'/'%0D'}"
+          echo "::set-env name=UNITY_LICENSE::$license"
       # Delete unity version file (test runner will crash otherwise)
       - name: Delete ProjectVersion.txt
         run: sudo rm ./${{ matrix.projectPath }}/ProjectSettings/ProjectVersion.txt
