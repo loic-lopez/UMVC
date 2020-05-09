@@ -26,7 +26,8 @@ jobs:
         id: getManualLicenseFile
         uses: webbertakken/unity-request-manual-activation-file@v1.1
         with:
-          unityVersion: 2019.3.13f1-update-2020-05-07
+          unityVersion: 2019.3.12f1
+
 
       # Upload artifact (Unity_v20XX.X.XXXX.alf)
       - name: Expose as artifact
@@ -39,7 +40,7 @@ jobs:
       - uses: webbertakken/unity-test-runner@v1.6
         id: tests
         with:
-          unityVersion: 2019.3.13f1-update-2020-05-07
+          unityVersion: 2019.3.12f1
           testMode: ${{ matrix.testMode }}
           artifactsPath: ${{ matrix.testMode }}-artifacts
       - uses: actions/upload-artifact@v1
