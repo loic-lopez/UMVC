@@ -37,8 +37,7 @@ namespace UMVC.Editor.Models
 
         public void Save(out SettingsModel updatedModel)
         {
-            AssetDatabase.SaveAssets();
-            AssetDatabase.DeleteAsset(_settingsAssetPath);
+            Delete();
 
             var obj = CreateInstance<SettingsModel>();
             obj.name = ObjName;
@@ -53,6 +52,12 @@ namespace UMVC.Editor.Models
             updatedModel = obj;
 
             AssetDatabase.CreateAsset(obj, _settingsAssetPath);
+        }
+
+        public void Delete()
+        {
+            AssetDatabase.SaveAssets();
+            AssetDatabase.DeleteAsset(_settingsAssetPath);
         }
     }
 }
