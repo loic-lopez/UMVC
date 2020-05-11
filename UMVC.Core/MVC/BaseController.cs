@@ -12,7 +12,7 @@ namespace UMVC.Core.MVC
         public virtual void Setup(IBaseView<TModel> view)
         {
             View = view;
-            ModelProxy<TModel> modelProxy = ModelProxy<TModel>.Bind(View.Model());
+            ModelProxy<TModel> modelProxy = ModelProxy<TModel>.Bind(View.GetModel());
             Model = modelProxy.GetTransparentProxy();
             Model.Initialize();
             ModelProxy = modelProxy;

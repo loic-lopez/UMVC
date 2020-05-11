@@ -1,49 +1,49 @@
-name: UMVC.Editor Tests
-
-on:
-  push:
-    branches:
-      - master
-      - release/*
-      - staging/*
-      - pre-release/*
-  pull_request:
-    branches: [ master ]
-    
-#env:
-#  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  
-jobs:
-  test:
-    name: Test UMVC.Editor
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        targetPlatform:
-          - StandaloneWindows64
-        testMode:
-          - editmode
-    steps:
-      - uses: actions/checkout@v2
-      env:
-        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-
-      - name: Activate license
-        uses: MirrorNG/unity-runner@2.0.0
-        with:
-          entrypoint: /activate.sh
-
-      - name: Run tests
-        uses: MirrorNG/unity-runner@2.0.0
-        with:
-          args: -testPlatform editmode -runTests -projectPath .
-
-
-#      # Run tests - only edit mode supported
-#      - name: Run tests
-#        uses: webbertakken/unity-test-runner@v1.5
-#        with:
-#          projectPath: ${{ matrix.projectPath }}
-#          artifactsPath: ./testReports/${{ matrix.targetPlatform }}
-#          testMode: editmode
+#name: UMVC.Editor Tests
+#
+#on:
+#  push:
+#    branches:
+#      - master
+#      - release/*
+#      - staging/*
+#      - pre-release/*
+#  pull_request:
+#    branches: [ master ]
+#    
+##env:
+##  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 #  
+#jobs:
+#  test:
+#    name: Test UMVC.Editor
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        targetPlatform:
+#          - StandaloneWindows64
+#        testMode:
+#          - editmode
+#    steps:
+#      - uses: actions/checkout@v2
+#      env:
+#        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+#
+#      - name: Activate license
+#        uses: MirrorNG/unity-runner@2.0.0
+#        with:
+#          entrypoint: /activate.sh
+#
+#      - name: Run tests
+#        uses: MirrorNG/unity-runner@2.0.0
+#        with:
+#          args: -testPlatform editmode -runTests -projectPath .
+#
+#
+##      # Run tests - only edit mode supported
+##      - name: Run tests
+##        uses: webbertakken/unity-test-runner@v1.5
+##        with:
+##          projectPath: ${{ matrix.projectPath }}
+##          artifactsPath: ./testReports/${{ matrix.targetPlatform }}
+##          testMode: editmode
+##  

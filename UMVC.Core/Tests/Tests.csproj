@@ -27,12 +27,7 @@
         <ProjectReference Include="..\Components\Components.csproj" />
         <ProjectReference Include="..\Generation\Generation.csproj" />
         <ProjectReference Include="..\MVC\MVC.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\Dlls\UnityEngine.CoreModule.dll</HintPath>
-      </Reference>
+        <ProjectReference Include="..\UnityEngine.Mock\UnityEngine.Mock.csproj" />
     </ItemGroup>
 
 </Project>
