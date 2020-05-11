@@ -39,7 +39,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\UnityEngine.Mock\bin\Debug\UnityEngine.dll</HintPath>
+      <HintPath>..\Dlls\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
