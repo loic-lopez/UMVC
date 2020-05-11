@@ -9,7 +9,10 @@ namespace UMVC.Core.MVC
     {
         protected readonly TController Controller = new TController();
 
-        public TModel model;
+        // ReSharper disable once InconsistentNaming
+        public TModel Model;
+        
+        public TModel GetModel() => Model;
 
         protected virtual void Awake()
         {
@@ -20,9 +23,8 @@ namespace UMVC.Core.MVC
         {
             Controller.LateSetup();
         }
-        
-        public TModel Model() => model;
 
+        
         public abstract void OnFieldUpdate(string field, object newObject, object oldObject);
         public abstract void OnFieldUpdated(string field, object value);
     }

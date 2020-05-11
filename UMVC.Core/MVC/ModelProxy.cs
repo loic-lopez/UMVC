@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
+using UMVC.Core.Exceptions;
 
 namespace UMVC.Core.MVC
 {
@@ -28,6 +28,10 @@ namespace UMVC.Core.MVC
 
         public override IMessage Invoke(IMessage msg)
         {
+            if (_instance == null)
+                throw new ModelProxyInstanceNull(typeof(TModel));
+            
+            
             if (msg is IMethodCallMessage methodCall)
             {
                 var arguments = methodCall.Args;
