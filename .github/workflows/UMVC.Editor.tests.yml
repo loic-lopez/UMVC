@@ -15,7 +15,7 @@ jobs:
   test:
     name: Test UMVC.Editor
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:2018.2.21f1
+    container: gableroux/unity3d:2019.3.13f1
     steps:
       - uses: actions/checkout@v2
 
