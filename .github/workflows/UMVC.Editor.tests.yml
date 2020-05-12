@@ -1,49 +1,31 @@
-#name: UMVC.Editor Tests
-#
-#on:
-#  push:
-#    branches:
-#      - master
-#      - release/*
-#      - staging/*
-#      - pre-release/*
-#  pull_request:
-#    branches: [ master ]
-#    
-##env:
-##  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+name: UMVC.Editor Tests
+
+on:
+  push:
+    branches:
+      - master
+      - release/*
+      - staging/*
+      - pre-release/*
+  pull_request:
+    branches: [ master ]
+
+
+jobs:
+  test:
+    name: Test UMVC.Editor
+    runs-on: ubuntu-latest
+    container: gableroux/unity3d:2018.2.21f1
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Decrypt the license file
+        run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
+
+      # Activate unity
+      - name: Activate Unity
+        run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
+
+      - name: Run tests
+        run: sh .github/scripts/test.umvc.editor.sh
 #  
-#jobs:
-#  test:
-#    name: Test UMVC.Editor
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        targetPlatform:
-#          - StandaloneWindows64
-#        testMode:
-#          - editmode
-#    steps:
-#      - uses: actions/checkout@v2
-#      env:
-#        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-#
-#      - name: Activate license
-#        uses: MirrorNG/unity-runner@2.0.0
-#        with:
-#          entrypoint: /activate.sh
-#
-#      - name: Run tests
-#        uses: MirrorNG/unity-runner@2.0.0
-#        with:
-#          args: -testPlatform editmode -runTests -projectPath .
-#
-#
-##      # Run tests - only edit mode supported
-##      - name: Run tests
-##        uses: webbertakken/unity-test-runner@v1.5
-##        with:
-##          projectPath: ${{ matrix.projectPath }}
-##          artifactsPath: ./testReports/${{ matrix.targetPlatform }}
-##          testMode: editmode
-##  
