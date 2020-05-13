@@ -9,6 +9,7 @@ namespace UMVC
         private static void Build()
         {
             MSBuildProjectBuilder.TryBuildAllProjects(MSBuildProjectBuilder.BuildProfileName);
+            AssetDatabase.Refresh();
         }
 
         public static void ExternalCall()
