@@ -34,6 +34,11 @@
   
   <ItemGroup>
     <ProjectReference Include="$(UnityProjectAssetsPath)\..\UMVC.Core\MVC\MVC.csproj" />
+
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <!-- SDK.targets is imported inside this props file -->
