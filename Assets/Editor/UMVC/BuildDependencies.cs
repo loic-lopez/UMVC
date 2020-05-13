@@ -5,7 +5,7 @@ namespace Editor.UMVC
 {
     public static class BuildDependencies
     {
-        [MenuItem("Build UMVC.Core")]
+        [MenuItem("UMVC/Build UMVC.Core")]
         public static void Build()
         {
             MSBuildProjectBuilder.TryBuildAllProjects(MSBuildProjectBuilder.BuildProfileName);
