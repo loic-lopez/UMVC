@@ -1,14 +1,19 @@
 using Microsoft.Build.Unity;
 using UnityEditor;
 
-namespace Editor.UMVC
+namespace UMVC
 {
     public static class BuildDependencies
     {
         [MenuItem("UMVC/Build UMVC.Core")]
-        public static void Build()
+        private static void Build()
         {
             MSBuildProjectBuilder.TryBuildAllProjects(MSBuildProjectBuilder.BuildProfileName);
+        }
+
+        public static void ExternalCall()
+        {
+            Build();
         }
     }
 }
