@@ -24,8 +24,8 @@ jobs:
 
       # Activate unity
       - name: Activate Unity
-        run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
+        run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf
 
       - name: Run tests
-        run: sh .github/scripts/test.umvc.editor.sh
+        run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -logFile -runTests -testPlatform editmode
 #  

@@ -1,1 +1,0 @@
-/opt/Unity/Editor/Unity -quit -batchmode -nographics -logFile -runTests -testPlatform editmode
