@@ -39,7 +39,7 @@ jobs:
           fail_ci_if_error: true
           
   Build:
-    needs: tests
+    needs: Test
     runs-on: windows-latest
     steps:
 
