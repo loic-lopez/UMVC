@@ -55,16 +55,25 @@ jobs:
         run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
         
       - uses: actions/upload-artifact@v2
+        name: Upload UMVC.Core.Components.dll
         with:
           name: UMVC.Core.Build
-          - files: [
-            "UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll",
-            "UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll",
-            "UMVC.Core/Generation/bin/Release/UMVC.Core.Generation.dll",
-            "UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll",
-            "UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll"
-          ]
+          path: UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll
+          
+      - uses: actions/upload-artifact@v2
+        name: Upload UMVC.Core.Exceptions.dll
+        with:
+          name: UMVC.Core.Build
+          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
 
+#              - name: "Packages"
+#                  files: [
+#                    "UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll",
+#                    "UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll",
+#                    "UMVC.Core/Generation/bin/Release/UMVC.Core.Generation.dll",
+#                    "UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll",
+#                    "UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll"
+#                  ]
         
 #      - name: Convert OpenCover format to lcov
 #        run: dotnet .\UMVC.Core\packages\reportgenerator\4.5.8\tools\netcoreapp3.0\ReportGenerator.dll "-reports:coverage.xml" -reporttypes:lcov "-targetdir:coveragereport"
