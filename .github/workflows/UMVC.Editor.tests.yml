@@ -1,5 +1,7 @@
 name: UMVC.Editor Tests
 
+# Ref: https://gist.github.com/chatrat12/9780fffe59bc46a63bc0b9b665489e08
+
 on:
   push:
     branches:
@@ -17,7 +19,20 @@ jobs:
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
     steps:
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-build
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: build
+          ref: github.event.pull_request.head.sha || github.sha
+      
       - uses: actions/checkout@v2
+
+          
+      - name: Is UMVC.Core failing? 
+        if: steps.wait-for-build.outputs.conclusion == 'failure'
+        run: ">&2 echo 'There is a problem with your UMVC.Core build!\\n Exiting!!' && exit 1"
 
       - name: Decrypt the license file
         run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf

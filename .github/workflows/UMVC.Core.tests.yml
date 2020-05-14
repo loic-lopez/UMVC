@@ -11,10 +11,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  test:
     runs-on: windows-latest
-
     steps:
 
       - uses: actions/checkout@v2
@@ -39,6 +37,34 @@ jobs:
           file: ./coverage.xml
           name: codecov-umbrella
           fail_ci_if_error: true
+          
+  build:
+    runs-on: windows-latest
+    steps:
+
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+
+      - name: Install dotnet dependencies
+        run: dotnet restore ./UMVC.Core/UMVC.Core.sln
+
+      - name: Build
+        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
+        
+      - uses: actions/upload-artifact@v2
+        with:
+          name: UMVC.Core.Build
+          - files: [
+            UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll,
+            UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll,
+            UMVC.Core/Generation/bin/Release/UMVC.Core.Generation.dll,
+            UMVC.Core/Generation/bin/Release/UMVC.Core.Templates.dll,
+            UMVC.Core/Generation/bin/Release/UMVC.Core.MVC.dll
+          ]
+
         
 #      - name: Convert OpenCover format to lcov
 #        run: dotnet .\UMVC.Core\packages\reportgenerator\4.5.8\tools\netcoreapp3.0\ReportGenerator.dll "-reports:coverage.xml" -reporttypes:lcov "-targetdir:coveragereport"
