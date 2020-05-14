@@ -37,7 +37,7 @@ jobs:
         run: add-apt-repository universe && apt-get update && apt-get install python3-pip -y
           
       - name: Install dependencies
-        run: python -m pip3 install --upgrade pip setuptools wheel
+        run: pip3 install requests
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py
