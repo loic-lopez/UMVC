@@ -52,7 +52,7 @@ jobs:
           dotnet-version: 3.1.101
 
       - name: Install dotnet dependencies
-        run: dotnet restore ./UMVC.Core/UMVC.Core.sln
+        run: dotnet restore ./UMVC.Core/UMVC.Core.sln --configuration Release
 
       - name: Build
         run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore

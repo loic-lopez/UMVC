@@ -18,15 +18,14 @@ jobs:
         id: wait-for-build
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: Build
+          checkName: Build 🏗️
           ref: ${{ github.event.pull_request.head.sha }}
+          
+      - name: Is UMVC.Core failing?
+        if: ${{ steps.wait-for-build.outputs.conclusion == 'failure' }}
+        run: ">&2 echo 'There is a problem with your UMVC.Core build!\\n Exiting!!' && exit 1"
       
       - uses: actions/checkout@v2
-
-          
-      - name: Is UMVC.Core failing? 
-        if: ${{ steps.wait-for-build.outputs.conclusion == 'failure' }} 
-        run: ">&2 echo 'There is a problem with your UMVC.Core build!\\n Exiting!!' && exit 1"
 
       - name: Decrypt the license file
         run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
