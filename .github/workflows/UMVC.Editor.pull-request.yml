@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    name: Test 🧪
+    name: Test UMVC.Editor 🧪
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
     steps:
@@ -18,7 +18,7 @@ jobs:
         id: wait-for-build
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: Build 🏗️
+          checkName: Build UMVC.Core 🏗️
           ref: ${{ github.event.pull_request.head.sha }}
           
       - name: Is UMVC.Core failing?
@@ -27,12 +27,14 @@ jobs:
       
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
+      - name: Set up Python 3.x
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.x' # Semantic version range syntax or exact version of a Python version
+            architecture: 'x64' # Optional - x64 or x86, defaults to x64
           
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests
+        run: python -m pip install --upgrade pip setuptools wheel
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py
