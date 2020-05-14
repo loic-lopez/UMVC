@@ -3,12 +3,6 @@ name: UMVC.Editor
 # Ref: https://gist.github.com/chatrat12/9780fffe59bc46a63bc0b9b665489e08
 
 on:
-  push:
-    branches:
-      - master
-      - release/*
-      - staging/*
-      - pre-release/*
   pull_request:
     branches: [ master ]
 
@@ -19,20 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
     steps:
-        
-      - name: Wait for build to succeed on Master
+      - name: Wait for build to succeed
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-build-master
-        if: contains(github.ref, "master")
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: Build
-          ref: ${{ github.sha }}
-
-      - name: Wait for build to succeed on Pull request
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-build-pull-request
-        if: ${{ !contains(github.ref, "master") }}
+        id: wait-for-build
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: Build
