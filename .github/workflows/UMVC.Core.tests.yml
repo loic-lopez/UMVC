@@ -12,6 +12,7 @@ on:
 
 jobs:
   Test:
+    name: Test 🧪
     runs-on: windows-latest
     steps:
     
@@ -40,6 +41,7 @@ jobs:
           
   Build:
     needs: Test
+    name: Build 🏗️
     runs-on: windows-latest
     steps:
 
