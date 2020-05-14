@@ -21,19 +21,19 @@ jobs:
     steps:
       - name: Extract Branch Name
         
-      - name: Wait for build to succeed
+      - name: Wait for build to succeed on Master
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-build
+        id: wait-for-build-master
         if: contains(github.ref, "master")
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: Build
           ref: ${{ github.sha }}
 
-      - name: Wait for build to succeed
+      - name: Wait for build to succeed on Pull request
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-build
-        if: !contains(github.ref, "master")
+        id: wait-for-build-pull-request
+        if: ${{ !contains(github.ref, "master") }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: Build
