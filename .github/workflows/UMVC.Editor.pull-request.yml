@@ -26,6 +26,12 @@ jobs:
         run: echo "::error There is a problem with your UMVC.Core build! Exiting!!" && exit 1
       
       - uses: actions/checkout@v2
+        
+      - name: Update debian packages
+        run: apt-get update
+          
+      - name: Install software-properties-common 
+        run: apt-get install software-properties-common
 
       - name: Set up Python 3.x
         run: add-apt-repository universe && apt-get update && apt-get install python3-pip -y
