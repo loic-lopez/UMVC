@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up Python 3.x
-        run: apt-get install python3 python3-pip -y
+        run: apt-get update && apt-get install python3 python3-pip -y
           
       - name: Install dependencies
         run: python -m pip install --upgrade pip setuptools wheel
