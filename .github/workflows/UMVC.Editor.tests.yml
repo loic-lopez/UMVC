@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
     steps:
-      - name: Extract Branch Name
         
       - name: Wait for build to succeed on Master
         uses: fountainhead/action-wait-for-check@v1.0.0
