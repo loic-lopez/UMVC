@@ -1,4 +1,4 @@
-name: UMVC.Editor Tests
+name: UMVC.Editor
 
 # Ref: https://gist.github.com/chatrat12/9780fffe59bc46a63bc0b9b665489e08
 
@@ -15,7 +15,7 @@ on:
 
 jobs:
   test:
-    name: Test UMVC.Editor
+    name: Test 🧪
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
     steps:
@@ -25,13 +25,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: Build
-          ref: github.event.pull_request.head.sha || github.sha
+          ref: ${{ github.event.pull_request.head.sha }} || ${{ github.sha }}
       
       - uses: actions/checkout@v2
 
           
       - name: Is UMVC.Core failing? 
-        if: steps.wait-for-build.outputs.conclusion == 'failure'
+        if: ${{ steps.wait-for-build.outputs.conclusion }} == 'failure'
         run: ">&2 echo 'There is a problem with your UMVC.Core build!\\n Exiting!!' && exit 1"
 
       - name: Decrypt the license file
