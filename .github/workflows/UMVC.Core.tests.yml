@@ -58,11 +58,11 @@ jobs:
         with:
           name: UMVC.Core.Build
           - files: [
-            UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll,
-            UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll,
-            UMVC.Core/Generation/bin/Release/UMVC.Core.Generation.dll,
-            UMVC.Core/Generation/bin/Release/UMVC.Core.Templates.dll,
-            UMVC.Core/Generation/bin/Release/UMVC.Core.MVC.dll
+            "UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll",
+            "UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll",
+            "UMVC.Core/Generation/bin/Release/UMVC.Core.Generation.dll",
+            "UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll",
+            "UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll"
           ]
 
         
