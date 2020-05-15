@@ -77,11 +77,8 @@ if __name__ == "__main__":
 
   file_path = os.path.join(output_directory, 'UMVC.Core.Build.zip')
 
-  headers = {}
   auth = ("loic-lopez", sys.argv[1])
-
-  with requests.session(auth=auth, headers=headers) as c:
-    zip = requests.get(artifact_url, stream=True)   
+  zip = requests.get(artifact_url, stream=True, auth=auth)   
 
   # Write the file
   with open(file_path, 'wb') as fd:
