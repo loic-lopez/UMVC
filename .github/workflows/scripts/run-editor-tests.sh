@@ -8,6 +8,7 @@ xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
         -testResults "$GITHUB_WORKSPACE/editmode-results.xml" \
         -enableCodeCoverage \
         -coverageResultsPath "$GITHUB_WORKSPACE/CodeCoverage/" \
+        -coverageOptions "assemblyFilters:-*unity*" \
         -burst-disable-compilation
 
 # Catch exit code
