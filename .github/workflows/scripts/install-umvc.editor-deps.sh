@@ -1,8 +1,8 @@
 unzip -o UMVC.Core.Build.zip -d UMVC.Core.Build
 
 moveDllToDir() {
-  echo "Moving dependency $1 to $2"
   mv "$1" "$2"
+  echo "Moving dependency $1 to $2"
 }
 
 

@@ -71,16 +71,19 @@ if __name__ == "__main__":
   artifact_url = get_latest_artifact_url(WORKFLOW_NAME, ARTIFACT_NAME)
   print(artifact_url)
   
-  zip = requests.get(artifact_url)
 
   pathname = os.path.dirname(sys.argv[0])
   output_directory = os.path.join(os.path.abspath(pathname), "../../../")
 
   file_path = os.path.join(output_directory, 'UMVC.Core.Build.zip')
 
+  zip = requests.get(artifact_url, stream=True) 
+
   # Write the file
-  with open(file_path, 'wb') as output:
-    output.write(zip.content)
+  with open(file_path, 'wb') as fd:
+    for chunk in zip.iter_content(chunk_size=128):
+      print("downloading UMVC.Core.Build.zip...")
+      fd.write(chunk)
 
   print("Writed UMVC.Core.Build.zip to %s" % file_path)
   
