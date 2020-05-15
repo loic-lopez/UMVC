@@ -29,10 +29,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: apt-get update && apt-get install python-pip -y && pip install requests
+        run: apt-get update && apt-get install python-pip unzip -y && pip install requests
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py
+
+      - name: Unzip and move UMVC.Core dlls
+        run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
 
       - name: Decrypt the license file
         run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf

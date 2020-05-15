@@ -82,5 +82,5 @@ if __name__ == "__main__":
   with open(file_path, 'wb') as output:
     output.write(zip.content)
 
-  print("Writed UMVC.Core.Build.zip to %d" % file_path)
+  print("Writed UMVC.Core.Build.zip to %s" % file_path)
   
