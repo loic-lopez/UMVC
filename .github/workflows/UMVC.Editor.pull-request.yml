@@ -27,6 +27,9 @@ jobs:
         run: echo "::error There is a problem with your UMVC.Core build! Exiting!!" && exit 1
       
       - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: python -m ensurepip --default-pip
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py
