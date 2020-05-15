@@ -32,7 +32,7 @@ jobs:
         run: apt-get update && apt-get install python-pip unzip -y && pip install requests
         
       - name: Download UMVC.Core Build
-        run: python .github/workflows/scripts/downloadArtifacts.py
+        run: python .github/workflows/scripts/downloadArtifacts.py ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Unzip and move UMVC.Core dlls
         run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
