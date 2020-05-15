@@ -19,25 +19,28 @@ namespace UMVC.Editor.Windows
         [SerializeField]
         private BaseComponentSettings controller;
 
+        private SerializedProperty _serializedModel;
+        private SerializedProperty _serializedController;
+        private SerializedProperty _serializedView;
+        private SerializedObject _serializedGameObject;
+
         public override void SetupWindow()
         {
             base.SetupWindow();
             titleContent.text = "UMVC Settings";
-        }
-
-
-        private void Awake()
-        {
             _outputNamespace = Singleton.UMVC.Instance.Settings.outputNamespace;
             model = Singleton.UMVC.Instance.Settings.model;
             controller = Singleton.UMVC.Instance.Settings.controller;
             view = Singleton.UMVC.Instance.Settings.view;
+            
+            _serializedGameObject = new SerializedObject (this);
+            _serializedModel = _serializedGameObject.FindProperty("model");
+            _serializedController = _serializedGameObject.FindProperty("controller");
+            _serializedView = _serializedGameObject.FindProperty("view");
         }
-
+        
         protected override void OnGUI()
         {
-            if (GUI.changed) return; //Returns true if any controls changed the value of the input data.
-
             GUILayout.Label("Settings", Label.Header);
             DisplayOutputNamespace();
 
@@ -49,16 +52,12 @@ namespace UMVC.Editor.Windows
 
         private void DisplayBaseExtends()
         {
-            SerializedObject so = new SerializedObject (this);
-            SerializedProperty serializedModel = so.FindProperty("model");
-            SerializedProperty serializedController = so.FindProperty("controller");
-            SerializedProperty serializedView = so.FindProperty("view");
-            EditorGUILayout.PropertyField(serializedModel);
+            EditorGUILayout.PropertyField(_serializedModel);
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(serializedView);
+            EditorGUILayout.PropertyField(_serializedView);
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(serializedController);
-            so.ApplyModifiedProperties();
+            EditorGUILayout.PropertyField(_serializedController);
+            _serializedGameObject.ApplyModifiedProperties();
         }
 
         private void DisplayOutputNamespace()
@@ -70,7 +69,8 @@ namespace UMVC.Editor.Windows
 
         protected override void DisplayEndButton()
         {
-            if (GUILayout.Button("Save", Button.WithMargin))
+            EditorGUILayout.Space(2);
+            if (GUILayout.Button("Save"))
             {
                 Singleton.UMVC.Instance.Settings.outputNamespace = _outputNamespace;
                 Singleton.UMVC.Instance.Settings.model = model;

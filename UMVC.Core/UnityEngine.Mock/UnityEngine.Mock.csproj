@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C94C47E2-97DF-4D03-AE00-D685894D8419}</ProjectGuid>
+    <ProjectGuid>{39DFD947-1B1E-4179-8A08-2C928E6341BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UMVC.Core.TestTemplates</RootNamespace>
-    <AssemblyName>UMVC.Core.TestTemplates</AssemblyName>
+    <RootNamespace>UnityEngine</RootNamespace>
+    <AssemblyName>UnityEngine</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,49 +38,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewTemplateTest.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ViewTemplateTest.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ControllerTemplateTest.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControllerTemplateTest.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelTemplateTest.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelTemplateTest.tt</DependentUpon>
-    </Compile>
+    <Compile Include="MonoBehaviour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ViewTemplateTest.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ViewTemplateTest.cs</LastGenOutput>
-    </Content>
-    <Content Include="ControllerTemplateTest.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ControllerTemplateTest.cs</LastGenOutput>
-    </Content>
-    <Content Include="ModelTemplateTest.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelTemplateTest.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MVC\MVC.csproj">
-      <Project>{c588bfd9-8b97-44e7-91d4-9a1b3a26aaf0}</Project>
-      <Name>MVC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UnityEngine.Mock\UnityEngine.Mock.csproj">
-      <Project>{39dfd947-1b1e-4179-8a08-2c928e6341bc}</Project>
-      <Name>UnityEngine.Mock</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

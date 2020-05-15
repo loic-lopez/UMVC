@@ -2,7 +2,7 @@
 {
     public interface IBaseView<out TModel> where TModel : BaseModel
     {
-        TModel Model();
+        TModel GetModel();
         void OnFieldUpdate(string field, object newObject, object oldObject);
         void OnFieldUpdated(string field, object value);
     }
