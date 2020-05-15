@@ -46,18 +46,7 @@ jobs:
 
       # Run tests
       - name: Run tests
-        run: |
-          xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-          /opt/Unity/Editor/Unity \
-          -batchmode \
-          -logFile "$GITHUB_WORKSPACE/editmode.log" \
-          -projectPath "$GITHUB_WORKSPACE" \
-          -runTests \
-          -testPlatform editmode \
-          -testResults "$GITHUB_WORKSPACE/editmode-results.xml" \
-          -enableCodeCoverage \
-          -coverageResultsPath "$GITHUB_WORKSPACE/CodeCoverage/" \
-          -burst-disable-compilation
+        run: sh .github/workflows/scripts/run-editor-tests.sh
         
       - name: Check output
         run: |
