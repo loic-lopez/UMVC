@@ -60,5 +60,7 @@ jobs:
           -burst-disable-compilation
         
       - name: Check output
-        run: ls ./CodeCoverage
+        run: |
+          cat $GITHUB_WORKSPACE/editmode-results.xml
+          ls ./CodeCoverage/UMVC-opencov
 #  
