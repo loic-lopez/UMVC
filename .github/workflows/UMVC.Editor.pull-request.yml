@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
 
-    strategy:
-      matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
-
     steps:
       - name: Wait for build to succeed
         uses: fountainhead/action-wait-for-check@v1.0.0
@@ -31,13 +27,6 @@ jobs:
         run: echo "::error There is a problem with your UMVC.Core build! Exiting!!" && exit 1
       
       - uses: actions/checkout@v2
-        
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: which pip
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py
