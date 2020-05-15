@@ -1,3 +1,5 @@
+ls
+
 unzip -o UMVC.Core.Build.zip -d UMVC.Core.Build
 
 moveDllToDir() {
