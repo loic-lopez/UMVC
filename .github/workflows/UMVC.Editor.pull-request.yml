@@ -48,8 +48,11 @@ jobs:
       - name: Run tests
         run: sh .github/workflows/scripts/run-editor-tests.sh
         
-      - name: Check output
-        run: |
-          cat $GITHUB_WORKSPACE/editmode-results.xml
-          ls ./CodeCoverage/UMVC-opencov
+      - name: Codecov
+          uses: codecov/codecov-action@v1.0.7
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            file: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml
+            name: codecov-umbrella
+            fail_ci_if_error: true
 #  
