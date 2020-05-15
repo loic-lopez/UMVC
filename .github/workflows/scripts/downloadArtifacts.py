@@ -74,7 +74,7 @@ if __name__ == "__main__":
   zip = requests.get(artifact_url)
 
   pathname = os.path.dirname(sys.argv[0])
-  output_directory = os.path.join(os.path.abspath(pathname), "..\\..\\..\\")
+  output_directory = os.path.join(os.path.abspath(pathname), "../../../")
 
   file_path = os.path.join(output_directory, 'UMVC.Core.Build.zip')
 
