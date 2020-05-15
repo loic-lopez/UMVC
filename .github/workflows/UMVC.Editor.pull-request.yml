@@ -57,9 +57,8 @@ jobs:
           -testResults "$GITHUB_WORKSPACE/editmode-results.xml" \
           -enableCodeCoverage \
           -coverageResultsPath "$GITHUB_WORKSPACE/CodeCoverage/" \
-          -coverageOptions "generateHtmlReport;assemblyFilters:-*unity*" \
           -burst-disable-compilation
         
       - name: Check output
-        run: ls
+        run: ls ./CodeCoverage
 #  

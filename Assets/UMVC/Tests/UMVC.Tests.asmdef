@@ -1,8 +1,6 @@
 {
     "name": "UMVC.Tests",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
         "UMVC.Editor"
     ],
     "includePlatforms": [
@@ -14,7 +12,7 @@
     "precompiledReferences": [
         "nunit.framework.dll"
     ],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS"
     ],
