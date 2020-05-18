@@ -14,10 +14,13 @@
 <hr>
 <p align="center">
 	<a href="https://codecov.io/gh/loic-lopez/UMVC">
-           <img src="https://codecov.io/gh/loic-lopez/UMVC/branch/master/graph/badge.svg" />    
+           <img src="https://codecov.io/gh/loic-lopez/UMVC/branch/master/graph/badge.svg" />
         </a>
-	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3A%22UMVC+Generation+Tests%22">
-	    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Core%20Tests/badge.svg" alt="Download">
+	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Editor">
+	    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Editor/badge.svg">
+	</a>
+	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Core">
+	    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Core/badge.svg">
 	</a>
 	<a href="">
 	    <img src="/Docs/BtnDownload.png" alt="Download">
