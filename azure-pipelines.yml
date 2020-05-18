@@ -1,5 +1,7 @@
 trigger:
   - master
+  pr:
+    - master
 
 pool:
   vmImage: 'windows-latest'
