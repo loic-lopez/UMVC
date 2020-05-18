@@ -6,9 +6,9 @@ using UMVC.Tests.Extensions;
 
 namespace UMVC.Tests
 {
+    [TestFixture]
     public class SettingsTests
     {
-        // A Test behaves as an ordinary method
         [Test]
         public void TestIfSettingsAreSuccessfullySerialized()
         {
