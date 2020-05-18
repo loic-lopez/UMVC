@@ -25,10 +25,10 @@ steps:
     displayName: 'Prepare analysis configuration'
     inputs:
       SonarCloud: 'SonarCloud'
-      organization: 'sonarsource'
+      organization: 'loic-lopez'
       scannerMode: 'MSBuild'
-      projectKey: 'dotnet-framework-on-azdo'
-      projectName: 'Sample .NET Framework project with Azure DevOps'
+      projectKey: 'loic-lopez_UMVC'
+      projectName: 'UMVC Model-View-Controller Generator built for Unity'
 
 
   - task: VSBuild@1
