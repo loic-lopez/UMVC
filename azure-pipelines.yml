@@ -17,7 +17,9 @@ steps:
   - task: NuGetCommand@2
     displayName: 'NuGet restore'
     inputs:
-      restoreSolution: 'UMVC.Core/UMVC.Core.sln'
+      command: 'restore'
+      feedsToUse: 'select'
+      restoreSolution: '**/*.sln'
 
   - task: SonarCloudPrepare@1
     displayName: 'Prepare analysis configuration'
