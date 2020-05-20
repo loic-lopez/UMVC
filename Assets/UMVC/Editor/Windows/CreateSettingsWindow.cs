@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UMVC.Editor.Windows
 {
-    public class CreateSettingsWindow : Window
+    public sealed class CreateSettingsWindow : Window
     {
         private string _outputNamespace;
         private SerializedProperty _serializedController;
