@@ -28,7 +28,7 @@ namespace UMVC.Editor.Windows
         public override void SetupWindow()
         {
             base.SetupWindow();
-            titleContent.text = "UMVC Generator";
+            titleContent.text = WindowName();
         }
 
 
@@ -95,6 +95,11 @@ namespace UMVC.Editor.Windows
                 AssetDatabase.Refresh();
                 EditorUtility.DisplayDialog("MVC Generated!", $"Generated to {outputDir}", "Got it!");
             }
+        }
+
+        public override string WindowName()
+        {
+            return "UMVC Generator";
         }
 
         private string GenerateOutputNamespace()

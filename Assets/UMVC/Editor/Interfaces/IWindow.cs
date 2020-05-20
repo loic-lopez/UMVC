@@ -4,5 +4,6 @@ namespace UMVC.Editor.Interfaces
     {
         bool IsOpen { get; }
         void SetupWindow();
+        string WindowName();
     }
 }

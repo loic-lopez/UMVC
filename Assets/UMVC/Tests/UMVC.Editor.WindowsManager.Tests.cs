@@ -3,7 +3,6 @@ using NUnit.Framework;
 using UMVC.Editor;
 using UMVC.Editor.Interfaces;
 using UMVC.Editor.Windows;
-using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace UMVC.Tests
@@ -12,21 +11,23 @@ namespace UMVC.Tests
     public class UMVCEditorWindowsManagerTests
     {
         [UnityTest]
-        public IEnumerable TestCreateMVCWindow()
+        public IEnumerator TestCreateMVCWindow()
         {
-            var window = WindowsManager.CreateMVCWindow();
+            var window = (CreateMVCWindow)WindowsManager.CreateMVCWindow();
             yield return null;
-            Assert.IsNotNull(Object.FindObjectOfType<CreateMVCWindow>());
-            Assert.That(window.IsOpen);
+            Assert.IsNotNull(CreateMVCWindow.Instance);
+            Assert.That(((IWindow) window).IsOpen);
+            window.Close();
         }
 
         [UnityTest]
-        public IEnumerable TestCreateSettingsWindow()
+        public IEnumerator TestCreateSettingsWindow()
         {
-            var window = WindowsManager.CreateSettingsWindow();
+            var window = (CreateSettingsWindow)WindowsManager.CreateSettingsWindow();
             yield return null;
-            Assert.IsNotNull(Object.FindObjectOfType<CreateSettingsWindow>());
-            Assert.That(window.IsOpen);
+            Assert.IsNotNull(CreateSettingsWindow.Instance);
+            Assert.That(((IWindow) window).IsOpen);
+            window.Close();
         }
     }
 }
