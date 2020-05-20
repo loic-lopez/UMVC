@@ -1,7 +1,6 @@
 using System;
 using NUnit.Framework;
 using UMVC.Editor.Extensions;
-using UnityEngine;
 
 namespace UMVC.Tests
 {
@@ -25,7 +24,6 @@ namespace UMVC.Tests
 
     public class ADog2 : ADog
     {
-        
     }
 
     [TestFixture]
@@ -35,25 +33,25 @@ namespace UMVC.Tests
         public class StringExtensionsTests
         {
             [Test]
+            public void TestIsNotNullOrEmpty()
+            {
+                var str = "a";
+
+                Assert.That(str.IsNotNullOrEmpty());
+            }
+
+            [Test]
             public void TestIsNullOrEmpty()
             {
                 string str = null;
-            
+
                 Assert.That(str.IsNullOrEmpty());
 
                 str = "";
                 Assert.That(str.IsNullOrEmpty());
             }
-        
-            [Test]
-            public void TestIsNotNullOrEmpty()
-            {
-                string str = "a";
-            
-                Assert.That(str.IsNotNullOrEmpty());
-            }
         }
-        
+
         [TestFixture]
         public class SystemExtensionsTests
         {
@@ -61,7 +59,7 @@ namespace UMVC.Tests
             public void TestGetDeclaredType()
             {
                 var adog = new ADog();
-                
+
                 Assert.True(adog.GetType().ToString() == adog.GetDeclaredType().ToString());
             }
 
