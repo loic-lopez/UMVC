@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace UMVC.Editor.Extensions
 {
     public static class StringExtensions
@@ -13,11 +15,18 @@ namespace UMVC.Editor.Extensions
         }
 
 
-        public static string Capitalize(this string str)
+        public static string ToPascalCase(this string str)
         {
             if (str.IsNullOrEmpty()) return "";
 
-            return char.ToUpper(str[0]) + str.Substring(1);
+            string CapitalizeWord(string word)
+            {
+                return char.ToUpper(word[0]) + word.Substring(1);
+            }
+            
+            var wordList = str.Replace("[^A-Za-z0-9]", "").Split(' ');
+
+            return wordList.Aggregate(string.Empty, (current, word) => current + CapitalizeWord(word));
         }
     }
 }

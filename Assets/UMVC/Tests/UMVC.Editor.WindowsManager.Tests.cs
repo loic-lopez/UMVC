@@ -16,7 +16,7 @@ namespace UMVC.Tests
             var window = (CreateMVCWindow)WindowsManager.CreateMVCWindow();
             yield return null;
             Assert.IsNotNull(CreateMVCWindow.Instance);
-            Assert.That(((IWindow) window).IsOpen);
+            Assert.That(((IWindow) window).IsOpen, Is.True);
             window.Close();
         }
 
@@ -26,7 +26,7 @@ namespace UMVC.Tests
             var window = (CreateSettingsWindow)WindowsManager.CreateSettingsWindow();
             yield return null;
             Assert.IsNotNull(CreateSettingsWindow.Instance);
-            Assert.That(((IWindow) window).IsOpen);
+            Assert.That(((IWindow) window).IsOpen, Is.True);
             window.Close();
         }
     }

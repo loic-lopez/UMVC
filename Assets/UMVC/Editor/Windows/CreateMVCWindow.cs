@@ -4,6 +4,7 @@ using UMVC.Core.Generation.GeneratorParameters;
 using UMVC.Editor.Abstracts;
 using UMVC.Editor.Extensions;
 using UMVC.Editor.Styles;
+using UMVC.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using Component = UMVC.Core.Components.Component;
@@ -41,9 +42,7 @@ namespace UMVC.Editor.Windows
 
             if (componentName != _componentName)
             {
-                var wordList = componentName.Replace("[^A-Za-z0-9]", "").Split(' ');
-                _componentName = string.Empty;
-                foreach (var word in wordList) _componentName += word.Capitalize();
+                _componentName = componentName.ToPascalCase();
 
                 UpdateNewSubdir();
             }
@@ -59,7 +58,7 @@ namespace UMVC.Editor.Windows
         {
             if (GUILayout.Button("Create", Button.WithMargin) && _componentName.IsNotNullOrEmpty())
             {
-                var outputNamespace = GenerateOutputNamespace();
+                var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
                 var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
                 if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
 
@@ -100,28 +99,6 @@ namespace UMVC.Editor.Windows
         public override string WindowName()
         {
             return "UMVC Generator";
-        }
-
-        private string GenerateOutputNamespace()
-        {
-            string outputNamespace;
-            if (Singleton.UMVC.Instance.Settings.outputNamespace.IsNotNullOrEmpty())
-            {
-                outputNamespace = Singleton.UMVC.Instance.Settings.outputNamespace;
-            }
-            else
-            {
-                var basePath = Application.dataPath + "/";
-                outputNamespace = _wantCreateSubDir ? _newSubdir : _outputDir;
-                basePath = outputNamespace.Replace(basePath, "");
-
-                if (basePath == Application.dataPath) // if the path is /Assets
-                    outputNamespace = Application.productName;
-                else
-                    outputNamespace = basePath.Replace('/', '.');
-            }
-
-            return outputNamespace;
         }
 
         private void DisplayGenerated()

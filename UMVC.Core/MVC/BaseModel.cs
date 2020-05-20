@@ -7,10 +7,11 @@ namespace UMVC.Core.MVC
     // MarshalByRefObject are necessary in order to RealProxy be able to work
     public abstract class BaseModel : MarshalByRefObject, IBaseModel
     {
+        public bool eventsEnabled = true;
+        
         public virtual void Initialize()
         {
         }
-
-       
+        
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using UMVC.Editor.Extensions;
+using UnityEngine;
 
 namespace UMVC.Tests
 {
@@ -37,7 +38,7 @@ namespace UMVC.Tests
             {
                 var str = "a";
 
-                Assert.That(str.IsNotNullOrEmpty());
+                Assert.That(str.IsNotNullOrEmpty(), Is.True);
             }
 
             [Test]
@@ -45,10 +46,18 @@ namespace UMVC.Tests
             {
                 string str = null;
 
-                Assert.That(str.IsNullOrEmpty());
+                Assert.That(str.IsNullOrEmpty(), Is.True);
 
                 str = "";
-                Assert.That(str.IsNullOrEmpty());
+                Assert.That(str.IsNullOrEmpty(), Is.True);
+            }
+
+            [Test]
+            public void TestToPascalCase()
+            {
+                var str = "unit test".ToPascalCase();
+
+                Assert.That(str, Is.EqualTo("UnitTest"));
             }
         }
 
@@ -60,14 +69,15 @@ namespace UMVC.Tests
             {
                 var adog = new ADog();
 
-                Assert.True(adog.GetType().ToString() == adog.GetDeclaredType().ToString());
+                Assert.That(adog.GetType().ToString(), Is.EqualTo(adog.GetDeclaredType().ToString()));
             }
 
             [Test]
             public void TestGetDeclaredTypeSubDog()
             {
                 var adog2 = new ADog2();
-                Assert.True(adog2.GetType().ToString() != adog2.GetDogType().ToString());
+                adog2.Bark();
+                Assert.AreNotEqual(adog2.GetType().ToString(), adog2.GetDogType().ToString());
             }
         }
     }

@@ -15,7 +15,7 @@ namespace UMVC.Tests
 
             var obj = Asset.CreateAssetIfNotExists<SettingsModel>("settings", file);
 
-            Assert.That(File.Exists(file));
+            Assert.That(File.Exists(file), Is.True);
             Assert.NotNull(obj);
 
             obj = Asset.CreateAssetIfNotExists<SettingsModel>("settings", file);
@@ -31,7 +31,7 @@ namespace UMVC.Tests
 
             var obj = Asset.CreateAssetIfNotExists<SettingsModel>("settings", file);
 
-            Assert.That(File.Exists(file));
+            Assert.That(File.Exists(file), Is.True);
             Assert.NotNull(obj);
             File.Delete(file);
             File.Delete(file + ".meta");

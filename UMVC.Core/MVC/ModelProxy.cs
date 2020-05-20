@@ -36,14 +36,14 @@ namespace UMVC.Core.MVC
             {
                 var arguments = methodCall.Args;
                 
-                if (methodCall.MethodBase.Name.Equals("FieldSetter"))
+                if (methodCall.MethodBase.Name.Equals("FieldSetter") && _instance.eventsEnabled)
                 {
                     BeforeFieldUpdate(arguments);
                 }
                 
                 var result = methodCall.MethodBase.Invoke(_instance, arguments);
                 
-                if (methodCall.MethodBase.Name.Equals("FieldSetter"))
+                if (methodCall.MethodBase.Name.Equals("FieldSetter") && _instance.eventsEnabled)
                 {
                     AfterFieldUpdate(arguments);
                 }
