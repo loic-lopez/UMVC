@@ -9,20 +9,17 @@ namespace UMVC.Editor.Windows
     public class CreateSettingsWindow : Window
     {
         private string _outputNamespace;
-        
-        [SerializeField]
-        private BaseComponentSettings model;
-        
-        [SerializeField]
-        private BaseComponentSettings view;
-        
-        [SerializeField]
-        private BaseComponentSettings controller;
+        private SerializedProperty _serializedController;
+        private SerializedObject _serializedGameObject;
 
         private SerializedProperty _serializedModel;
-        private SerializedProperty _serializedController;
         private SerializedProperty _serializedView;
-        private SerializedObject _serializedGameObject;
+
+        [SerializeField] private BaseComponentSettings controller;
+
+        [SerializeField] private BaseComponentSettings model;
+
+        [SerializeField] private BaseComponentSettings view;
 
         public override void SetupWindow()
         {
@@ -32,13 +29,13 @@ namespace UMVC.Editor.Windows
             model = Singleton.UMVC.Instance.Settings.model;
             controller = Singleton.UMVC.Instance.Settings.controller;
             view = Singleton.UMVC.Instance.Settings.view;
-            
-            _serializedGameObject = new SerializedObject (this);
+
+            _serializedGameObject = new SerializedObject(this);
             _serializedModel = _serializedGameObject.FindProperty("model");
             _serializedController = _serializedGameObject.FindProperty("controller");
             _serializedView = _serializedGameObject.FindProperty("view");
         }
-        
+
         protected override void OnGUI()
         {
             GUILayout.Label("Settings", Label.Header);

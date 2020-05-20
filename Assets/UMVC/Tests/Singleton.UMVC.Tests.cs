@@ -1,14 +1,11 @@
 using NUnit.Framework;
 using UMVC.Tests.Extensions;
-using UnityEngine;
 
 namespace UMVC.Tests
 {
-    
-    
     public class StaticDerivedUMVC : Editor.Singleton.UMVC
     {
-        public static UMVC.Editor.Singleton.UMVC GetInternalInstance()
+        public static Editor.Singleton.UMVC GetInternalInstance()
         {
             return _instance;
         }
@@ -36,19 +33,10 @@ namespace UMVC.Tests
         }
     }
 
-    
+
     [TestFixture]
     public class SingletonUMVCTests
     {
-
-        [Test]
-        public void TestSingletonSetupInstance()
-        {
-            // ReSharper disable once UnusedVariable
-            var instance = Editor.Singleton.UMVC.Instance;
-            Assert.NotNull(StaticDerivedUMVC.GetInternalInstance());
-        }
-        
         [Test]
         public void TestSingletonInitializeField()
         {
@@ -60,17 +48,29 @@ namespace UMVC.Tests
         }
 
         [Test]
+        public void TestSingletonSetupInstance()
+        {
+            // ReSharper disable once UnusedVariable
+            var instance = Editor.Singleton.UMVC.Instance;
+            Assert.NotNull(StaticDerivedUMVC.GetInternalInstance());
+        }
+
+        [Test]
         public void TestSingletonUpdateModel()
         {
+            var logo = DerivedUMVC.Instance.Settings.logo;
             DerivedUMVC.Instance.Settings.logo = TestsExtensions.RandomString();
             DerivedUMVC.Instance.UpdateSettingsModel();
-            
+
             var settingsModelLogo = DerivedUMVC.Instance.Settings.logo;
-            
+
             DerivedUMVC.Instance.Settings.logo = TestsExtensions.RandomString();
             DerivedUMVC.Instance.UpdateSettingsModel();
-            
+
             Assert.IsTrue(settingsModelLogo != DerivedUMVC.Instance.Settings.logo);
+
+            DerivedUMVC.Instance.Settings.logo = logo;
+            DerivedUMVC.Instance.UpdateSettingsModel();
         }
     }
 }

@@ -4,24 +4,26 @@ using UnityEditor;
 
 namespace UMVC.Editor
 {
-    public static class WindowsManager
+    public class WindowsManager
     {
-        private static void InstantiateWindow<T>() where T : IWindow
+        private static IWindow InstantiateWindow<T>() where T : IWindow
         {
             var window = (IWindow) EditorWindow.GetWindow(typeof(T));
             window.SetupWindow();
+
+            return window;
         }
 
         [MenuItem("UMVC/Create an MVC pattern")]
-        private static void CreateMVCWindow()
+        protected static IWindow CreateMVCWindow()
         {
-            InstantiateWindow<CreateMVCWindow>();
+            return InstantiateWindow<CreateMVCWindow>();
         }
 
         [MenuItem("UMVC/Settings")]
-        private static void CreateModelWindow()
+        protected static IWindow CreateSettingsWindow()
         {
-            InstantiateWindow<CreateSettingsWindow>();
+            return InstantiateWindow<CreateSettingsWindow>();
         }
     }
 }

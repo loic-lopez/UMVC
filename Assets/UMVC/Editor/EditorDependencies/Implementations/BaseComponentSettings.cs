@@ -5,8 +5,7 @@ namespace UMVC.Editor.EditorDependencies.Implementations
 {
     [Serializable]
     // Inherit from BaseComponent in order to make the BaseComponent serialized by Unity ()
-    public class BaseComponentSettings : BaseComponent 
+    public class BaseComponentSettings : BaseComponent
     {
-        
     }
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace UMVC.Editor.Utils
 {
-    public class Asset
+    public static class Asset
     {
         public static T CreateAssetIfNotExists<T>(string objectName, string assetFile) where T : ScriptableObject
         {
             T obj;
-            
+
             if (!File.Exists(assetFile))
             {
                 obj = ScriptableObject.CreateInstance<T>();
