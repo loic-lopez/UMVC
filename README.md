@@ -30,11 +30,17 @@
 
 ## Features
 
-✔️ Customizable T4 Templates
+✔ Customizable T4 Templates
 
-✔️ Customizable Base Templates
+✔ Customizable Base Templates
 
-✔️ Generate your architecture directly in the Unity Editor
+✔ Generate your architecture directly in the Unity Editor
+
+✔ Automated Events bound on model fields
+- ✔ OnFieldUpdate(string field, object newObject, object oldObject)
+- ✔ OnFieldUpdated(string field, object value)
+
+✔ Disable/Enable Model Events on demand
 
 ## The library is following the MVC pattern
 
