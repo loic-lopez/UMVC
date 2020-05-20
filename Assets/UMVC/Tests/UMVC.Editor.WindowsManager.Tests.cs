@@ -8,27 +8,13 @@ using UnityEngine.TestTools;
 
 namespace UMVC.Tests
 {
-    public class DerivedWindowsManager : WindowsManager
-    {
-        public new static IWindow CreateSettingsWindow()
-        {
-            return WindowsManager.CreateSettingsWindow();
-        }
-
-        public new static IWindow CreateMVCWindow()
-        {
-            return WindowsManager.CreateMVCWindow();
-        }
-    }
-
-
     [TestFixture]
     public class UMVCEditorWindowsManagerTests
     {
         [UnityTest]
         public IEnumerable TestCreateMVCWindow()
         {
-            var window = DerivedWindowsManager.CreateMVCWindow();
+            var window = WindowsManager.CreateMVCWindow();
             yield return null;
             Assert.IsNotNull(Object.FindObjectOfType<CreateMVCWindow>());
             Assert.That(window.IsOpen);
@@ -37,7 +23,7 @@ namespace UMVC.Tests
         [UnityTest]
         public IEnumerable TestCreateSettingsWindow()
         {
-            var window = DerivedWindowsManager.CreateSettingsWindow();
+            var window = WindowsManager.CreateSettingsWindow();
             yield return null;
             Assert.IsNotNull(Object.FindObjectOfType<CreateSettingsWindow>());
             Assert.That(window.IsOpen);

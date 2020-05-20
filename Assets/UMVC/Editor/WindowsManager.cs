@@ -15,13 +15,13 @@ namespace UMVC.Editor
         }
 
         [MenuItem("UMVC/Create an MVC pattern")]
-        protected static IWindow CreateMVCWindow()
+        public static IWindow CreateMVCWindow()
         {
             return InstantiateWindow<CreateMVCWindow>();
         }
 
         [MenuItem("UMVC/Settings")]
-        protected static IWindow CreateSettingsWindow()
+        public static IWindow CreateSettingsWindow()
         {
             return InstantiateWindow<CreateSettingsWindow>();
         }
