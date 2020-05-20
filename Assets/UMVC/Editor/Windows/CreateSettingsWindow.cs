@@ -24,7 +24,7 @@ namespace UMVC.Editor.Windows
         public override void SetupWindow()
         {
             base.SetupWindow();
-            titleContent.text = "UMVC Settings";
+            titleContent.text = WindowName();
             _outputNamespace = Singleton.UMVC.Instance.Settings.outputNamespace;
             model = Singleton.UMVC.Instance.Settings.model;
             controller = Singleton.UMVC.Instance.Settings.controller;
@@ -75,6 +75,11 @@ namespace UMVC.Editor.Windows
                 Singleton.UMVC.Instance.Settings.view = view;
                 Singleton.UMVC.Instance.UpdateSettingsModel();
             }
+        }
+
+        public override string WindowName()
+        {
+            return "UMVC Settings";
         }
     }
 }

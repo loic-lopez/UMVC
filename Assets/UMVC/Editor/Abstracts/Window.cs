@@ -29,5 +29,7 @@ namespace UMVC.Editor.Abstracts
         }
 
         protected abstract void DisplayEndButton();
+
+        public abstract string WindowName();
     }
 }
