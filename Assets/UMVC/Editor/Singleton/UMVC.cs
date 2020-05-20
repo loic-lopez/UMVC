@@ -1,4 +1,5 @@
 using System.IO;
+using UMVC.Editor.Extensions;
 using UMVC.Editor.Models;
 using UnityEditor;
 using UnityEngine;
@@ -9,12 +10,12 @@ namespace UMVC.Editor.Singleton
     {
         private const string SettingsFolder = "Settings";
 
-        private UMVC()
+        protected UMVC()
         {
         }
 
-        private string RootPath { get; set; }
-        private string RelativePath { get; set; }
+        protected string RootPath { get; set; }
+        protected string RelativePath { get; set; }
 
         public SettingsModel Settings { get; set; }
 
@@ -29,25 +30,32 @@ namespace UMVC.Editor.Singleton
 
         #region Static
 
-        private static UMVC _instance;
+        protected static UMVC _instance;
 
         public static UMVC Instance
         {
             get
             {
-                if (_instance == null) SetupInstance();
+                if (_instance == null) SetupInstance<UMVC>();
                 return _instance;
             }
         }
 
-        private static void SetupInstance()
+        protected static void SetupInstance<T>() where T : UMVC
         {
-            _instance = CreateInstance<UMVC>();
+            _instance = CreateInstance<T>();
             var script = MonoScript.FromScriptableObject(_instance);
             var currentScriptPath = AssetDatabase.GetAssetPath(script);
+            if (currentScriptPath.IsNullOrEmpty())
+            {
+                _instance.RootPath = Path.GetFullPath(Application.dataPath + "/UMVC/Editor");
+            }
+            else
+            {
+                var currentDirectory = Path.GetDirectoryName(currentScriptPath);
+                _instance.RootPath = Path.GetFullPath(currentDirectory + "/../");
+            }
 
-            var currentDirectory = Path.GetDirectoryName(currentScriptPath);
-            _instance.RootPath = Path.GetFullPath(currentDirectory + "/../");
             _instance.RelativePath = "Assets" + $"{_instance.RootPath}".Substring(Application.dataPath.Length);
 
             var settingsAssetPath = $"{_instance.RelativePath}/{SettingsFolder}/SettingsAsset.asset";

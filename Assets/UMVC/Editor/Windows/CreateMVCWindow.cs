@@ -6,7 +6,6 @@ using UMVC.Editor.Extensions;
 using UMVC.Editor.Styles;
 using UnityEditor;
 using UnityEngine;
-
 using Component = UMVC.Core.Components.Component;
 
 namespace UMVC.Editor.Windows
@@ -67,32 +66,32 @@ namespace UMVC.Editor.Windows
                 var baseModelSettings = Singleton.UMVC.Instance.Settings.model;
                 var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
                 var baseViewSettings = Singleton.UMVC.Instance.Settings.view;
-                
+
                 Generator.GenerateMVC(
                     new GeneratorParameters.Builder()
-                    .WithView(new Component
-                    {
-                        BaseNamespace = baseViewSettings.BaseNamespace,
-                        Extends = baseViewSettings.Extends,
-                        Name = _generatedViewName
-                    })
-                    .WithController(new Component
-                    {
-                        BaseNamespace = baseControllerSettings.BaseNamespace,
-                        Extends = baseControllerSettings.Extends,
-                        Name = _generatedControllerName
-                    })
-                    .WithModel(new Component
-                    {
-                        BaseNamespace = baseViewSettings.BaseNamespace,
-                        Extends = baseModelSettings.Extends,
-                        Name = _generatedModelName
-                    })
-                    .WithNamespaceName(outputNamespace)
-                    .WithOutputDir(outputDir)
-                    .Build()
+                        .WithView(new Component
+                        {
+                            BaseNamespace = baseViewSettings.BaseNamespace,
+                            Extends = baseViewSettings.Extends,
+                            Name = _generatedViewName
+                        })
+                        .WithController(new Component
+                        {
+                            BaseNamespace = baseControllerSettings.BaseNamespace,
+                            Extends = baseControllerSettings.Extends,
+                            Name = _generatedControllerName
+                        })
+                        .WithModel(new Component
+                        {
+                            BaseNamespace = baseViewSettings.BaseNamespace,
+                            Extends = baseModelSettings.Extends,
+                            Name = _generatedModelName
+                        })
+                        .WithNamespaceName(outputNamespace)
+                        .WithOutputDir(outputDir)
+                        .Build()
                 );
-                
+
                 AssetDatabase.Refresh();
                 EditorUtility.DisplayDialog("MVC Generated!", $"Generated to {outputDir}", "Got it!");
             }
@@ -112,14 +111,9 @@ namespace UMVC.Editor.Windows
                 basePath = outputNamespace.Replace(basePath, "");
 
                 if (basePath == Application.dataPath) // if the path is /Assets
-                {
                     outputNamespace = Application.productName;
-                }
                 else
-                {
                     outputNamespace = basePath.Replace('/', '.');
-                }
-                
             }
 
             return outputNamespace;

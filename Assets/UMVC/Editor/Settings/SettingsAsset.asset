@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d711a0927a641a1a8bda2d6799ff1c9, type: 3}
   m_Name: SettingsAsset
   m_EditorClassIdentifier: 
+  controller:
+    Extends: BaseController
+    BaseNamespace: UMVC.Core.MVC
   logo: logo.jpg
   model:
     Extends: BaseModel
     BaseNamespace: UMVC.Core.MVC
+  outputNamespace: 
+  spritesDirectory: Sprites
   view:
     Extends: BaseView
     BaseNamespace: UMVC.Core.MVC
-  controller:
-    Extends: BaseController
-    BaseNamespace: UMVC.Core.MVC
-  outputNamespace: 
-  spritesDirectory: Sprites
