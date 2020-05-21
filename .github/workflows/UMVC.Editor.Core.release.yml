@@ -38,6 +38,7 @@ jobs:
   Build_UMVC_Core:
     name: Build UMVC.Core 🏗️
     runs-on: windows-latest
+    needs: Test_UMVC_Core
     steps:
 
       - uses: actions/checkout@v2
@@ -86,7 +87,7 @@ jobs:
     name: Test UMVC.Editor 🧪
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
-    needs: Build UMVC.Core
+    needs: Build_UMVC_Core
 
     steps:
       - uses: actions/checkout@v2
@@ -124,7 +125,7 @@ jobs:
   Release_UMVC:
     name: Release UMVC 📦
     runs-on: ubuntu-latest
-    needs: Test UMVC.Editor
+    needs: Test_UMVC_Editor
     steps:
       - uses: actions/checkout@v2
       
