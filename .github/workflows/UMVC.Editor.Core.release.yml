@@ -135,6 +135,9 @@ jobs:
         with:
           fetch-depth: 0
           
+      - name: Install dependencies
+        run: apt-get update && apt-get install unzip git -y
+          
       - name: Decrypt the license file
         run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
 
