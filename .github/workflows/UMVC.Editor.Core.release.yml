@@ -142,6 +142,9 @@ jobs:
 
       - name: Unzip and move UMVC.Core dlls
         run: sh .github/workflows/scripts/install-umvc.editor-deps-same-workflow.sh
+        
+      - name: Delete Tests directory
+        run: rm -rf Assets/UMVC.Tests
 
       - name: Decrypt the license file
         run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
