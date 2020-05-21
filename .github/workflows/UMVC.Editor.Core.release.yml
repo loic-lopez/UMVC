@@ -198,8 +198,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ GitVersion_SemVer }}
-          release_name: Release v${{ GitVersion_SemVer }}
+          tag_name: v$GitVersion_SemVer
+          release_name: Release v$GitVersion_SemVer
           body: ${{ steps.generate-changelog.outputs.changelog }}
           draft: false
           prerelease: false
