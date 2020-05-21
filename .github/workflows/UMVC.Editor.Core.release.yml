@@ -212,7 +212,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Core.zip
-          asset_name: UMVC.Core.zip
+          asset_name: UMVC.Core.${{ env.GitVersion_SemVer }}.zip
           asset_content_type: application/zip
           
       - name: 🚀 Upload UMVC.Editor.PreBuiltDlls.unitypackage
@@ -222,7 +222,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.PreBuiltDlls.unitypackage
-          asset_name: UMVC.Editor.PreBuiltDlls.unitypackage
+          asset_name: UMVC.Editor.PreBuiltDlls.${{ env.GitVersion_SemVer }}.unitypackage
           asset_content_type: application/gzip
       
       - name: 🚀 Upload UMVC.Editor.MsBuildForUnity.unitypackage
@@ -232,7 +232,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.MsBuildForUnity.unitypackage
-          asset_name: UMVC.Editor.MsBuildForUnity.unitypackage
+          asset_name: UMVC.Editor.MsBuildForUnity.${{ env.GitVersion_SemVer }}.unitypackage
           asset_content_type: application/gzip
         
     
