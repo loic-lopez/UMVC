@@ -192,6 +192,16 @@ jobs:
       
       - name: 📦 Zip UMVC.Core Sources
         run: zip -r UMVC.Core.zip UMVC.Core
+        
+      - name: Download UMVC.Editor.MsBuildForUnity.unitypackage
+        uses: actions/download-artifact@v2
+        with:
+          name: UMVC.Editor.MsBuildForUnity.unitypackage
+          
+      - name: Download UMVC.Editor.PreBuiltDlls.unitypackage
+        uses: actions/download-artifact@v2
+        with:
+          name: UMVC.Editor.PreBuiltDlls.unitypackage
 
       - name: 🚀 Create GitHub release
         uses: actions/create-release@v1.1.0
