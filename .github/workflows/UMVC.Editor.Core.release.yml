@@ -156,8 +156,11 @@ jobs:
       - name: Create UMVC.Editor.unitypackage with prebuilded UMVC.Core
         run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.ExportWithPreBuiltDlls
         
-      - name: Run ls
-        run: ls
+      - uses: actions/upload-artifact@v2
+        name: Upload UMVC.Editor.PreBuiltDlls.unitypackage
+        with:
+          name: UMVC.Editor.PreBuiltDlls.unitypackage
+          path: ./UMVC.Editor.PreBuiltDlls.unitypackage
 
 #  Release_UMVC:
 #    name: Release UMVC 📦
