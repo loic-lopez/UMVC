@@ -1,12 +1,6 @@
 name: UMVC.Core
 
 on:
-  push:
-    branches:
-      - master
-      - release/*
-      - staging/*
-      - pre-release/*
   pull_request:
     branches: [ master ]
 
