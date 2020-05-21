@@ -6,7 +6,7 @@ on:
       - release/create-release-workflow
 
 jobs:
-  Test_UMVC.Core:
+  Test_UMVC_Core:
     name: Test UMVC.Core 🧪
     runs-on: windows-latest
     steps:
@@ -35,7 +35,7 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: true
           
-  Build_UMVC.Core:
+  Build_UMVC_Core:
     name: Build UMVC.Core 🏗️
     runs-on: windows-latest
     steps:
@@ -82,7 +82,7 @@ jobs:
           name: UMVC.Core.Build
           path: UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll
           
-  Test_UMVC.Editor:
+  Test_UMVC_Editor:
     name: Test UMVC.Editor 🧪
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
