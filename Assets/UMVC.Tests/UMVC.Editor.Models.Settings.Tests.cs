@@ -10,7 +10,7 @@ namespace UMVC.Tests
         [Test]
         public void TestIfSettingsAreSuccessfullySerialized()
         {
-            var settings = SettingsModel.Initialize("Assets/UMVC/Tests/Settings.asset");
+            var settings = SettingsModel.Initialize("Assets/UMVC.Tests/Settings.asset");
 
             Assert.NotNull(settings);
 
