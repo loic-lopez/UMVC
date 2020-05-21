@@ -128,9 +128,6 @@ jobs:
     needs: Test_UMVC_Editor
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Install dependencies
-        run: apt-get update && apt-get install git unzip -y
 
       - name: Get Git Version
         uses: docker://gittools/gitversion:5.3.4-linux-centos.7-x64-netcoreapp2.1
