@@ -223,6 +223,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.PreBuiltDlls.unitypackage
           asset_name: UMVC.Editor.PreBuiltDlls.unitypackage
+          asset_content_type: application/gzip
       
       - name: 🚀 Upload UMVC.Editor.MsBuildForUnity.unitypackage
         uses: actions/upload-release-asset@v1
@@ -232,6 +233,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.MsBuildForUnity.unitypackage
           asset_name: UMVC.Editor.MsBuildForUnity.unitypackage
+          asset_content_type: application/gzip
         
     
     
