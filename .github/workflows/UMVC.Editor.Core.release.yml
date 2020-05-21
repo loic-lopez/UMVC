@@ -178,6 +178,12 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow --tags
+          
+      - name: Get Git Version
+        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.1
+        with:
+          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
 
       - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
         name: ✏️Generate changelog
@@ -188,22 +194,22 @@ jobs:
         run: zip -r UMVC.Core.zip UMVC.Core
 
       - name: 🚀 Create GitHub release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: v${{ GitVersion_SemVer }}
+          release_name: Release v${{ GitVersion_SemVer }}
           body: ${{ steps.generate-changelog.outputs.changelog }}
           draft: false
           prerelease: false
           
       - name: 🚀 Upload UMVC.Core sources
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.Release_UMVC.outputs.upload_url }} 
           asset_path: ./UMVC.Core.zip
           asset_name: UMVC.Core.zip
           asset_content_type: application/zip
@@ -213,7 +219,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.Release_UMVC.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.PreBuiltDlls.unitypackage
           asset_name: UMVC.Editor.PreBuiltDlls.unitypackage
       
@@ -222,7 +228,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.Release_UMVC.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.MsBuildForUnity.unitypackage
           asset_name: UMVC.Editor.MsBuildForUnity.unitypackage
         
