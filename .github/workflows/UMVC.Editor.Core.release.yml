@@ -138,7 +138,7 @@ jobs:
       - name: Get Git Version
         uses: docker://gittools/gitversion:latest-linux-netcoreapp2.1
         with:
-          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_FullSemVer > /github/workspace/version.txt\""    
+          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""    
       
       - name: Show gitversion
         run: cat /github/workspace/version.txt
