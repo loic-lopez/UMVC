@@ -141,7 +141,7 @@ jobs:
           args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""    
       
       - name: Show gitversion
-        run: cat /github/workspace/version.txt
+        run: echo $GitVersion_SemVer
         
     
     
