@@ -153,7 +153,7 @@ jobs:
       - name: Activate Unity
         run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
 
-      - name: Create UMVC.Editor.unitypackage with prebuilded UMVC.Core
+      - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
         run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.ExportWithPreBuiltDlls
         
       - uses: actions/upload-artifact@v2
@@ -161,6 +161,15 @@ jobs:
         with:
           name: UMVC.Editor.PreBuiltDlls.unitypackage
           path: ./UMVC.Editor.PreBuiltDlls.unitypackage
+          
+      - name: Create UMVC.Editor.MsBuildForUnity.unitypackage with unbundled UMVC.Core
+        run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.ExportWithMsBuildForUnity
+        
+      - uses: actions/upload-artifact@v2
+        name: Upload UMVC.Editor.MsBuildForUnity.unitypackage
+        with:
+          name: UMVC.Editor.MsBuildForUnity.unitypackage
+          path: ./UMVC.Editor.MsBuildForUnity.unitypackage
 
 #  Release_UMVC:
 #    name: Release UMVC 📦
