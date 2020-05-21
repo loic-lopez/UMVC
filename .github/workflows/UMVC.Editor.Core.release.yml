@@ -134,7 +134,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Get Git Version
-        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.2
+        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.1
         with:
           args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_FullSemVer > /github/workspace/version.txt\""    
       
