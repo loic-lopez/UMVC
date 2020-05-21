@@ -195,11 +195,12 @@ jobs:
 
       - name: 🚀 Create GitHub release
         uses: actions/create-release@v1.1.0
+        id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v$GitVersion_SemVer
-          release_name: Release v$GitVersion_SemVer
+          tag_name: v${{ env.GitVersion_SemVer }}
+          release_name: Release v${{ env.GitVersion_SemVer }}
           body: ${{ steps.generate-changelog.outputs.changelog }}
           draft: false
           prerelease: false
@@ -209,7 +210,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.Release_UMVC.outputs.upload_url }} 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Core.zip
           asset_name: UMVC.Core.zip
           asset_content_type: application/zip
@@ -219,7 +220,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.Release_UMVC.outputs.upload_url }} 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.PreBuiltDlls.unitypackage
           asset_name: UMVC.Editor.PreBuiltDlls.unitypackage
       
@@ -228,7 +229,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.Release_UMVC.outputs.upload_url }} 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.MsBuildForUnity.unitypackage
           asset_name: UMVC.Editor.MsBuildForUnity.unitypackage
         
