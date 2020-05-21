@@ -9,6 +9,7 @@ jobs:
   Test_UMVC_Core:
     name: Test UMVC.Core 🧪
     runs-on: windows-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
     
       - uses: actions/checkout@v2  
@@ -39,6 +40,7 @@ jobs:
     name: Build UMVC.Core 🏗️
     runs-on: windows-latest
     needs: Test_UMVC_Core
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
 
       - uses: actions/checkout@v2
@@ -88,6 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
     needs: Build_UMVC_Core
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
       - uses: actions/checkout@v2
@@ -126,11 +129,12 @@ jobs:
     name: Release UMVC 📦
     runs-on: ubuntu-latest
     needs: Test_UMVC_Editor
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v2
 
       - name: Get Git Version
-        uses: docker://gittools/gitversion:5.3.4-linux-centos.7-x64-netcoreapp2.1
+        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.2
         with:
           args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_FullSemVer > /github/workspace/version.txt\""    
       
