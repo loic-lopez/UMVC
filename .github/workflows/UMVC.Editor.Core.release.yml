@@ -132,15 +132,14 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          git fetch --unshallow
+        with:
+          fetch-depth: 0
           
       - name: Decrypt the license file
         run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
 
       # Activate unity
       - name: Activate Unity
-        uses: docker://gableroux/unity3d:2019.3.13f1
         run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
 
       - name: Get Git Version
