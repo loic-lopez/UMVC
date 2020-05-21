@@ -43,7 +43,6 @@ public static class UMVCPackageExport
     {
         var path = Path.Combine(Application.dataPath, Root);
         var assets = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories)
-            .Where(x => Path.GetExtension(x) == ".cs")
             .Select(x => "Assets" + x.Replace(Application.dataPath, "").Replace(@"\", "/"))
             .ToArray();
 
