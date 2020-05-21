@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-public static class PackageExport
+public static class UMVCPackageExport
 {
     // method must be static
     [MenuItem("UMVC/Export to UnityPackage")]

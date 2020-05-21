@@ -96,7 +96,7 @@ jobs:
 #      - uses: actions/checkout@v2
 #
 #      - name: Download UMVC.Core Build
-#        uses: actions/download-artifact@v1
+#        uses: actions/download-artifact@v2
 #        with:
 #          name: UMVC.Core.Build
 #
@@ -125,47 +125,75 @@ jobs:
 #          name: codecov-umbrella
 #          fail_ci_if_error: true
 #          
-  Release_UMVC:
-    name: Release UMVC 📦
+  Build_UMVC_Editor:
+    name: Build UMVC.Editor 🏗️
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.13f1
+    #needs: Build_UMVC_Core
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          
-      - name: Install dependencies
-        run: apt-get update && apt-get install unzip git -y
-          
+
+#      - name: Download UMVC.Core Build
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: UMVC.Core.Build
+
+#      - name: Unzip and move UMVC.Core dlls
+#        run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
+
       - name: Decrypt the license file
         run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
 
       # Activate unity
       - name: Activate Unity
-        run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
+        run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
 
-      - name: Get Git Version
-        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.1
-        with:
-          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
-          
-      - name: Generate changelog
-        uses: scottbrenner/generate-changelog-action@master
-        id: Changelog
-        env:
-          REPO: ${{ github.repository }}
-          
-      - name: Download UMVC.Core Build
-        uses: actions/download-artifact@v1
-        with:
-          name: UMVC.Core.Build
-          
-      - name: Unzip and move UMVC.Core dlls
-        run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
-      
-      - name: Show gitversion
-        run: echo $GitVersion_SemVer
+      - name: Create UMVC.Editor.unitypackage with prebuilded UMVC.Core
+        run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.Export
+        
+      - name: Run ls
+        run: ls
+
+#  Release_UMVC:
+#    name: Release UMVC 📦
+#    runs-on: ubuntu-latest
+#    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0
+#          
+#      - name: Zip UMVC.Core Sources
+#        run: zip -r UMVC.Core.zip UMVC.Core
+#          
+#      - name: Get Git Version
+#        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.1
+#        with:
+#          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
+#          
+#      - name: Generate changelog
+#        uses: scottbrenner/generate-changelog-action@master
+#        id: Changelog
+#        env:
+#          REPO: ${{ github.repository }}
+#          
+#      - name: Download UMVC.Core Build
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: UMVC.Core.Build
+#          
+#      - name: Download UMVC.Core Build
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: UMVC.Core.Build
+#          
+#      - name: Unzip and move UMVC.Core dlls
+#        run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
+#      
+#      - name: Show gitversion
+#        run: echo $GitVersion_SemVer
         
     
     
