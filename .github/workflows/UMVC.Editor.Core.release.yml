@@ -140,6 +140,7 @@ jobs:
 
       # Activate unity
       - name: Activate Unity
+        uses: docker://gableroux/unity3d:2019.3.13f1
         run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
 
       - name: Get Git Version
