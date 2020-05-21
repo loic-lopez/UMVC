@@ -36,54 +36,54 @@ jobs:
 #          name: codecov-umbrella
 #          fail_ci_if_error: true
 #
-  Build_UMVC_Core:
-    name: Build UMVC.Core 🏗️
-    runs-on: windows-latest
-    #needs: Test_UMVC_Core
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-
-      - uses: actions/checkout@v2
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.101
-
-      - name: Install dotnet dependencies
-        run: dotnet restore ./UMVC.Core/UMVC.Core.sln
-
-      - name: Build
-        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
-
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Core.Components.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll
-
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Core.Exceptions.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
-
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Core.Generation.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Generation/obj/Release/UMVC.Core.Generation.dll
-
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Core.Templates.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll
-
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Core.MVC.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll
+#  Build_UMVC_Core:
+#    name: Build UMVC.Core 🏗️
+#    runs-on: windows-latest
+#    #needs: Test_UMVC_Core
+#    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+#    steps:
+#
+#      - uses: actions/checkout@v2
+#      - name: Setup .NET Core
+#        uses: actions/setup-dotnet@v1
+#        with:
+#          dotnet-version: 3.1.101
+#
+#      - name: Install dotnet dependencies
+#        run: dotnet restore ./UMVC.Core/UMVC.Core.sln
+#
+#      - name: Build
+#        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
+#
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Core.Components.dll
+#        with:
+#          name: UMVC.Core.Build
+#          path: UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll
+#
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Core.Exceptions.dll
+#        with:
+#          name: UMVC.Core.Build
+#          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
+#
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Core.Generation.dll
+#        with:
+#          name: UMVC.Core.Build
+#          path: UMVC.Core/Generation/obj/Release/UMVC.Core.Generation.dll
+#
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Core.Templates.dll
+#        with:
+#          name: UMVC.Core.Build
+#          path: UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll
+#
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Core.MVC.dll
+#        with:
+#          name: UMVC.Core.Build
+#          path: UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll
 #
 #  Test_UMVC_Editor:
 #    name: Test UMVC.Editor 🧪
@@ -124,16 +124,80 @@ jobs:
 #          file: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml
 #          name: codecov-umbrella
 #          fail_ci_if_error: true
+#
+#  Build_UMVC_Editor:
+#    name: Build UMVC.Editor 🏗️
+#    runs-on: ubuntu-latest
+#    container: gableroux/unity3d:2019.3.13f1
+#    needs: Test_UMVC_Editor
+#    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Download UMVC.Core Build
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: UMVC.Core.Build
+#
+#      - name: Unzip and move UMVC.Core dlls
+#        run: sh .github/workflows/scripts/install-umvc.editor-deps-same-workflow.sh
+#        
+#      - name: Delete Tests directory
+#        run: rm -rf Assets/UMVC.Tests
+#
+#      - name: Decrypt the license file
+#        run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
+#
+#      # Activate unity
+#      - name: Activate Unity
+#        run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
+#
+#      - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
+#        run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.ExportWithPreBuiltDlls
+#        
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Editor.PreBuiltDlls.unitypackage
+#        with:
+#          name: UMVC.Editor.PreBuiltDlls.unitypackage
+#          path: ./UMVC.Editor.PreBuiltDlls.unitypackage
 #          
-  Build_UMVC_Editor:
-    name: Build UMVC.Editor 🏗️
-    runs-on: ubuntu-latest
-    container: gableroux/unity3d:2019.3.13f1
-    needs: Build_UMVC_Core
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+#      - name: Create UMVC.Editor.MsBuildForUnity.unitypackage with unbundled UMVC.Core
+#        run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.ExportWithMsBuildForUnity
+#        
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Editor.MsBuildForUnity.unitypackage
+#        with:
+#          name: UMVC.Editor.MsBuildForUnity.unitypackage
+#          path: ./UMVC.Editor.MsBuildForUnity.unitypackage
 
+  Release_UMVC:
+    name: Release UMVC 📦
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Zip UMVC.Core Sources
+        run: zip -r UMVC.Core.zip UMVC.Core
+
+      - name: Get Git Version
+        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.1
+        with:
+          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
+
+      - name: Generate changelog
+        uses: scottbrenner/generate-changelog-action@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
+
+      - name: Download UMVC.Core Build
+        uses: actions/download-artifact@v2
+        with:
+          name: UMVC.Core.Build
 
       - name: Download UMVC.Core Build
         uses: actions/download-artifact@v2
@@ -141,74 +205,10 @@ jobs:
           name: UMVC.Core.Build
 
       - name: Unzip and move UMVC.Core dlls
-        run: sh .github/workflows/scripts/install-umvc.editor-deps-same-workflow.sh
-        
-      - name: Delete Tests directory
-        run: rm -rf Assets/UMVC.Tests
+        run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
 
-      - name: Decrypt the license file
-        run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
-
-      # Activate unity
-      - name: Activate Unity
-        run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
-
-      - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
-        run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.ExportWithPreBuiltDlls
-        
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Editor.PreBuiltDlls.unitypackage
-        with:
-          name: UMVC.Editor.PreBuiltDlls.unitypackage
-          path: ./UMVC.Editor.PreBuiltDlls.unitypackage
-          
-      - name: Create UMVC.Editor.MsBuildForUnity.unitypackage with unbundled UMVC.Core
-        run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -executeMethod UMVCPackageExport.ExportWithMsBuildForUnity
-        
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Editor.MsBuildForUnity.unitypackage
-        with:
-          name: UMVC.Editor.MsBuildForUnity.unitypackage
-          path: ./UMVC.Editor.MsBuildForUnity.unitypackage
-
-#  Release_UMVC:
-#    name: Release UMVC 📦
-#    runs-on: ubuntu-latest
-#    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-#    steps:
-#      - uses: actions/checkout@v2
-#        with:
-#          fetch-depth: 0
-#          
-#      - name: Zip UMVC.Core Sources
-#        run: zip -r UMVC.Core.zip UMVC.Core
-#          
-#      - name: Get Git Version
-#        uses: docker://gittools/gitversion:latest-linux-netcoreapp2.1
-#        with:
-#          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
-#          
-#      - name: Generate changelog
-#        uses: scottbrenner/generate-changelog-action@master
-#        id: Changelog
-#        env:
-#          REPO: ${{ github.repository }}
-#          
-#      - name: Download UMVC.Core Build
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: UMVC.Core.Build
-#          
-#      - name: Download UMVC.Core Build
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: UMVC.Core.Build
-#          
-#      - name: Unzip and move UMVC.Core dlls
-#        run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
-#      
-#      - name: Show gitversion
-#        run: echo $GitVersion_SemVer
+      - name: Show gitversion
+        run: echo $GitVersion_SemVer
         
     
     

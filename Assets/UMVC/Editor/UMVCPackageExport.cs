@@ -49,12 +49,7 @@ public static class UMVCPackageExport
 
         if (disableDlls)
         {
-            assets = assets.Where(x =>
-            {
-                if (Path.GetFileName(x).Equals("UMVC.Dependencies.msb4u.csproj")) return true;
-                
-                return Path.GetExtension(x) != ".dll" && !x.Contains("Dependencies");
-            });
+            assets = assets.Where(x => Path.GetExtension(x) != ".dll" && !x.Contains("net46"));
         }
 
         assets = assets.Select(x => "Assets" + x.Replace(Application.dataPath, "").Replace(@"\", "/"));
