@@ -13,6 +13,13 @@
 
 <hr>
 <p align="center">
+	<a href="https://github.com/loic-lopez/UMVC/blob/master/LICENSE">
+           <img src="https://img.shields.io/github/license/loic-lopez/UMVC" />
+        </a>
+	<a href="https://github.com/loic-lopez/UMVC/releases">
+	    <img src="https://img.shields.io/github/v/release/loic-lopez/UMVC">
+	</a>
+	<br/>
 	<a href="https://codecov.io/gh/loic-lopez/UMVC">
            <img src="https://codecov.io/gh/loic-lopez/UMVC/branch/master/graph/badge.svg" />
         </a>
@@ -22,13 +29,11 @@
 	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Core">
 	    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Core/badge.svg">
 	</a>
-	<a href="">
-	    <img src="/Docs/BtnDownload.png" alt="Download">
-	</a>
+	
 </p>
 <hr>
 
-## Features
+# Features
 
 ✔ Customizable T4 Templates
 
@@ -42,26 +47,26 @@
 
 ✔ Disable/Enable Model Events on demand
 
-## The library is following the MVC pattern
+# The library is following the MVC pattern
 
 <br />
 <p align="center">	
 	<img src="/Docs/MVC_Pattern.png" alt="Download">
 </p>
 
-### The View
+## The View
 
 Any representation of information such as a chart, diagram or table. Multiple views of the same information are possible, such as a bar chart for management and a tabular view for accountants.
 
-### The Model
+## The Model
 
 The central component of the pattern. It is the application's dynamic data structure, independent of the user interface. It directly manages the data, logic and rules of the application.
 
-### The Controller
+## The Controller
 
 Accepts input and converts it to commands for the model or view.
 
-### Resume
+## Resume
 
 In addition to dividing the application into these components, the model–view–controller design defines the interactions between them.
 
@@ -69,4 +74,59 @@ In addition to dividing the application into these components, the model–view�
 - The view means presentation of the model in a particular format.
 - The controller responds to the user input and performs interactions on the data model objects. The controller receives the input, optionally validates it and then passes the input to the model.
 
-## How to get started
+# How to get started
+
+## Choose your installation method
+
+| Requirements and use cases | Release Archive(s) |  
+| -------------------------------------------------- | -------- |  
+| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.1.1/UMVC.Editor.PreBuiltDlls.0.1.1.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
+| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.1.1/UMVC.Editor.MsBuildForUnity.0.1.1.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.1.1/UMVC.Core.0.1.1.zip)  |  
+
+## Basic usage using UMVC.Editor.PreBuiltDlls UnityPackage
+
+* Download UMVC.Editor.PreBuiltDlls UnityPackage from from above
+
+* Import UMVC.Editor.PreBuiltDlls UnityPackage in Unity Editor Assets > Import Package > Custom Package
+
+## Advanced usage using UMVC.Editor.MsBuildForUnity UnityPackage and UMVC.Core sources
+
+### Download and unzip sources
+
+* Download UMVC.Editor.MsBuildForUnity UnityPackage from from above
+
+* Download UMVC.Core sources from from above
+
+* Import UMVC.Editor.MsBuildForUnity UnityPackage in Unity Editor Assets > Import Package > Custom Package
+
+* Unzip UMVC.Core sources to your project next to your Assets folder
+
+### Add MSBuildForUnity to your manifest.json
+Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
+
+- Edit the `Packages/manifest.json` file in your Unity project.
+- Add the following near the top of the file:
+
+```json
+"scopedRegistries": [
+    {
+      "name": "Microsoft",
+      "url": "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
+      "scopes": [
+        "com.microsoft"
+      ]
+    }
+],
+```
+
+- Add the following to the `dependencies` section of the file:
+
+```json
+  "com.microsoft.msbuildforunity": "0.9.2-20200131.11",
+```
+
+
+# FAQ
+
+**See the associated wiki: [UMVC Wiki](https://github.com/loic-lopez/UMVC/wiki)**
+
