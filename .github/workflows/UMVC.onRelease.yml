@@ -1,0 +1,26 @@
+on:
+  release:
+    types: ["created","edited"]
+    
+jobs:
+  updateREADME:
+    name: Update README 🏗️
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      
+      - name: Update the README.md
+        run: sh ./.github/workflows/scripts/updateREADME.sh ${GITHUB_REF}
+        
+      - name: Commit Readme onto master branch
+        run: |
+          git config --local user.email "umvc-readme-updater@github.com"
+          git config --local user.name "UMVC README Updater"
+          git add ./README.md
+          git commit -m "[skip ci] Automated push... Updating README.md..."
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        
