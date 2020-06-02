@@ -5,7 +5,7 @@ namespace UMVC.Core.Generation.GeneratorParameters
     public class GeneratorParameters
     {
         public Component View { get; private set; }
-        public Component Model { get; private set; }
+        public ModelComponent Model { get; private set; }
         public Component Controller { get; private set; }
         public string NamespaceName { get; private set; }
         public string OutputDir { get; private set; }
@@ -14,7 +14,7 @@ namespace UMVC.Core.Generation.GeneratorParameters
         {
 
             private Component _view;
-            private Component _model;
+            private ModelComponent _model;
             private Component _controller;
             private string _namespaceName;
             private string _outputDir;
@@ -31,7 +31,7 @@ namespace UMVC.Core.Generation.GeneratorParameters
                 return this;
             }
             
-            public Builder WithModel(Component model)
+            public Builder WithModel(ModelComponent model)
             {
                 _model = model;
                 return this;

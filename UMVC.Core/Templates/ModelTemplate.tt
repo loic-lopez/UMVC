@@ -1,8 +1,11 @@
 ﻿<#@ template language="C#" hostspecific="false" linePragmas="false" #>
+<#@ import namespace="UMVC.Core.Components" #>
 <#@ parameter name="ClassName" type="System.String"#>
 <#@ parameter name="Namespace" type="System.String"#>
 <#@ parameter name="Extends" type="System.String"#>
 <#@ parameter name="BaseNamespace" type="System.String"#>
+<#@ parameter type="System.Collections.Generic.List<ClassField>" name="Fields" #>
+
 using System;
 using <#= BaseNamespace #>;
 
@@ -11,7 +14,10 @@ namespace <#= Namespace #>
     [Serializable]
     public class <#= ClassName #> : <#= Extends #>
     {
-
+<# foreach (var field in Fields)
+{ #>
+        public <#= field.FieldType.ToString() #> <#= field.FieldName #>;
+<# } #>
     }
 }
 

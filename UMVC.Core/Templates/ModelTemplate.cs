@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 namespace UMVC.Core.Templates
 {
+    using UMVC.Core.Components;
     using System;
     
     /// <summary>
@@ -22,7 +23,7 @@ namespace UMVC.Core.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing ");
+            this.Write("\r\nusing System;\r\nusing ");
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseNamespace));
             this.Write(";\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
@@ -30,7 +31,16 @@ namespace UMVC.Core.Templates
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
             this.Write(" : ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Extends));
-            this.Write("\r\n    {\r\n\r\n    }\r\n}\r\n\r\n");
+            this.Write("\r\n    {\r\n");
+ foreach (var field in Fields)
+{ 
+            this.Write("        public ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.FieldType.ToString()));
+            this.Write(" ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.FieldName));
+            this.Write(";\r\n");
+ } 
+            this.Write("    }\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
 
@@ -83,6 +93,19 @@ private string BaseNamespace
     get
     {
         return this._BaseNamespaceField;
+    }
+}
+
+private global::System.Collections.Generic.List<ClassField> _FieldsField;
+
+/// <summary>
+/// Access the Fields parameter of the template.
+/// </summary>
+private global::System.Collections.Generic.List<ClassField> Fields
+{
+    get
+    {
+        return this._FieldsField;
     }
 }
 
@@ -148,6 +171,20 @@ if ((BaseNamespaceValueAcquired == false))
     if ((data != null))
     {
         this._BaseNamespaceField = ((string)(data));
+    }
+}
+bool FieldsValueAcquired = false;
+if (this.Session.ContainsKey("Fields"))
+{
+    this._FieldsField = ((global::System.Collections.Generic.List<ClassField>)(this.Session["Fields"]));
+    FieldsValueAcquired = true;
+}
+if ((FieldsValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Fields");
+    if ((data != null))
+    {
+        this._FieldsField = ((global::System.Collections.Generic.List<ClassField>)(data));
     }
 }
 

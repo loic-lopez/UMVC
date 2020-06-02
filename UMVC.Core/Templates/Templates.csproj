@@ -74,4 +74,11 @@
       <LastGenOutput>ViewTemplate.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\Components.csproj">
+      <Project>{2edc5796-3284-4ec0-96ac-521288d5144b}</Project>
+      <Name>Components</Name>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
