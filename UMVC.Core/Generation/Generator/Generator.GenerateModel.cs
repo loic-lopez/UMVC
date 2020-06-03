@@ -19,6 +19,7 @@ namespace UMVC.Core.Generation.Generator
             template.Session["Namespace"] = generatorParameters.NamespaceName;
             template.Session["Extends"] = generatorParameters.Model.Extends;
             template.Session["BaseNamespace"] = generatorParameters.Model.BaseNamespace;
+            template.Session["Fields"] = generatorParameters.Model.Fields;
 
             template.Initialize();
 

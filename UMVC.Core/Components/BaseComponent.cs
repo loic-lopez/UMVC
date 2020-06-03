@@ -5,7 +5,14 @@ namespace UMVC.Core.Components
     [Serializable]
     public abstract class BaseComponent
     {
-        public string Extends;
+        protected string extends;
+        
+        public string Extends 
+        { 
+            get => extends;
+            set => extends = value;
+        }
+        
         public string BaseNamespace;
     }
 }

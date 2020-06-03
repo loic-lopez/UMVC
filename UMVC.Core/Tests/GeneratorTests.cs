@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 using UMVC.Core.Components;
 using UMVC.Core.Generation.GeneratorParameters;
@@ -23,11 +25,24 @@ namespace UMVC.Core.Tests
 
             var parameters = new GeneratorParameters.Builder()
                 .WithModel(
-                    new Component
+                    new ModelComponent
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseModel",
-                        Name = ModelName
+                        Name = ModelName,
+                        Fields = new List<ClassField>
+                        {
+                            new ClassField
+                            {
+                                FieldName = "value",
+                                FieldType = typeof(string)
+                            },
+                            new ClassField
+                            {
+                                FieldName = "intValue",
+                                FieldType = typeof(int)
+                            }
+                        }
                     })
                 .WithController(
                     new Component
@@ -53,11 +68,24 @@ namespace UMVC.Core.Tests
 
             var parameters = new GeneratorParameters.Builder()
                 .WithModel(
-                    new Component
+                    new ModelComponent
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseModel",
-                        Name = ModelName
+                        Name = ModelName,
+                        Fields = new List<ClassField>
+                        {
+                            new ClassField
+                            {
+                                FieldName = "value",
+                                FieldType = typeof(string)
+                            },
+                            new ClassField
+                            {
+                                FieldName = "intValue",
+                                FieldType = typeof(int)
+                            }
+                        }
                     })
                 .WithNamespaceName(NamespaceName)
                 .WithOutputDir(currentDir);
@@ -77,11 +105,24 @@ namespace UMVC.Core.Tests
 
             var parameters = new GeneratorParameters.Builder()
                 .WithModel(
-                    new Component
+                    new ModelComponent
                     {
                         BaseNamespace = DefaultBaseNamespace,
                         Extends = "BaseModel",
-                        Name = ModelName
+                        Name = ModelName,
+                        Fields = new List<ClassField>
+                        {
+                            new ClassField
+                            {
+                                FieldName = "value",
+                                FieldType = typeof(string)
+                            },
+                            new ClassField
+                            {
+                                FieldName = "intValue",
+                                FieldType = typeof(int)
+                            }
+                        }
                     })
                 .WithController(
                     new Component

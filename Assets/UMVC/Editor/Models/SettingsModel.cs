@@ -10,15 +10,14 @@ namespace UMVC.Editor.Models
         private const string ObjName = "Settings";
 
         private string _settingsAssetPath;
-        public BaseComponentSettings controller;
         public string logo = "logo.jpg";
 
-        public BaseComponentSettings model;
-
+        public BaseModelSettings model;
+        public BaseViewSettings view;
+        public BaseControllerSettings controller;
 
         public string outputNamespace;
         public string spritesDirectory = "Sprites";
-        public BaseComponentSettings view;
 
         public static SettingsModel Initialize(string settingsAssetPath)
         {

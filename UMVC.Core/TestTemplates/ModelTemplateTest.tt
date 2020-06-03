@@ -1,9 +1,26 @@
 ﻿﻿<#@ template debug="false" language="C#" #>
+<#@ assembly name="$(ProjectDir)\..\Components\bin\Debug\UMVC.Core.Components.dll" #>
+<#@ import namespace="UMVC.Core.Components" #>
+<#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#
     _ClassNameField = "Model";
     _NamespaceField = "MyNamespace";
     _ExtendsField = "BaseModel";
     _BaseNamespaceField = "UMVC.Core.MVC";
+    _FieldsField = new List<ClassField>
+    {
+        new ClassField
+        {
+            FieldName = "value",
+            FieldType = typeof(string)
+        },
+        new ClassField
+        {
+            FieldName = "intValue",
+            FieldType = typeof(int)
+        }
+    };
 #>
+
 <#@ include file="$(ProjectDir)\..\Templates\ModelTemplate.tt"#>

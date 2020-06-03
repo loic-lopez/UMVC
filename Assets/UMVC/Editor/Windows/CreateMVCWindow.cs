@@ -1,7 +1,13 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
+using UMVC.Core.Components;
 using UMVC.Core.Generation.Generator;
 using UMVC.Core.Generation.GeneratorParameters;
+using UMVC.Core.MVC;
 using UMVC.Editor.Abstracts;
+using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
+using UMVC.Editor.EditorDependencies.Implementations;
 using UMVC.Editor.Extensions;
 using UMVC.Editor.Styles;
 using UMVC.Editor.Utils;
@@ -16,20 +22,49 @@ namespace UMVC.Editor.Windows
         private const string ModelPrefix = "Model";
         private const string ViewPrefix = "View";
         private const string ControllerPrefix = "Controller";
-        private string _componentName;
-        private string _generatedControllerName;
 
-        private string _generatedModelName;
-        private string _generatedViewName;
+        private string _componentName;
         private string _newSubdir;
         private string _outputDir;
         private bool _wantCreateSubDir;
+        
+        private SerializedObject _serializedGameObject;
 
+        private SerializedProperty _serializedController;
+        private SerializedProperty _serializedModel;
+        private SerializedProperty _serializedView;
 
+        [SerializeField] private UnitySerializableControllerComponent controller;
+        [SerializeField] private UnitySerializableViewComponent view;
+        [SerializeField] private UnitySerializableModelComponent model;
+        
+        
         public override void SetupWindow()
         {
             base.SetupWindow();
             titleContent.text = WindowName();
+            
+            var baseModelSettings = Singleton.UMVC.Instance.Settings.model;
+            var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
+            var baseViewSettings = Singleton.UMVC.Instance.Settings.view;
+            
+            model = new UnitySerializableModelComponent
+            {
+                BaseNamespace = baseModelSettings.BaseNamespace,
+                ClassFields = new List<UnitySerializableClassField>(),
+                ClassExtends = baseModelSettings.ClassExtends
+            };
+
+            controller = new UnitySerializableControllerComponent
+            {
+                BaseNamespace = baseControllerSettings.BaseNamespace,
+                ClassExtends = baseControllerSettings.ClassExtends
+            };
+            view = new UnitySerializableViewComponent
+            {
+                BaseNamespace = baseViewSettings.BaseNamespace,
+                ClassExtends = baseViewSettings.ClassExtends
+            };
         }
 
 
@@ -56,43 +91,51 @@ namespace UMVC.Editor.Windows
 
         protected override void DisplayEndButton()
         {
-            if (GUILayout.Button("Create", Button.WithMargin) && _componentName.IsNotNullOrEmpty())
+            if (GUILayout.Button("Create", Button.WithMargin))
             {
-                var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
+                if (_componentName.IsNullOrEmpty())
+                {
+                    EditorUtility.DisplayDialog("UMVC", $"New component name cannot be null or empty!", "Got it!");
+                    return;
+                }
+                
                 var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
+
+                if (_wantCreateSubDir && Directory.Exists(outputDir)
+                    || File.Exists($"{outputDir}/{view.Name}.cs")
+                    || File.Exists($"{outputDir}/{model.Name}.cs")
+                    || File.Exists($"{outputDir}/{controller.Name}.cs")
+                )
+                {
+                    if (!EditorUtility.DisplayDialog("UMVC", $"Are you sure to overwrite your files in directory: {outputDir}", "Overwrite", "Cancel"))
+                    {
+                        return;   
+                    }
+                }
+
+                
+                var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
+               
                 if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
 
-                var baseModelSettings = Singleton.UMVC.Instance.Settings.model;
-                var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
-                var baseViewSettings = Singleton.UMVC.Instance.Settings.view;
+                model.CompileToSystemType();
+                model.Extends = model.ClassExtends.ToString();
+                controller.Extends = controller.ClassExtends.ToString();
+                view.Extends = view.ClassExtends.ToString();
+                
 
                 Generator.GenerateMVC(
                     new GeneratorParameters.Builder()
-                        .WithView(new Component
-                        {
-                            BaseNamespace = baseViewSettings.BaseNamespace,
-                            Extends = baseViewSettings.Extends,
-                            Name = _generatedViewName
-                        })
-                        .WithController(new Component
-                        {
-                            BaseNamespace = baseControllerSettings.BaseNamespace,
-                            Extends = baseControllerSettings.Extends,
-                            Name = _generatedControllerName
-                        })
-                        .WithModel(new Component
-                        {
-                            BaseNamespace = baseViewSettings.BaseNamespace,
-                            Extends = baseModelSettings.Extends,
-                            Name = _generatedModelName
-                        })
+                        .WithView(view)
+                        .WithController(controller)
+                        .WithModel(model)
                         .WithNamespaceName(outputNamespace)
                         .WithOutputDir(outputDir)
                         .Build()
                 );
 
                 AssetDatabase.Refresh();
-                EditorUtility.DisplayDialog("MVC Generated!", $"Generated to {outputDir}", "Got it!");
+                EditorUtility.DisplayDialog("UMVC", $"Generated to {outputDir}", "Got it!");
             }
         }
 
@@ -103,22 +146,28 @@ namespace UMVC.Editor.Windows
 
         private void DisplayGenerated()
         {
-            _generatedModelName = $"{_componentName}{ModelPrefix}";
-            _generatedViewName = $"{_componentName}{ViewPrefix}";
-            _generatedControllerName = $"{_componentName}{ControllerPrefix}";
+            model.Name = $"{_componentName}{ModelPrefix}";
+            view.Name = $"{_componentName}{ViewPrefix}";
+            controller.Name = $"{_componentName}{ControllerPrefix}";
+
+            model.BaseNamespace = model.ClassExtends.Type.Namespace;
+            controller.BaseNamespace = controller.ClassExtends.Type.Namespace;
+            view.BaseNamespace = view.ClassExtends.Type.Namespace;
+            
+                        
+            _serializedGameObject = new SerializedObject(this);
+            _serializedModel = _serializedGameObject.FindProperty("model");
+            _serializedController = _serializedGameObject.FindProperty("controller");
+            _serializedView = _serializedGameObject.FindProperty("view");
 
             // Output
             GUILayout.Label("Generated", Label.Header);
-
-            var generatedModelName = _generatedModelName == ModelPrefix ? null : _generatedModelName;
-            var generatedViewName = _generatedViewName == ViewPrefix ? null : _generatedViewName;
-            var generatedControllerName =
-                _generatedControllerName == ControllerPrefix ? null : _generatedControllerName;
-
-
-            GUILayout.Label($"Generated Model: {generatedModelName}");
-            GUILayout.Label($"Generated View: {generatedViewName}");
-            GUILayout.Label($"Generated Model: {generatedControllerName}");
+            EditorGUILayout.PropertyField(_serializedModel);
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(_serializedView);
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(_serializedController);
+            _serializedGameObject.ApplyModifiedProperties();
         }
 
         private void DisplayOutputSettings()
@@ -136,6 +185,9 @@ namespace UMVC.Editor.Windows
 
             var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
             GUILayout.Label($"Output directory: {outputDir}");
+            
+            var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
+            GUILayout.Label($"Output namespace: {outputNamespace}");
         }
 
         private void UpdateNewSubdir()
