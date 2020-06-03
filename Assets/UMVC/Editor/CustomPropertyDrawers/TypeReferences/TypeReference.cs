@@ -1,5 +1,7 @@
 ﻿﻿using System;
-using UnityEngine;
+ using System.ComponentModel;
+ using UMVC.Editor.Extensions;
+ using UnityEngine;
 
 namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
 {
@@ -120,7 +122,7 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
 
         public override string ToString()
         {
-            return Type != null ? Type.FullName : "(None)";
+            return Type.GetNameWithoutGenerics();
         }
     }
 }

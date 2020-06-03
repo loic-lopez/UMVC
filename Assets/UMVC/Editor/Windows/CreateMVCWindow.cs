@@ -91,13 +91,38 @@ namespace UMVC.Editor.Windows
 
         protected override void DisplayEndButton()
         {
-            if (GUILayout.Button("Create", Button.WithMargin) && _componentName.IsNotNullOrEmpty())
+            if (GUILayout.Button("Create", Button.WithMargin))
             {
-                var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
+                if (_componentName.IsNullOrEmpty())
+                {
+                    EditorUtility.DisplayDialog("UMVC", $"New component name cannot be null or empty!", "Got it!");
+                    return;
+                }
+                
                 var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
+
+                if (_wantCreateSubDir && Directory.Exists(outputDir)
+                    || File.Exists($"{outputDir}/{view.Name}.cs")
+                    || File.Exists($"{outputDir}/{model.Name}.cs")
+                    || File.Exists($"{outputDir}/{controller.Name}.cs")
+                )
+                {
+                    if (!EditorUtility.DisplayDialog("UMVC", $"Are you sure to overwrite your files in directory: {outputDir}", "Overwrite", "Cancel"))
+                    {
+                        return;   
+                    }
+                }
+
+                
+                var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
+               
                 if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
 
                 model.CompileToSystemType();
+                model.Extends = model.ClassExtends.ToString();
+                controller.Extends = controller.ClassExtends.ToString();
+                view.Extends = view.ClassExtends.ToString();
+                
 
                 Generator.GenerateMVC(
                     new GeneratorParameters.Builder()
@@ -110,7 +135,7 @@ namespace UMVC.Editor.Windows
                 );
 
                 AssetDatabase.Refresh();
-                EditorUtility.DisplayDialog("MVC Generated!", $"Generated to {outputDir}", "Got it!");
+                EditorUtility.DisplayDialog("UMVC", $"Generated to {outputDir}", "Got it!");
             }
         }
 
@@ -160,6 +185,9 @@ namespace UMVC.Editor.Windows
 
             var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
             GUILayout.Label($"Output directory: {outputDir}");
+            
+            var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
+            GUILayout.Label($"Output namespace: {outputNamespace}");
         }
 
         private void UpdateNewSubdir()
