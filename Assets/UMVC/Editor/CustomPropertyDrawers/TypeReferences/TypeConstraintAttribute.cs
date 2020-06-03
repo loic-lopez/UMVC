@@ -79,12 +79,12 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
     /// selecting a <see cref="TypeReference"/> with the Unity inspector.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    public class AllowEnumsClassesInterfaces : TypeConstraintAttribute
+    public class AllowPrimitivesEnumsClassesInterfaces : TypeConstraintAttribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeConstraintAttribute"/> class.
         /// </summary>
-        public AllowEnumsClassesInterfaces() { }
+        public AllowPrimitivesEnumsClassesInterfaces() { }
 
         /// <summary>
         /// Determines whether the specified <see cref="Type"/> satisfies filter constraint.
@@ -96,7 +96,10 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
         /// </returns>
         public override bool IsConstraintSatisfied(Type type)
         {
-            return type.IsAbstract || type.IsClass || type.IsInterface || type.IsEnum;
+            if (type.GetConstructor(Type.EmptyTypes) == null && type.IsAbstract && type.IsSealed) // is a static class
+                return false;
+            
+            return  type.IsAbstract || type.IsClass || type.IsInterface || type.IsEnum || type.IsPrimitive;
         }
     }
     

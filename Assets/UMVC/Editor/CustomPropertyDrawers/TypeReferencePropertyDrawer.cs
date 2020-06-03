@@ -59,26 +59,13 @@ namespace UMVC.Editor.CustomPropertyDrawers
 
         private static void FilterTypes(Assembly assembly, TypeConstraintAttribute filter, ICollection<Type> excludedTypes, List<Type> output)
         {
-            
-            foreach (var type in assembly.GetTypes())
-            {
-                if (!type.IsVisible)
-                {
-                    continue;
-                }
-                
-                if (filter != null && !filter.IsConstraintSatisfied(type))
-                {
-                    continue;
-                }
-                
-                if (excludedTypes != null && excludedTypes.Contains(type))
-                {
-                    continue;
-                }
-
-                output.Add(type);
-            }
+            output.AddRange(
+                from type in assembly.GetTypes() 
+                where type.IsVisible 
+                where filter == null || filter.IsConstraintSatisfied(type) 
+                where excludedTypes == null || !excludedTypes.Contains(type) 
+                select type
+            );
         }
 
         private List<Type> GetFilteredTypes(TypeConstraintAttribute filter)

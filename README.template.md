@@ -35,15 +35,21 @@
 
 # Features
 
+### Overall
+
 ✔ Customizable T4 Templates
 
 ✔ Customizable Base Templates
 
 ✔ Generate your architecture directly in the Unity Editor
 
+### Model
+
 ✔ Automated Events bound on model fields
 - ✔ OnFieldUpdate(string field, object newObject, object oldObject)
 - ✔ OnFieldUpdated(string field, object value)
+
+✔ Generate field when creating a Model
 
 ✔ Disable/Enable Model Events on demand
 

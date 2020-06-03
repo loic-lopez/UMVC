@@ -6,7 +6,7 @@ namespace UMVC.Core.Components
     [Serializable]
     public class ModelComponent : Component
     {
-        private List<ClassField> _fields;
+        protected List<ClassField> _fields;
 
         public ModelComponent()
         {

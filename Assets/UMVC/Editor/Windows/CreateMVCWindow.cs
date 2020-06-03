@@ -94,13 +94,13 @@ namespace UMVC.Editor.Windows
                 var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
                 if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
 
-               
+                model.CompileToSystemType();
 
                 Generator.GenerateMVC(
                     new GeneratorParameters.Builder()
                         .WithView(view)
                         .WithController(controller)
-                        //.WithModel(model)
+                        .WithModel(model)
                         .WithNamespaceName(outputNamespace)
                         .WithOutputDir(outputDir)
                         .Build()

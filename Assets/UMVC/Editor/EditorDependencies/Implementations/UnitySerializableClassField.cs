@@ -7,7 +7,7 @@ namespace UMVC.Editor.EditorDependencies.Implementations
     [Serializable]
     public class UnitySerializableClassField : ClassField
     {
-        [AllowEnumsClassesInterfaces(Grouping = ClassGrouping.ByAddComponentMenu)]
+        [AllowPrimitivesEnumsClassesInterfaces(Grouping = ClassGrouping.ByAddComponentMenu)]
         public new TypeReference FieldType;
     }
 }
