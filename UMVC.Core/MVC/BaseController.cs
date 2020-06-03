@@ -25,8 +25,8 @@ namespace UMVC.Core.MVC
 
         protected virtual void SubscribeEvents()
         {
-            ModelProxy.OnFieldUpdate += View.OnFieldUpdate;
-            ModelProxy.OnFieldUpdated += View.OnFieldUpdated;
+            ModelProxy.OnFieldWillUpdate += View.OnFieldWillUpdate;
+            ModelProxy.OnFieldDidUpdate += View.OnFieldDidUpdate;
         }
 
 

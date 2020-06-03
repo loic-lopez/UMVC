@@ -33,11 +33,11 @@ namespace UMVC.Core.Tests
 
     public class TestView : BaseView<TestModel, TestController>
     {
-        public override void OnFieldUpdate(string field, object newObject, object oldObject)
+        public override void OnFieldWillUpdate(string field, object newObject, object oldObject)
         {
         }
 
-        public override void OnFieldUpdated(string field, object value)
+        public override void OnFieldDidUpdate(string field, object value)
         {
         }
 
@@ -70,7 +70,7 @@ namespace UMVC.Core.Tests
             int newValue = new Random().Next();
             const string fieldName = "value";
             
-            modelProxy.OnFieldUpdate += (field, newObject, oldObject) =>
+            modelProxy.OnFieldWillUpdate += (field, newObject, oldObject) =>
             {
                 Assert.True((int)oldObject == TestModel.DefaultValue);
                 Assert.True(field == fieldName);
@@ -78,7 +78,7 @@ namespace UMVC.Core.Tests
                 Assert.True((int)newObject == newValue);
             };
 
-            modelProxy.OnFieldUpdated += (field, value) =>
+            modelProxy.OnFieldDidUpdate += (field, value) =>
             {
                 Assert.True(field == fieldName);
                 Assert.True((int)value == newValue);
