@@ -1,4 +1,5 @@
-﻿using UMVC.Core.Components;
+﻿using System;
+using UMVC.Core.Components;
 
 namespace UMVC.Core.Generation.GeneratorParameters
 {

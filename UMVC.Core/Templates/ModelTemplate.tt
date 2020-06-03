@@ -4,7 +4,7 @@
 <#@ parameter name="Namespace" type="System.String"#>
 <#@ parameter name="Extends" type="System.String"#>
 <#@ parameter name="BaseNamespace" type="System.String"#>
-<#@ parameter type="System.Collections.Generic.List<ClassField>" name="Fields" #>
+<#@ parameter type="System.Collections.Generic.List<UMVC.Core.Components.ClassField>" name="Fields" #>
 
 using System;
 using <#= BaseNamespace #>;

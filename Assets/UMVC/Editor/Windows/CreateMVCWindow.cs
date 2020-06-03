@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UMVC.Core.Components;
 using UMVC.Core.Generation.Generator;
 using UMVC.Core.Generation.GeneratorParameters;
 using UMVC.Editor.Abstracts;
+using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
+using UMVC.Editor.EditorDependencies.Implementations;
 using UMVC.Editor.Extensions;
 using UMVC.Editor.Styles;
 using UMVC.Editor.Utils;
@@ -32,7 +35,7 @@ namespace UMVC.Editor.Windows
 
         [SerializeField] private Component controller;
         [SerializeField] private Component view;
-        [SerializeField] private ModelComponent model;
+        [SerializeField] private UnitySerializableModelComponent model;
 
         public override void SetupWindow()
         {
@@ -43,10 +46,11 @@ namespace UMVC.Editor.Windows
             var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
             var baseViewSettings = Singleton.UMVC.Instance.Settings.view;
             
-            model = new ModelComponent
+            model = new UnitySerializableModelComponent
             {
                 BaseNamespace = baseModelSettings.BaseNamespace,
                 Extends = baseModelSettings.Extends,
+                ClassFields = new List<UnitySerializableClassField>()
             };
             controller = new Component
             {
@@ -96,7 +100,7 @@ namespace UMVC.Editor.Windows
                     new GeneratorParameters.Builder()
                         .WithView(view)
                         .WithController(controller)
-                        .WithModel(model)
+                        //.WithModel(model)
                         .WithNamespaceName(outputNamespace)
                         .WithOutputDir(outputDir)
                         .Build()

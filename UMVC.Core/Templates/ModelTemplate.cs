@@ -96,12 +96,12 @@ private string BaseNamespace
     }
 }
 
-private global::System.Collections.Generic.List<ClassField> _FieldsField;
+private global::System.Collections.Generic.List<UMVC.Core.Components.ClassField> _FieldsField;
 
 /// <summary>
 /// Access the Fields parameter of the template.
 /// </summary>
-private global::System.Collections.Generic.List<ClassField> Fields
+private global::System.Collections.Generic.List<UMVC.Core.Components.ClassField> Fields
 {
     get
     {
@@ -176,7 +176,7 @@ if ((BaseNamespaceValueAcquired == false))
 bool FieldsValueAcquired = false;
 if (this.Session.ContainsKey("Fields"))
 {
-    this._FieldsField = ((global::System.Collections.Generic.List<ClassField>)(this.Session["Fields"]));
+    this._FieldsField = ((global::System.Collections.Generic.List<UMVC.Core.Components.ClassField>)(this.Session["Fields"]));
     FieldsValueAcquired = true;
 }
 if ((FieldsValueAcquired == false))
@@ -184,7 +184,7 @@ if ((FieldsValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Fields");
     if ((data != null))
     {
-        this._FieldsField = ((global::System.Collections.Generic.List<ClassField>)(data));
+        this._FieldsField = ((global::System.Collections.Generic.List<UMVC.Core.Components.ClassField>)(data));
     }
 }
 
