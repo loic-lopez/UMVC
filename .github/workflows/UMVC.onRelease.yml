@@ -9,7 +9,7 @@ jobs:
     name: Update README 🏗️
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       
       - name: Update the README.md
         run: sh ./.github/workflows/scripts/updateREADME.sh ${GITHUB_REF#refs/tags/}

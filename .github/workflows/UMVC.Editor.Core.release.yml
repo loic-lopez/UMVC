@@ -211,7 +211,9 @@ jobs:
         with:
           tag_name: v${{ env.GitVersion_SemVer }}
           release_name: Release v${{ env.GitVersion_SemVer }}
-          body: ${{ steps.generate-changelog.outputs.changelog }}
+          body: |
+            ### Changes in release v${{ env.GitVersion_SemVer }}
+            ${{ steps.generate-changelog.outputs.changelog }}
           draft: false
           prerelease: false
           
