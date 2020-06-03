@@ -25,7 +25,7 @@ namespace UMVC.Core.MVC
         }
 
         
-        public abstract void OnFieldUpdate(string field, object newObject, object oldObject);
-        public abstract void OnFieldUpdated(string field, object value);
+        public abstract void OnFieldWillUpdate(string field, object newObject, object oldObject);
+        public abstract void OnFieldDidUpdate(string field, object value);
     }
 }

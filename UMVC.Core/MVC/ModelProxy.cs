@@ -8,8 +8,8 @@ namespace UMVC.Core.MVC
     public class ModelProxy<TModel> : RealProxy where TModel : BaseModel
     {
         private readonly TModel _instance;
-        public event Delegates.OnFieldUpdate OnFieldUpdate;
-        public event Delegates.OnFieldUpdated OnFieldUpdated;
+        public event Delegates.OnFieldWillUpdate OnFieldWillUpdate;
+        public event Delegates.OnFieldDidUpdate OnFieldDidUpdate;
 
         private ModelProxy(TModel instance) : base(typeof(TModel))
         {
@@ -36,14 +36,14 @@ namespace UMVC.Core.MVC
             {
                 var arguments = methodCall.Args;
                 
-                if (methodCall.MethodBase.Name.Equals("FieldSetter") && _instance.eventsEnabled)
+                if (methodCall.MethodBase.Name.Equals("FieldSetter") && _instance.isOnFieldWillUpdateEnabled)
                 {
                     BeforeFieldUpdate(arguments);
                 }
                 
                 var result = methodCall.MethodBase.Invoke(_instance, arguments);
                 
-                if (methodCall.MethodBase.Name.Equals("FieldSetter") && _instance.eventsEnabled)
+                if (methodCall.MethodBase.Name.Equals("FieldSetter") && _instance.isOnFieldDidUpdateEnabled)
                 {
                     AfterFieldUpdate(arguments);
                 }
@@ -65,12 +65,12 @@ namespace UMVC.Core.MVC
         {
             var field = (string) arguments[1];
             
-            OnFieldUpdate?.Invoke(field, arguments[2], _instance.GetType().GetField(field).GetValue(_instance));
+            OnFieldWillUpdate?.Invoke(field, arguments[2], _instance.GetType().GetField(field).GetValue(_instance));
         }
 
         private void AfterFieldUpdate(IReadOnlyList<object> arguments)
         {
-            OnFieldUpdated?.Invoke((string) arguments[1], arguments[2]);
+            OnFieldDidUpdate?.Invoke((string) arguments[1], arguments[2]);
         }
     }
 }
