@@ -187,6 +187,7 @@ jobs:
 
       - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
         name: ✏️Generate changelog
+        id: generate-changelog
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       
@@ -202,6 +203,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: UMVC.Editor.PreBuiltDlls.unitypackage
+          
+      - name: Set env CHANGELOG
+        run: echo '::set-env name=CHANGELOG::${{ steps.generate-changelog.outputs.changelog }}'
 
       - name: 🚀 Create GitHub release
         uses: actions/create-release@v1.1.0
@@ -213,7 +217,7 @@ jobs:
           release_name: Release v${{ env.GitVersion_SemVer }}
           body: |
             ### Changes in release v${{ env.GitVersion_SemVer }}
-            ${{ steps.generate-changelog.outputs.changelog }}
+            ${{ env.CHANGELOG }}
           draft: false
           prerelease: false
           
