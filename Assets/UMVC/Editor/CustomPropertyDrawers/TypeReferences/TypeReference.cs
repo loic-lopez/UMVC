@@ -86,7 +86,7 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
 
             set
             {
-                if (value != null)
+                if (value == null)
                 {
                     throw new ArgumentException(
                         string.Format("'{0}' is null.", value.FullName),
@@ -96,6 +96,11 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
                 _type = value;
                 _classRef = GetClassRef(value);
             }
+        }
+
+        public void UpdateInternalType(Type type)
+        {
+            Type = type;
         }
 
         public static implicit operator string(TypeReference typeReference)

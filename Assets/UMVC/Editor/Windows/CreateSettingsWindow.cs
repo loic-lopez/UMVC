@@ -15,11 +15,11 @@ namespace UMVC.Editor.Windows
         private SerializedProperty _serializedModel;
         private SerializedProperty _serializedView;
 
-        [SerializeField] private BaseComponentSettings controller;
+        [SerializeField] private BaseControllerSettings controller;
 
-        [SerializeField] private BaseComponentSettings model;
+        [SerializeField] private BaseModelSettings model;
 
-        [SerializeField] private BaseComponentSettings view;
+        [SerializeField] private BaseViewSettings view;
 
         public override void SetupWindow()
         {
@@ -49,6 +49,20 @@ namespace UMVC.Editor.Windows
 
         private void DisplayBaseExtends()
         {
+            if (model.ClassExtends.Type != null)
+                model.BaseNamespace = model.ClassExtends.Type.Namespace;
+            
+            if (controller.ClassExtends.Type != null)
+                controller.BaseNamespace = controller.ClassExtends.Type.Namespace;
+            
+            if (view.ClassExtends.Type != null)
+                view.BaseNamespace = view.ClassExtends.Type.Namespace;
+            
+            _serializedGameObject = new SerializedObject(this);
+            _serializedModel = _serializedGameObject.FindProperty("model");
+            _serializedController = _serializedGameObject.FindProperty("controller");
+            _serializedView = _serializedGameObject.FindProperty("view");
+            
             EditorGUILayout.PropertyField(_serializedModel);
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(_serializedView);

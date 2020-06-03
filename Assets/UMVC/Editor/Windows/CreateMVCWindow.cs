@@ -4,6 +4,7 @@ using System.IO;
 using UMVC.Core.Components;
 using UMVC.Core.Generation.Generator;
 using UMVC.Core.Generation.GeneratorParameters;
+using UMVC.Core.MVC;
 using UMVC.Editor.Abstracts;
 using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
 using UMVC.Editor.EditorDependencies.Implementations;
@@ -33,10 +34,11 @@ namespace UMVC.Editor.Windows
         private SerializedProperty _serializedModel;
         private SerializedProperty _serializedView;
 
-        [SerializeField] private Component controller;
-        [SerializeField] private Component view;
+        [SerializeField] private UnitySerializableControllerComponent controller;
+        [SerializeField] private UnitySerializableViewComponent view;
         [SerializeField] private UnitySerializableModelComponent model;
-
+        
+        
         public override void SetupWindow()
         {
             base.SetupWindow();
@@ -49,18 +51,19 @@ namespace UMVC.Editor.Windows
             model = new UnitySerializableModelComponent
             {
                 BaseNamespace = baseModelSettings.BaseNamespace,
-                Extends = baseModelSettings.Extends,
-                ClassFields = new List<UnitySerializableClassField>()
+                ClassFields = new List<UnitySerializableClassField>(),
+                ClassExtends = baseModelSettings.ClassExtends
             };
-            controller = new Component
+
+            controller = new UnitySerializableControllerComponent
             {
                 BaseNamespace = baseControllerSettings.BaseNamespace,
-                Extends = baseControllerSettings.Extends, 
+                ClassExtends = baseControllerSettings.ClassExtends
             };
-            view = new Component
+            view = new UnitySerializableViewComponent
             {
                 BaseNamespace = baseViewSettings.BaseNamespace,
-                Extends = baseViewSettings.Extends,
+                ClassExtends = baseViewSettings.ClassExtends
             };
         }
 
@@ -121,6 +124,10 @@ namespace UMVC.Editor.Windows
             model.Name = $"{_componentName}{ModelPrefix}";
             view.Name = $"{_componentName}{ViewPrefix}";
             controller.Name = $"{_componentName}{ControllerPrefix}";
+
+            model.BaseNamespace = model.ClassExtends.Type.Namespace;
+            controller.BaseNamespace = controller.ClassExtends.Type.Namespace;
+            view.BaseNamespace = view.ClassExtends.Type.Namespace;
             
                         
             _serializedGameObject = new SerializedObject(this);

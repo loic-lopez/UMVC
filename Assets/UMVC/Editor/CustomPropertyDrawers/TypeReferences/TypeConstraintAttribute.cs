@@ -1,5 +1,6 @@
 ﻿﻿using System;
-using UnityEngine;
+ using UMVC.Core.MVC;
+ using UnityEngine;
 
 namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
 {
@@ -128,12 +129,23 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
         /// Gets the type of class that selectable classes must derive from.
         /// </summary>
         public Type BaseType { get; private set; }
+        
+        private static bool IsSubclassOfRawGeneric(Type generic, Type toCheck) {
+            while (toCheck != null && toCheck != typeof(object)) {
+                var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+                if (generic == cur) {
+                    return true;
+                }
+                toCheck = toCheck.BaseType;
+            }
+            return false;
+        }
 
         /// <inheritdoc/>
         public override bool IsConstraintSatisfied(Type type)
         {
-            return base.IsConstraintSatisfied(type)
-                && BaseType.IsAssignableFrom(type) && type != BaseType;
+            return base.IsConstraintSatisfied(type) && BaseType.IsAssignableFrom(type)
+                   || base.IsConstraintSatisfied(type) && IsSubclassOfRawGeneric(BaseType, type);
         }
     }
 
