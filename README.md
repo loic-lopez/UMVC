@@ -35,15 +35,21 @@
 
 # Features
 
+### Overall
+
 ✔ Customizable T4 Templates
 
 ✔ Customizable Base Templates
 
 ✔ Generate your architecture directly in the Unity Editor
 
+### Model
+
 ✔ Automated Events bound on model fields
 - ✔ OnFieldUpdate(string field, object newObject, object oldObject)
 - ✔ OnFieldUpdated(string field, object value)
+
+✔ Generate field when creating a Model
 
 ✔ Disable/Enable Model Events on demand
 
@@ -80,8 +86,8 @@ In addition to dividing the application into these components, the model–view�
 
 | Requirements and use cases | Release Archive(s) |  
 | -------------------------------------------------- | -------- |  
-| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.1.1/UMVC.Editor.PreBuiltDlls.0.1.1.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
-| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.1.1/UMVC.Editor.MsBuildForUnity.0.1.1.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.1.1/UMVC.Core.0.1.1.zip)  |  
+| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.1.2/UMVC.Editor.PreBuiltDlls.0.1.2.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
+| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.1.2/UMVC.Editor.MsBuildForUnity.0.1.2.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.1.2/UMVC.Core.0.1.2.zip)  |  
 
 ## Basic usage using UMVC.Editor.PreBuiltDlls UnityPackage
 
