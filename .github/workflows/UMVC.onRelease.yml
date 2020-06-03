@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v1
       
       - name: Update the README.md
-        run: sh ./.github/workflows/scripts/updateREADME.sh ${GITHUB_REF}
+        run: sh ./.github/workflows/scripts/updateREADME.sh ${GITHUB_REF#refs/tags/}
         
       - name: Commit Readme onto master branch
         run: |
