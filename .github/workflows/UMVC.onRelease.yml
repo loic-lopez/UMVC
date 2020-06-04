@@ -1,8 +1,9 @@
 name: UMVC.OnRelease
 
 on:
-  release:
-    types: ["created","edited"]
+  push:
+    tags:
+      - 'v*.*.*'
     
 jobs:
   updateREADME:
