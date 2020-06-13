@@ -1,7 +1,6 @@
 {
     "name": "Assets",
     "type": "asset",
-    "path": "",
     "roots": [],
     "includes": [],
     "excludes": [
