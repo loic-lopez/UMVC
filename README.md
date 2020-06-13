@@ -46,8 +46,8 @@
 ### Model
 
 ✔ Automated Events bound on model fields
-- ✔ OnFieldUpdate(string field, object newObject, object oldObject)
-- ✔ OnFieldUpdated(string field, object value)
+- ✔ OnFieldWillUpdate(string field, object newObject, object oldObject)
+- ✔ OnFieldDidUpdate(string field, object value)
 
 ✔ Generate field when creating a Model
 
