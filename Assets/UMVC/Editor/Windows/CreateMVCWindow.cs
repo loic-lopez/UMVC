@@ -186,7 +186,10 @@ namespace UMVC.Editor.Windows
             var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
             GUILayout.Label($"Output directory: {outputDir}");
             
-            var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
+            string outputNamespace = "";
+            
+            if (_newSubdir.IsNotNullOrEmpty() || _outputDir.IsNotNullOrEmpty())
+                outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
             GUILayout.Label($"Output namespace: {outputNamespace}");
         }
 
