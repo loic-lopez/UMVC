@@ -185,11 +185,11 @@ jobs:
         with:
           args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
 
-      - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
-        name: ✏️Generate changelog
-        id: generate-changelog
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: ✏️Generate changelog
+        uses: scottbrenner/generate-changelog-action@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
       
       - name: 📦 Zip UMVC.Core Sources
         run: zip -r UMVC.Core.zip UMVC.Core
@@ -204,20 +204,18 @@ jobs:
         with:
           name: UMVC.Editor.PreBuiltDlls.unitypackage
           
-      - name: Set env CHANGELOG
-        run: echo '::set-env name=CHANGELOG::${{ steps.generate-changelog.outputs.changelog }}'
 
       - name: 🚀 Create GitHub release
         uses: actions/create-release@v1.1.0
         id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.UMVC_PUSH_TAG_PAT }}
         with:
           tag_name: v${{ env.GitVersion_SemVer }}
           release_name: Release v${{ env.GitVersion_SemVer }}
           body: |
             ### Changes in release v${{ env.GitVersion_SemVer }}
-            ${{ env.CHANGELOG }}
+            ${{ steps.Changelog.outputs.changelog }}
           draft: false
           prerelease: false
           
