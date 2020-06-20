@@ -20,7 +20,7 @@ namespace UMVC.Export
             );
             File.Delete(Path.Combine(Application.dataPath, $"{Root}PlayerDependencies/UMVC.Dependencies.msb4u.csproj"));
             AssetDatabase.Refresh();
-        
+
             Export(ExportWithDllsPath);
         }
 
@@ -28,18 +28,18 @@ namespace UMVC.Export
         public static void ExportWithMsBuildForUnity()
         {
             File.Copy(
-                $"{Application.dataPath}/../MSBuildForUnity/EditorDependencies/UMVC.Dependencies.msb4u.csproj", 
+                $"{Application.dataPath}/../MSBuildForUnity/EditorDependencies/UMVC.Dependencies.msb4u.csproj",
                 $"{Application.dataPath}/UMVC/Editor/EditorDependencies/UMVC.Dependencies.msb4u.csproj"
-                ,true
+                , true
             );
-        
+
             File.Copy(
-                $"{Application.dataPath}/../MSBuildForUnity/PlayerDependencies/UMVC.Dependencies.msb4u.csproj", 
+                $"{Application.dataPath}/../MSBuildForUnity/PlayerDependencies/UMVC.Dependencies.msb4u.csproj",
                 $"{Application.dataPath}/UMVC/PlayerDependencies/UMVC.Dependencies.msb4u.csproj"
-                ,true
+                , true
             );
             AssetDatabase.Refresh();
-        
+
             Export(ExportMsBuildForUnityPath, true);
         }
 
@@ -47,12 +47,10 @@ namespace UMVC.Export
         {
             var path = Path.Combine(Application.dataPath, Root);
             var assets = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories)
-                .Where(x => !x.Contains("Export"));;
+                .Where(x => !x.Contains("Export"));
+            ;
 
-            if (disableDlls)
-            {
-                assets = assets.Where(x => Path.GetExtension(x) != ".dll" && !x.Contains("net46"));
-            }
+            if (disableDlls) assets = assets.Where(x => Path.GetExtension(x) != ".dll" && !x.Contains("net46"));
 
             assets = assets.Select(x => "Assets" + x.Replace(Application.dataPath, "").Replace(@"\", "/"));
 

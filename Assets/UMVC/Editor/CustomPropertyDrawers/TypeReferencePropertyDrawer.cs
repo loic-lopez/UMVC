@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UMVC.Core.MVC;
 using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
 using UnityEditor;
 using UnityEngine;
@@ -10,43 +9,58 @@ using UnityEngine;
 namespace UMVC.Editor.CustomPropertyDrawers
 {
     /// <summary>
-    /// Custom property drawer for <see cref="TypeReference"/> properties.
+    ///     Custom property drawer for <see cref="TypeReference" /> properties.
     /// </summary>
     [CustomPropertyDrawer(typeof(TypeReference))]
     [CustomPropertyDrawer(typeof(TypeConstraintAttribute), true)]
     public sealed class TypeReferencePropertyDrawer : PropertyDrawer
     {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorStyles.popup.CalcHeight(GUIContent.none, 0);
+        }
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var constraintAttribute = attribute as TypeConstraintAttribute ?? new TypeConstraintAttribute();
+            DrawTypeSelectionControl(position, property.FindPropertyRelative("_classRef"), label, constraintAttribute);
+        }
+
         #region Type Filtering
 
         /// <summary>
-        /// Gets or sets a function that returns a collection of types that are
-        /// to be excluded from drop-down. A value of <c>null</c> specifies that
-        /// no types are to be excluded.
+        ///     Gets or sets a function that returns a collection of types that are
+        ///     to be excluded from drop-down. A value of <c>null</c> specifies that
+        ///     no types are to be excluded.
         /// </summary>
         /// <remarks>
-        /// <para>This property must be set immediately before presenting a class
-        /// type reference property field using <see cref="EditorGUI.PropertyField"/>
-        /// or <see cref="EditorGUILayout.PropertyField"/> since the value of this
-        /// property is reset to <c>null</c> each time the control is drawn.</para>
-        /// <para>Since filtering makes extensive use of <see cref="ICollection{Type}.Contains"/>
-        /// it is recommended to use a collection that is optimized for fast
-        /// lookups such as <see cref="HashSet{Type}"/> for better performance.</para>
+        ///     <para>
+        ///         This property must be set immediately before presenting a class
+        ///         type reference property field using <see cref="EditorGUI.PropertyField" />
+        ///         or <see cref="EditorGUILayout.PropertyField" /> since the value of this
+        ///         property is reset to <c>null</c> each time the control is drawn.
+        ///     </para>
+        ///     <para>
+        ///         Since filtering makes extensive use of <see cref="ICollection{T}.Contains" />
+        ///         it is recommended to use a collection that is optimized for fast
+        ///         lookups such as <see cref="HashSet{Type}" /> for better performance.
+        ///     </para>
         /// </remarks>
         /// <example>
-        /// <para>Exclude a specific type from being selected:</para>
-        /// <code language="csharp"><![CDATA[
+        ///     <para>Exclude a specific type from being selected:</para>
+        ///     <code language="csharp"><![CDATA[
         /// private SerializedProperty _someTypeReferenceProperty;
-        ///
+        /// 
         /// public override void OnInspectorGUI()
         /// {
         ///     serializedObject.Update();
-        ///
+        /// 
         ///     TypeReferencePropertyDrawer.ExcludedTypeCollectionGetter = GetExcludedTypeCollection;
         ///     EditorGUILayout.PropertyField(_someTypeReferenceProperty);
-        ///
+        /// 
         ///     serializedObject.ApplyModifiedProperties();
         /// }
-        ///
+        /// 
         /// private ICollection<Type> GetExcludedTypeCollection()
         /// {
         ///     var set = new HashSet<Type>();
@@ -57,13 +71,14 @@ namespace UMVC.Editor.CustomPropertyDrawers
         /// </example>
         public Func<ICollection<Type>> ExcludedTypeCollectionGetter { get; set; }
 
-        private static void FilterTypes(Assembly assembly, TypeConstraintAttribute filter, ICollection<Type> excludedTypes, List<Type> output)
+        private static void FilterTypes(Assembly assembly, TypeConstraintAttribute filter,
+            ICollection<Type> excludedTypes, List<Type> output)
         {
             output.AddRange(
-                from type in assembly.GetTypes() 
-                where type.IsVisible 
-                where filter == null || filter.IsConstraintSatisfied(type) 
-                where excludedTypes == null || !excludedTypes.Contains(type) 
+                from type in assembly.GetTypes()
+                where type.IsVisible
+                where filter == null || filter.IsConstraintSatisfied(type)
+                where excludedTypes == null || !excludedTypes.Contains(type)
                 select type
             );
         }
@@ -74,10 +89,9 @@ namespace UMVC.Editor.CustomPropertyDrawers
 
             var excludedTypes = ExcludedTypeCollectionGetter != null ? ExcludedTypeCollectionGetter() : null;
 
-            foreach (var referencedAssembly in AppDomain.CurrentDomain.GetAssemblies().Where(assembly => !assembly.FullName.Contains("Tests")))
-            {
+            foreach (var referencedAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                .Where(assembly => !assembly.FullName.Contains("Tests")))
                 FilterTypes(referencedAssembly, filter, excludedTypes, types);
-            }
 
             types.Sort((a, b) => a.FullName.CompareTo(b.FullName));
 
@@ -92,7 +106,7 @@ namespace UMVC.Editor.CustomPropertyDrawers
 
         private static Type ResolveType(string classRef)
         {
-            if (!s_TypeMap.TryGetValue(classRef, out Type type))
+            if (!s_TypeMap.TryGetValue(classRef, out var type))
             {
                 type = !string.IsNullOrEmpty(classRef) ? Type.GetType(classRef) : null;
                 s_TypeMap[classRef] = type;
@@ -118,15 +132,12 @@ namespace UMVC.Editor.CustomPropertyDrawers
             menu.AddItem(new GUIContent("(None)"), selectedType == null, s_OnSelectedTypeName, null);
             menu.AddSeparator(string.Empty);
 
-            for (int i = 0; i < types.Count; ++i)
+            for (var i = 0; i < types.Count; ++i)
             {
                 var type = types[i];
 
-                string menuLabel = FormatGroupedTypeName(type, grouping);
-                if (string.IsNullOrEmpty(menuLabel))
-                {
-                    continue;
-                }
+                var menuLabel = FormatGroupedTypeName(type, grouping);
+                if (string.IsNullOrEmpty(menuLabel)) continue;
 
                 var content = new GUIContent(menuLabel);
                 menu.AddItem(content, type == selectedType, s_OnSelectedTypeName, type);
@@ -137,7 +148,7 @@ namespace UMVC.Editor.CustomPropertyDrawers
 
         private static string FormatGroupedTypeName(Type type, ClassGrouping grouping)
         {
-            string name = type.FullName;
+            var name = type.FullName;
 
             switch (grouping)
             {
@@ -149,20 +160,16 @@ namespace UMVC.Editor.CustomPropertyDrawers
                     return name.Replace('.', '/');
 
                 case ClassGrouping.ByNamespaceFlat:
-                    int lastPeriodIndex = name.LastIndexOf('.');
+                    var lastPeriodIndex = name.LastIndexOf('.');
                     if (lastPeriodIndex != -1)
-                    {
                         name = name.Substring(0, lastPeriodIndex) + "/" + name.Substring(lastPeriodIndex + 1);
-                    }
 
                     return name;
 
                 case ClassGrouping.ByAddComponentMenu:
                     var addComponentMenuAttributes = type.GetCustomAttributes(typeof(AddComponentMenu), false);
                     if (addComponentMenuAttributes.Length == 1)
-                    {
-                        return ((AddComponentMenu)addComponentMenuAttributes[0]).componentMenu;
-                    }
+                        return ((AddComponentMenu) addComponentMenuAttributes[0]).componentMenu;
 
                     return type.FullName.Replace('.', '/');
             }
@@ -177,22 +184,19 @@ namespace UMVC.Editor.CustomPropertyDrawers
             EditorWindow.focusedWindow.SendEvent(typeReferenceUpdatedEvent);
         }
 
-        private string DrawTypeSelectionControl(Rect position, GUIContent label, string classRef, TypeConstraintAttribute filter)
+        private string DrawTypeSelectionControl(Rect position, GUIContent label, string classRef,
+            TypeConstraintAttribute filter)
         {
-            if (label != null && label != GUIContent.none)
-            {
-                position = EditorGUI.PrefixLabel(position, label);
-            }
+            if (label != null && label != GUIContent.none) position = EditorGUI.PrefixLabel(position, label);
 
-            int controlID = GUIUtility.GetControlID(s_ControlHint, FocusType.Keyboard, position);
+            var controlID = GUIUtility.GetControlID(s_ControlHint, FocusType.Keyboard, position);
 
-            bool triggerDropDown = false;
+            var triggerDropDown = false;
 
             switch (Event.current.GetTypeForControl(controlID))
             {
                 case EventType.ExecuteCommand:
                     if (Event.current.commandName == "TypeReferenceUpdated")
-                    {
                         if (s_SelectionControlID == controlID)
                         {
                             if (classRef != s_SelectedClassRef)
@@ -204,7 +208,6 @@ namespace UMVC.Editor.CustomPropertyDrawers
                             s_SelectionControlID = 0;
                             s_SelectedClassRef = null;
                         }
-                    }
 
                     break;
 
@@ -220,13 +223,11 @@ namespace UMVC.Editor.CustomPropertyDrawers
 
                 case EventType.KeyDown:
                     if (GUI.enabled && GUIUtility.keyboardControl == controlID)
-                    {
                         if (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.Space)
                         {
                             triggerDropDown = true;
                             Event.current.Use();
                         }
-                    }
 
                     break;
 
@@ -236,13 +237,8 @@ namespace UMVC.Editor.CustomPropertyDrawers
 
                     s_TempContent.text = classRefParts[0].Trim();
                     if (s_TempContent.text == string.Empty)
-                    {
                         s_TempContent.text = "(None)";
-                    }
-                    else if (ResolveType(classRef) == null)
-                    {
-                        s_TempContent.text += " {Missing}";
-                    }
+                    else if (ResolveType(classRef) == null) s_TempContent.text += " {Missing}";
 
                     EditorStyles.popup.Draw(position, s_TempContent, controlID);
                     break;
@@ -260,11 +256,12 @@ namespace UMVC.Editor.CustomPropertyDrawers
             return classRef;
         }
 
-        private void DrawTypeSelectionControl(Rect position, SerializedProperty property, GUIContent label, TypeConstraintAttribute filter)
+        private void DrawTypeSelectionControl(Rect position, SerializedProperty property, GUIContent label,
+            TypeConstraintAttribute filter)
         {
             try
             {
-                bool restoreShowMixedValue = EditorGUI.showMixedValue;
+                var restoreShowMixedValue = EditorGUI.showMixedValue;
                 EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
 
                 property.stringValue = DrawTypeSelectionControl(position, label, property.stringValue, filter);
@@ -278,16 +275,5 @@ namespace UMVC.Editor.CustomPropertyDrawers
         }
 
         #endregion
-
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorStyles.popup.CalcHeight(GUIContent.none, 0);
-        }
-
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            var constraintAttribute = attribute as TypeConstraintAttribute ?? new TypeConstraintAttribute();
-            DrawTypeSelectionControl(position, property.FindPropertyRelative("_classRef"), label, constraintAttribute);
-        }
     }
 }

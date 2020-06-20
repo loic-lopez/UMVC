@@ -23,7 +23,7 @@ namespace UMVC.Editor.Extensions
             {
                 return char.ToUpper(word[0]) + word.Substring(1);
             }
-            
+
             var wordList = str.Replace("[^A-Za-z0-9]", "").Split(' ');
 
             return wordList.Aggregate(string.Empty, (current, word) => current + CapitalizeWord(word));

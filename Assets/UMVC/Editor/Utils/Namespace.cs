@@ -16,9 +16,11 @@ namespace UMVC.Editor.Utils
             {
                 var basePath = Application.dataPath + "/";
                 outputNamespace = wantCreateSubDir ? newSubdir : outputDir;
-                basePath = outputNamespace.Replace(basePath, "");
-                
-                outputNamespace = basePath == Application.dataPath ? Application.productName : basePath.Replace('/', '.');
+                basePath = outputNamespace?.Replace(basePath, "");
+
+                outputNamespace = basePath == Application.dataPath
+                    ? Application.productName
+                    : basePath.Replace('/', '.');
             }
 
             return outputNamespace;

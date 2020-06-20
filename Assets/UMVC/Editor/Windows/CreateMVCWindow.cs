@@ -1,19 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using UMVC.Core.Components;
 using UMVC.Core.Generation.Generator;
 using UMVC.Core.Generation.GeneratorParameters;
-using UMVC.Core.MVC;
 using UMVC.Editor.Abstracts;
-using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
 using UMVC.Editor.EditorDependencies.Implementations;
 using UMVC.Editor.Extensions;
 using UMVC.Editor.Styles;
 using UMVC.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
-using Component = UMVC.Core.Components.Component;
 
 namespace UMVC.Editor.Windows
 {
@@ -23,49 +18,20 @@ namespace UMVC.Editor.Windows
         private const string ViewPrefix = "View";
         private const string ControllerPrefix = "Controller";
 
-        private string _componentName;
-        private string _newSubdir;
-        private string _outputDir;
-        private bool _wantCreateSubDir;
-        
-        private SerializedObject _serializedGameObject;
-
-        private SerializedProperty _serializedController;
-        private SerializedProperty _serializedModel;
-        private SerializedProperty _serializedView;
-
         [SerializeField] private UnitySerializableControllerComponent controller;
         [SerializeField] private UnitySerializableViewComponent view;
         [SerializeField] private UnitySerializableModelComponent model;
-        
-        
-        public override void SetupWindow()
-        {
-            base.SetupWindow();
-            titleContent.text = WindowName();
-            
-            var baseModelSettings = Singleton.UMVC.Instance.Settings.model;
-            var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
-            var baseViewSettings = Singleton.UMVC.Instance.Settings.view;
-            
-            model = new UnitySerializableModelComponent
-            {
-                BaseNamespace = baseModelSettings.BaseNamespace,
-                ClassFields = new List<UnitySerializableClassField>(),
-                ClassExtends = baseModelSettings.ClassExtends
-            };
 
-            controller = new UnitySerializableControllerComponent
-            {
-                BaseNamespace = baseControllerSettings.BaseNamespace,
-                ClassExtends = baseControllerSettings.ClassExtends
-            };
-            view = new UnitySerializableViewComponent
-            {
-                BaseNamespace = baseViewSettings.BaseNamespace,
-                ClassExtends = baseViewSettings.ClassExtends
-            };
-        }
+        private string _componentName;
+        private string _newSubdir;
+        private string _outputDir;
+
+        private SerializedProperty _serializedController;
+
+        private SerializedObject _serializedGameObject;
+        private SerializedProperty _serializedModel;
+        private SerializedProperty _serializedView;
+        private bool _wantCreateSubDir;
 
 
         protected override void OnGUI()
@@ -89,16 +55,45 @@ namespace UMVC.Editor.Windows
             base.OnGUI();
         }
 
+
+        public override void SetupWindow()
+        {
+            base.SetupWindow();
+            titleContent.text = WindowName();
+
+            var baseModelSettings = Singleton.UMVC.Instance.Settings.model;
+            var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
+            var baseViewSettings = Singleton.UMVC.Instance.Settings.view;
+
+            model = new UnitySerializableModelComponent
+            {
+                BaseNamespace = baseModelSettings.BaseNamespace,
+                ClassFields = new List<UnitySerializableClassField>(),
+                ClassExtends = baseModelSettings.ClassExtends
+            };
+
+            controller = new UnitySerializableControllerComponent
+            {
+                BaseNamespace = baseControllerSettings.BaseNamespace,
+                ClassExtends = baseControllerSettings.ClassExtends
+            };
+            view = new UnitySerializableViewComponent
+            {
+                BaseNamespace = baseViewSettings.BaseNamespace,
+                ClassExtends = baseViewSettings.ClassExtends
+            };
+        }
+
         protected override void DisplayEndButton()
         {
             if (GUILayout.Button("Create", Button.WithMargin))
             {
                 if (_componentName.IsNullOrEmpty())
                 {
-                    EditorUtility.DisplayDialog("UMVC", $"New component name cannot be null or empty!", "Got it!");
+                    EditorUtility.DisplayDialog("UMVC", "New component name cannot be null or empty!", "Got it!");
                     return;
                 }
-                
+
                 var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
 
                 if (_wantCreateSubDir && Directory.Exists(outputDir)
@@ -113,16 +108,22 @@ namespace UMVC.Editor.Windows
                     }
                 }
 
-                
+
                 var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
-               
+
+                if (outputNamespace.IsNullOrEmpty())
+                {
+                    EditorUtility.DisplayDialog("UMVC", "You need to choose an output directory!", "Got it!");
+                    return;
+                }
+
                 if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
 
                 model.CompileToSystemType();
                 model.Extends = model.ClassExtends.ToString();
                 controller.Extends = controller.ClassExtends.ToString();
                 view.Extends = view.ClassExtends.ToString();
-                
+
 
                 Generator.GenerateMVC(
                     new GeneratorParameters.Builder()
@@ -153,8 +154,8 @@ namespace UMVC.Editor.Windows
             model.BaseNamespace = model.ClassExtends.Type.Namespace;
             controller.BaseNamespace = controller.ClassExtends.Type.Namespace;
             view.BaseNamespace = view.ClassExtends.Type.Namespace;
-            
-                        
+
+
             _serializedGameObject = new SerializedObject(this);
             _serializedModel = _serializedGameObject.FindProperty("model");
             _serializedController = _serializedGameObject.FindProperty("controller");
@@ -185,9 +186,9 @@ namespace UMVC.Editor.Windows
 
             var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
             GUILayout.Label($"Output directory: {outputDir}");
-            
-            string outputNamespace = "";
-            
+
+            var outputNamespace = "";
+
             if (_newSubdir.IsNotNullOrEmpty() || _outputDir.IsNotNullOrEmpty())
                 outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
             GUILayout.Label($"Output namespace: {outputNamespace}");

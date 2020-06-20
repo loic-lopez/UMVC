@@ -1,7 +1,6 @@
 using System;
 using NUnit.Framework;
 using UMVC.Editor.Extensions;
-using UnityEngine;
 
 namespace UMVC.Tests
 {

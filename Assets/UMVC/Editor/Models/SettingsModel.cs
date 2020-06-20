@@ -8,8 +8,6 @@ namespace UMVC.Editor.Models
     public class SettingsModel : ScriptableObject
     {
         private const string ObjName = "Settings";
-
-        private string _settingsAssetPath;
         public string logo = "logo.jpg";
 
         public BaseModelSettings model;
@@ -18,6 +16,8 @@ namespace UMVC.Editor.Models
 
         public string outputNamespace;
         public string spritesDirectory = "Sprites";
+
+        private string _settingsAssetPath;
 
         public static SettingsModel Initialize(string settingsAssetPath)
         {

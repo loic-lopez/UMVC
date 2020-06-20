@@ -8,6 +8,11 @@ namespace UMVC.Editor.Windows
 {
     public sealed class CreateSettingsWindow : Window
     {
+        [SerializeField] private BaseControllerSettings controller;
+
+        [SerializeField] private BaseModelSettings model;
+
+        [SerializeField] private BaseViewSettings view;
         private string _outputNamespace;
         private SerializedProperty _serializedController;
         private SerializedObject _serializedGameObject;
@@ -15,11 +20,16 @@ namespace UMVC.Editor.Windows
         private SerializedProperty _serializedModel;
         private SerializedProperty _serializedView;
 
-        [SerializeField] private BaseControllerSettings controller;
+        protected override void OnGUI()
+        {
+            GUILayout.Label("Settings", Label.Header);
+            DisplayOutputNamespace();
 
-        [SerializeField] private BaseModelSettings model;
+            GUILayout.Label("Base extends settings", Label.Header);
+            DisplayBaseExtends();
 
-        [SerializeField] private BaseViewSettings view;
+            base.OnGUI();
+        }
 
         public override void SetupWindow()
         {
@@ -36,33 +46,22 @@ namespace UMVC.Editor.Windows
             _serializedView = _serializedGameObject.FindProperty("view");
         }
 
-        protected override void OnGUI()
-        {
-            GUILayout.Label("Settings", Label.Header);
-            DisplayOutputNamespace();
-
-            GUILayout.Label("Base extends settings", Label.Header);
-            DisplayBaseExtends();
-
-            base.OnGUI();
-        }
-
         private void DisplayBaseExtends()
         {
             if (model.ClassExtends.Type != null)
                 model.BaseNamespace = model.ClassExtends.Type.Namespace;
-            
+
             if (controller.ClassExtends.Type != null)
                 controller.BaseNamespace = controller.ClassExtends.Type.Namespace;
-            
+
             if (view.ClassExtends.Type != null)
                 view.BaseNamespace = view.ClassExtends.Type.Namespace;
-            
+
             _serializedGameObject = new SerializedObject(this);
             _serializedModel = _serializedGameObject.FindProperty("model");
             _serializedController = _serializedGameObject.FindProperty("controller");
             _serializedView = _serializedGameObject.FindProperty("view");
-            
+
             EditorGUILayout.PropertyField(_serializedModel);
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(_serializedView);
