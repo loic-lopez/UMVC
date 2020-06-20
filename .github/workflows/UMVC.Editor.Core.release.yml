@@ -186,10 +186,12 @@ jobs:
           args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
 
       - name: ✏️Generate changelog
-        uses: scottbrenner/generate-changelog-action@master
-        id: Changelog
-        env:
-          REPO: ${{ github.repository }}
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          output-file: 'false'
+          skip-on-empty: 'true'
       
       - name: 📦 Zip UMVC.Core Sources
         run: zip -r UMVC.Core.zip UMVC.Core
@@ -215,7 +217,7 @@ jobs:
           release_name: Release v${{ env.GitVersion_SemVer }}
           body: |
             ### Changes in release v${{ env.GitVersion_SemVer }}
-            ${{ steps.Changelog.outputs.changelog }}
+            ${{ steps.changelog.outputs.clean_changelog }}
           draft: false
           prerelease: false
           
