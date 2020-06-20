@@ -187,11 +187,9 @@ jobs:
 
       - name: ✏️Generate changelog
         id: changelog
-        uses: TriPSs/conventional-changelog-action@v2
+        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          output-file: 'false'
-          skip-on-empty: 'true'
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: 📦 Zip UMVC.Core Sources
         run: zip -r UMVC.Core.zip UMVC.Core
@@ -217,7 +215,7 @@ jobs:
           release_name: Release v${{ env.GitVersion_SemVer }}
           body: |
             ### Changes in release v${{ env.GitVersion_SemVer }}
-            ${{ steps.changelog.outputs.clean_changelog }}
+            ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
           
