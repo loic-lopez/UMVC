@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UMVC.Core.Components;
 using UMVC.Core.MVC;
 using UMVC.Editor.CustomPropertyDrawers.TypeReferences;

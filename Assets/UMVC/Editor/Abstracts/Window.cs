@@ -8,6 +8,17 @@ namespace UMVC.Editor.Abstracts
     {
         public static Window Instance { get; private set; }
 
+        protected virtual void OnGUI()
+        {
+            DisplayEndButton();
+        }
+
+
+        private void OnInspectorUpdate()
+        {
+            Repaint();
+        }
+
         bool IWindow.IsOpen => Instance != null;
 
 
@@ -17,19 +28,8 @@ namespace UMVC.Editor.Abstracts
             titleContent.image = (Texture) EditorGUIUtility.Load(Singleton.UMVC.Instance.LogoPath);
         }
 
-
-        private void OnInspectorUpdate()
-        {
-            Repaint();
-        }
-
-        protected virtual void OnGUI()
-        {
-            DisplayEndButton();
-        }
+        public abstract string WindowName();
 
         protected abstract void DisplayEndButton();
-
-        public abstract string WindowName();
     }
 }

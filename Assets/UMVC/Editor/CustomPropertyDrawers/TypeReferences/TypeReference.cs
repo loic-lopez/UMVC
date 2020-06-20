@@ -1,25 +1,28 @@
-﻿﻿using System;
- using System.ComponentModel;
- using UMVC.Editor.Extensions;
- using UnityEngine;
+﻿using System;
+using UMVC.Editor.Extensions;
+using UnityEngine;
 
 namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
 {
     /// <summary>
-    /// Reference to a class <see cref="System.Type"/> with support for Unity serialization.
+    ///     Reference to a class <see cref="System.Type" /> with support for Unity serialization.
     /// </summary>
     [Serializable]
     public sealed class TypeReference : ISerializationCallbackReceiver
     {
         [SerializeField] private string _classRef;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TypeReference"/> class.
-        /// </summary>
-        public TypeReference() { }
+        private Type _type;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypeReference"/> class.
+        ///     Initializes a new instance of the <see cref="TypeReference" /> class.
+        /// </summary>
+        public TypeReference()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TypeReference" /> class.
         /// </summary>
         /// <param name="assemblyQualifiedClassName">Assembly qualified class name.</param>
         public TypeReference(string assemblyQualifiedClassName)
@@ -30,15 +33,37 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypeReference"/> class.
+        ///     Initializes a new instance of the <see cref="TypeReference" /> class.
         /// </summary>
         /// <param name="type">Class type.</param>
         /// <exception cref="System.ArgumentException">
-        /// If <paramref name="type"/> is not a class type.
+        ///     If <paramref name="type" /> is not a class type.
         /// </exception>
         public TypeReference(Type type)
         {
             Type = type;
+        }
+
+        /// <summary>
+        ///     Gets or sets type of class reference.
+        /// </summary>
+        /// <exception cref="System.ArgumentException">
+        ///     If <paramref name="value" /> is not a class type.
+        /// </exception>
+        public Type Type
+        {
+            get => _type;
+
+            set
+            {
+                if (value == null)
+                    throw new ArgumentException(
+                        string.Format("'{0}' is null.", value.FullName),
+                        "value");
+
+                _type = value;
+                _classRef = GetClassRef(value);
+            }
         }
 
         public static string GetClassRef(Type type)
@@ -46,58 +71,6 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
             return type != null
                 ? type.FullName + ", " + type.Assembly.GetName().Name
                 : string.Empty;
-        }
-
-        #region ISerializationCallbackReceiver Members
-
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
-        {
-            if (!string.IsNullOrEmpty(_classRef))
-            {
-                _type = System.Type.GetType(_classRef);
-
-                if (_type == null)
-                {
-                    Debug.LogWarningFormat("'{0}' was referenced but class type was not found.", _classRef);
-                }
-            }
-            else
-            {
-                _type = null;
-            }
-        }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
-
-        #endregion
-
-        private Type _type;
-
-        /// <summary>
-        /// Gets or sets type of class reference.
-        /// </summary>
-        /// <exception cref="System.ArgumentException">
-        /// If <paramref name="value"/> is not a class type.
-        /// </exception>
-        public Type Type
-        {
-            get
-            {
-                return _type;
-            }
-
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentException(
-                        string.Format("'{0}' is null.", value.FullName),
-                        "value");
-                }
-
-                _type = value;
-                _classRef = GetClassRef(value);
-            }
         }
 
         public void UpdateInternalType(Type type)
@@ -124,5 +97,28 @@ namespace UMVC.Editor.CustomPropertyDrawers.TypeReferences
         {
             return Type.GetNameWithoutGenerics();
         }
+
+        #region ISerializationCallbackReceiver Members
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            if (!string.IsNullOrEmpty(_classRef))
+            {
+                _type = Type.GetType(_classRef);
+
+                if (_type == null)
+                    Debug.LogWarningFormat("'{0}' was referenced but class type was not found.", _classRef);
+            }
+            else
+            {
+                _type = null;
+            }
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        {
+        }
+
+        #endregion
     }
 }

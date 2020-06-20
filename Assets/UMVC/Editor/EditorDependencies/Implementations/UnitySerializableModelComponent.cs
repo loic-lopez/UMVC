@@ -10,20 +10,18 @@ namespace UMVC.Editor.EditorDependencies.Implementations
     public class UnitySerializableModelComponent : ModelComponent
     {
         public List<UnitySerializableClassField> ClassFields;
-        
+
         [ExtendsAttribute(typeof(BaseModel), Grouping = ClassGrouping.ByAddComponentMenu, AllowAbstract = true)]
-        public TypeReference ClassExtends; 
+        public TypeReference ClassExtends;
 
         public void CompileToSystemType()
         {
             foreach (var classField in ClassFields)
-            {
                 Fields.Add(new ClassField
                 {
                     FieldName = classField.FieldName,
                     FieldType = classField.FieldType.Type
                 });
-            }
         }
     }
 }
