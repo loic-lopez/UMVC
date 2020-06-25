@@ -43,7 +43,7 @@ namespace UMVC.Editor.Windows
 
             if (componentName != _componentName)
             {
-                _componentName = componentName.ToPascalCase();
+                _componentName = componentName.ToNamespacePascalCase();
 
                 UpdateNewSubdir();
             }

@@ -54,7 +54,7 @@ namespace UMVC.Tests
             [Test]
             public void TestToPascalCase()
             {
-                var str = "unit test".ToPascalCase();
+                var str = "unit test".ToNamespacePascalCase();
 
                 Assert.That(str, Is.EqualTo("UnitTest"));
             }

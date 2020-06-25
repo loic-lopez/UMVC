@@ -15,7 +15,7 @@ namespace UMVC.Editor.Extensions
         }
 
 
-        public static string ToPascalCase(this string str)
+        public static string ToNamespacePascalCase(this string str)
         {
             if (str.IsNullOrEmpty()) return "";
 

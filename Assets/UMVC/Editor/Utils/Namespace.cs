@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using UMVC.Editor.Extensions;
 using UnityEngine;
 
@@ -20,9 +21,11 @@ namespace UMVC.Editor.Utils
 
                 outputNamespace = basePath == Application.dataPath
                     ? Application.productName
-                    : basePath.Replace('/', '.');
+                    : basePath?.Replace('/', '.');
             }
 
+            outputNamespace = outputNamespace?.ToNamespacePascalCase();
+            
             return outputNamespace;
         }
     }
