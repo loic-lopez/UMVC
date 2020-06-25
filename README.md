@@ -86,12 +86,12 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 
 | Requirements and use cases | Release Archive(s) |  
 | -------------------------------------------------- | -------- |  
-| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.2.2/UMVC.Editor.PreBuiltDlls.0.2.2.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
-| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.2.2/UMVC.Editor.MsBuildForUnity.0.2.2.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.2.2/UMVC.Core.0.2.2.zip)  |  
+| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.2.3/UMVC.Editor.PreBuiltDlls.0.2.3.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
+| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.2.3/UMVC.Editor.MsBuildForUnity.0.2.3.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.2.3/UMVC.Core.0.2.3.zip)  |  
 
 ## Basic usage using UMVC.Editor.PreBuiltDlls UnityPackage
 
-* Download UMVC.Editor.PreBuiltDlls UnityPackage from from above
+* Download UMVC.Editor.PreBuiltDlls UnityPackage from above
 
 * Import UMVC.Editor.PreBuiltDlls UnityPackage in Unity Editor Assets > Import Package > Custom Package
 
@@ -99,9 +99,9 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 
 ### Download and unzip sources
 
-* Download UMVC.Editor.MsBuildForUnity UnityPackage from from above
+* Download UMVC.Editor.MsBuildForUnity UnityPackage from above
 
-* Download UMVC.Core sources from from above
+* Download UMVC.Core sources from above
 
 * Import UMVC.Editor.MsBuildForUnity UnityPackage in Unity Editor Assets > Import Package > Custom Package
 
