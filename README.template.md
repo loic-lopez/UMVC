@@ -91,7 +91,7 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 
 ## Basic usage using UMVC.Editor.PreBuiltDlls UnityPackage
 
-* Download UMVC.Editor.PreBuiltDlls UnityPackage from from above
+* Download UMVC.Editor.PreBuiltDlls UnityPackage from above
 
 * Import UMVC.Editor.PreBuiltDlls UnityPackage in Unity Editor Assets > Import Package > Custom Package
 
@@ -99,9 +99,9 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 
 ### Download and unzip sources
 
-* Download UMVC.Editor.MsBuildForUnity UnityPackage from from above
+* Download UMVC.Editor.MsBuildForUnity UnityPackage from above
 
-* Download UMVC.Core sources from from above
+* Download UMVC.Core sources from above
 
 * Import UMVC.Editor.MsBuildForUnity UnityPackage in Unity Editor Assets > Import Package > Custom Package
 
