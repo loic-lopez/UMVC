@@ -1,7 +1,7 @@
 <br />
 
 <p align="center">
-     <img src="/Docs/logo_transparent.png" alt="UMVC">
+     <img src="https://raw.githubusercontent.com/loic-lopez/UMVC/master/Docs/logo_transparent.png" alt="UMVC">
 </p>
 
 <h3 align="center" style="text-align:center;">
@@ -37,27 +37,27 @@
 
 ### Overall
 
-:white_check_mark: Customizable T4 Templates
+✅ Customizable T4 Templates
 
-:white_check_mark: Customizable Base Templates
+✅ Customizable Base Templates
 
-:white_check_mark: Generate your architecture directly in the Unity Editor
+✅ Generate your architecture directly in the Unity Editor
 
 ### Model
 
-:white_check_mark: Automated Events bound on model fields
-- :white_check_mark: OnFieldWillUpdate(string field, object newObject, object oldObject)
-- :white_check_mark: OnFieldDidUpdate(string field, object value)
+✅ Automated Events bound on model fields
+- ✅ OnFieldWillUpdate(string field, object newObject, object oldObject)
+- ✅ OnFieldDidUpdate(string field, object value)
 
-:white_check_mark: Generate field when creating a Model
+✅ Generate field when creating a Model
 
-:white_check_mark: Disable/Enable Model Events on demand
+✅ Disable/Enable Model Events on demand
 
 # The library is following the MVC pattern
 
 <br />
 <p align="center">	
-	<img src="/Docs/MVC_Pattern.png" alt="Download">
+	<img src="https://raw.githubusercontent.com/loic-lopez/UMVC/master/Docs/MVC_Pattern.png" alt="MVC Pattern">
 </p>
 
 ## The View

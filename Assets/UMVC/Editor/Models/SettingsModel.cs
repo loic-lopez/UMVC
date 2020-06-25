@@ -8,7 +8,7 @@ namespace UMVC.Editor.Models
     public class SettingsModel : ScriptableObject
     {
         private const string ObjName = "Settings";
-        public string logo = "logo.jpg";
+        public string logo = "logo.png";
 
         public BaseModelSettings model;
         public BaseViewSettings view;

@@ -11,24 +11,14 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\Unity\Hub\Editor\2019.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=981d692f_002Deffc_002D4cfd_002D9630_002Dc95fbd073831/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestController #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::UMVC.Core.Tests.MVCTests.TestController&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a37747d5_002Db1b9_002D4f58_002D87f4_002D3a44935e0e24/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestController" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0::.NETFramework,Version=v4.6.1::UMVC.Core.Tests.MVCTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8c3ab1d8_002D33d4_002D40ad_002Db0f0_002D028a1495abd7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d0543ecb_002D21e3_002D4f87_002Da5c6_002Db14e735fff1a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;And&gt;&#xD;
-    &lt;Project Location="D:\Projects\UMVC\UMVC.Core\Tests" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
-    &lt;Namespace&gt;UMVC.Core.Tests&lt;/Namespace&gt;&#xD;
-  &lt;/And&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
+	
 	
 	
 	
