@@ -49,7 +49,7 @@ jobs:
         run: sh .github/workflows/scripts/run-editor-tests.sh
         
       - name: Codecov
-        uses: codecov/codecov-action@v1.0.7
+        uses: codecov/codecov-action@v1.0.10
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml

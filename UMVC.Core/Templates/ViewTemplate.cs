@@ -34,19 +34,7 @@ namespace UMVC.Core.Templates
             this.Write(this.ToStringHelper.ToStringWithCulture(Model));
             this.Write(", ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Controller));
-            this.Write(@">
-    {
-        public override void OnFieldWillUpdate(string field, object newObject, object oldObject)
-        {
-            
-        }
-
-        public override void OnFieldDidUpdate(string field, object value)
-        {
-            
-        }
-    }
-}");
+            this.Write(">\r\n    {\r\n\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
 
