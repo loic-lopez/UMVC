@@ -24,8 +24,15 @@ namespace UMVC.Core.MVC
             Controller.LateSetup();
         }
 
-        
-        public abstract void OnFieldWillUpdate(string field, object newObject, object oldObject);
-        public abstract void OnFieldDidUpdate(string field, object value);
+
+        public virtual void OnFieldWillUpdate(string field, object newObject, object oldObject)
+        {
+            
+        }
+
+        public virtual void OnFieldDidUpdate(string field, object value)
+        {
+            
+        }
     }
 }

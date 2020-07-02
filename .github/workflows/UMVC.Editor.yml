@@ -11,7 +11,7 @@ jobs:
   test:
     name: Test UMVC.Editor 🧪
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:2019.3.13f1
+    container: gableroux/unity3d:2019.4.1f1
 
     steps:
       - name: Wait for build to succeed
@@ -49,7 +49,7 @@ jobs:
         run: sh .github/workflows/scripts/run-editor-tests.sh
         
       - name: Codecov
-        uses: codecov/codecov-action@v1.0.7
+        uses: codecov/codecov-action@v1.0.10
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml
