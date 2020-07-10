@@ -1,16 +1,17 @@
 using System;
 using UMVC.Core.MVC;
+using UnityEngine;
 
 namespace UseCases.Mvc
 {
     public class MvcView : BaseView<MvcModel, MvcController>
     {
-        public override void OnFieldWillUpdate(string field, object newObject, object oldObject)
+        private void Update()
         {
-        }
-
-        public override void OnFieldDidUpdate(string field, object value)
-        {
+            if (Input.anyKeyDown)
+            {
+                Controller.UpdateValue();
+            }
         }
     }
 }
