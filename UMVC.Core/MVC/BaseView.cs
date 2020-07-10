@@ -36,12 +36,12 @@ namespace UMVC.Core.MVC
                 Controller.Setup(this);
         }
 
-        public virtual void OnFieldWillUpdate(TModel model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
+        protected virtual void OnFieldWillUpdate(TModel model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
         {
             
         }
 
-        public virtual void OnFieldDidUpdate(TModel model, object newValue, PropertyChangedEventArgs eventArgs)
+        protected virtual void OnFieldDidUpdate(TModel model, object newValue, PropertyChangedEventArgs eventArgs)
         {
             
         }

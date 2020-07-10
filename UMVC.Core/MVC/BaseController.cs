@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel;
+using System.Reflection;
 using UMVC.Core.MVC.Interfaces;
 
 namespace UMVC.Core.MVC
@@ -9,7 +11,12 @@ namespace UMVC.Core.MVC
         protected TModel Model { get; set; }
         protected IBaseView<TModel> View;
         public bool IsAlreadySetup { get; protected set; } = false;
-        // protected ModelProxy<TModel> ModelProxy;
+        protected MethodInfo OnFieldWillUpdate;
+        protected MethodInfo OnFieldDidUpdate;
+
+        protected const BindingFlags ViewEventsBindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
+        protected const string OnFieldWillUpdateViewMemberName = "OnFieldWillUpdate";
+        protected const string OnFieldDidUpdateViewMemberName = "OnFieldDidUpdate";
 
         public virtual void Setup(IBaseView<TModel> view)
         {
@@ -18,6 +25,9 @@ namespace UMVC.Core.MVC
             Model.Initialize();
             SubscribeEvents();
             IsAlreadySetup = true;
+            var viewType = View.GetType();
+            OnFieldWillUpdate = viewType.GetMethod(OnFieldWillUpdateViewMemberName, ViewEventsBindingFlags);
+            OnFieldDidUpdate = viewType.GetMethod(OnFieldDidUpdateViewMemberName, ViewEventsBindingFlags);
         }
 
         public virtual void LateSetup()
@@ -39,12 +49,12 @@ namespace UMVC.Core.MVC
 
         protected virtual void RaiseOnFieldWillUpdate(object model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
         {
-            View.OnFieldWillUpdate((TModel) model, newValue, oldValue, eventArgs);
+            OnFieldWillUpdate?.Invoke(View, new[] { model, newValue, oldValue, eventArgs });
         }
         
         protected virtual void RaiseOnFieldDidUpdate(object model, object newValue, PropertyChangedEventArgs eventArgs)
         {
-            View.OnFieldDidUpdate((TModel) model, newValue, eventArgs);
+            OnFieldDidUpdate?.Invoke(View, new[] { model, newValue, eventArgs });
         }
     }
 }
