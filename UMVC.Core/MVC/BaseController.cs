@@ -8,16 +8,16 @@ namespace UMVC.Core.MVC
     {
         protected TModel Model { get; set; }
         protected IBaseView<TModel> View;
+        public bool IsAlreadySetup { get; protected set; } = false;
         // protected ModelProxy<TModel> ModelProxy;
 
         public virtual void Setup(IBaseView<TModel> view)
         {
             View = view;
-            //ModelProxy<TModel> modelProxy = ModelProxy<TModel>.Bind(View.GetModel());
-            //Model = modelProxy.GetTransparentProxy();
             Model = view.GetModel();
             Model.Initialize();
             SubscribeEvents();
+            IsAlreadySetup = true;
         }
 
         public virtual void LateSetup()
@@ -28,6 +28,7 @@ namespace UMVC.Core.MVC
         {
             Model.OnFieldWillUpdate += RaiseOnFieldWillUpdate;
             Model.OnFieldDidUpdate += RaiseOnFieldDidUpdate;
+            IsAlreadySetup = false;
         }
 
         protected virtual void SubscribeEvents()

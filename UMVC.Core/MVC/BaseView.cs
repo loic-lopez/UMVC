@@ -32,7 +32,8 @@ namespace UMVC.Core.MVC
 
         protected virtual void OnEnable()
         {
-            Controller.Setup(this);
+            if (!Controller.IsAlreadySetup)
+                Controller.Setup(this);
         }
 
         public virtual void OnFieldWillUpdate(TModel model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
