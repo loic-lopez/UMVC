@@ -86,8 +86,8 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 
 | Requirements and use cases | Release Archive(s) |  
 | -------------------------------------------------- | -------- |  
-| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.2.3/UMVC.Editor.PreBuiltDlls.0.2.3.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
-| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.2.3/UMVC.Editor.MsBuildForUnity.0.2.3.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.2.3/UMVC.Core.0.2.3.zip)  |  
+| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.3.0/UMVC.Editor.PreBuiltDlls.0.3.0.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
+| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.3.0/UMVC.Editor.MsBuildForUnity.0.3.0.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.3.0/UMVC.Core.0.3.0.zip)  |  
 
 ## Basic usage using UMVC.Editor.PreBuiltDlls UnityPackage
 
