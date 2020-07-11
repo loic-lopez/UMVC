@@ -29,7 +29,7 @@ jobs:
         run: .\UMVC.Core\packages\OpenCover\4.7.922\tools\OpenCover.Console.exe -register -filter:"+[*]* -[*]*.Templates.* -[*]*.Mock.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.11.1\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net461\UMVC.Core.Tests.dll" -output:coverage.xml
 
       - name: Codecov
-        uses: codecov/codecov-action@v1.0.10
+        uses: codecov/codecov-action@v1.
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
@@ -122,7 +122,7 @@ jobs:
         run: sh .github/workflows/scripts/run-playmode-tests.sh
 
       - name: Codecov
-          uses: codecov/codecov-action@v1.0.10
+          uses: codecov/codecov-action@v1
           with:
             token: ${{ secrets.CODECOV_TOKEN }}
             files: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml,./CodeCoverage/UMVC-opencov/PlayMode/TestCoverageResults_0000.xml
