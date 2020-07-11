@@ -51,7 +51,6 @@
     <Compile Include="Interfaces\IBaseModel.cs" />
     <Compile Include="Interfaces\IBaseView.cs" />
     <Compile Include="Interfaces\INotifyPropertyChanged.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

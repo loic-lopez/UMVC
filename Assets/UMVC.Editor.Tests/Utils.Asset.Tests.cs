@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UMVC.Editor.Models;
 using UMVC.Editor.Utils;
 
-namespace UMVC.Tests
+namespace UMVC.Editor.Tests
 {
     [TestFixture]
     public class UtilsAssetTests
