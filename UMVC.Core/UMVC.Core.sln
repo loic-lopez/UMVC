@@ -1,4 +1,4 @@
-﻿
+﻿ 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
@@ -16,8 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components", "Components\Components.csproj", "{2EDC5796-3284-4EC0-96AC-521288D5144B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine.Mock", "UnityEngine.Mock\UnityEngine.Mock.csproj", "{39DFD947-1B1E-4179-8A08-2C928E6341BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{0DC51167-A501-46FA-9AED-45CF0782C56D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +51,6 @@ Global
 		{39DFD947-1B1E-4179-8A08-2C928E6341BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39DFD947-1B1E-4179-8A08-2C928E6341BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39DFD947-1B1E-4179-8A08-2C928E6341BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0DC51167-A501-46FA-9AED-45CF0782C56D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DC51167-A501-46FA-9AED-45CF0782C56D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0DC51167-A501-46FA-9AED-45CF0782C56D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DC51167-A501-46FA-9AED-45CF0782C56D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

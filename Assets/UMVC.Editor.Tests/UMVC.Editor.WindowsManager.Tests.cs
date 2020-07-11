@@ -1,12 +1,11 @@
 using System.Collections;
 using NUnit.Framework;
-using UMVC.Editor;
 using UMVC.Editor.Abstracts;
 using UMVC.Editor.Interfaces;
 using UMVC.Editor.Windows;
 using UnityEngine.TestTools;
 
-namespace UMVC.Tests
+namespace UMVC.Editor.Tests
 {
     [TestFixture]
     public class UMVCEditorWindowsManagerTests

@@ -1,7 +1,7 @@
 using NUnit.Framework;
-using UMVC.Tests.Extensions;
+using UMVC.Editor.Tests.Extensions;
 
-namespace UMVC.Tests
+namespace UMVC.Editor.Tests
 {
     public class StaticDerivedUMVC : Editor.Singleton.UMVC
     {
@@ -51,7 +51,7 @@ namespace UMVC.Tests
         public void TestSingletonSetupInstance()
         {
             // ReSharper disable once UnusedVariable
-            var instance = Editor.Singleton.UMVC.Instance;
+            var instance = Singleton.UMVC.Instance;
             Assert.NotNull(StaticDerivedUMVC.GetInternalInstance());
         }
 

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace UMVC.Tests.Extensions
+namespace UMVC.Editor.Tests.Extensions
 {
     public static class TestsExtensions
     {

@@ -1,7 +1,9 @@
 {
-    "name": "UMVC.Tests",
+    "name": "UMVC.Editor.Tests",
     "references": [
-        "UMVC.Editor"
+        "UMVC.Editor",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
     ],
     "includePlatforms": [
         "Editor"

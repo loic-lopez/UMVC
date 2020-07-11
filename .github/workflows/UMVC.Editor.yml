@@ -44,15 +44,19 @@ jobs:
       - name: Activate Unity
         run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
 
-      # Run tests
-      - name: Run tests
+      # Run Editor tests
+      - name: Run Editor tests
         run: sh .github/workflows/scripts/run-editor-tests.sh
+
+      # Run PlayMode tests
+      - name: Run PlayMode tests
+        run: sh .github/workflows/scripts/run-playmode-tests.sh
         
       - name: Codecov
-        uses: codecov/codecov-action@v1.0.10
+        uses: codecov/codecov-action@master
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml
+          files: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml,./CodeCoverage/UMVC-opencov/PlayMode/TestCoverageResults_0000.xml
           name: codecov-umbrella
           fail_ci_if_error: true
 #  

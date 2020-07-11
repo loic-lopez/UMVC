@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UMVC.Core.MVC.Interfaces;
 using UnityEngine;
 
@@ -24,13 +25,23 @@ namespace UMVC.Core.MVC
             Controller.LateSetup();
         }
 
+        protected virtual void OnDisable()
+        {
+            Controller.Shutdown();
+        }
 
-        public virtual void OnFieldWillUpdate(string field, object newObject, object oldObject)
+        protected virtual void OnEnable()
+        {
+            if (!Controller.IsAlreadySetup)
+                Controller.Setup(this);
+        }
+
+        protected virtual void OnFieldWillUpdate(TModel model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
         {
             
         }
 
-        public virtual void OnFieldDidUpdate(string field, object value)
+        protected virtual void OnFieldDidUpdate(TModel model, object newValue, PropertyChangedEventArgs eventArgs)
         {
             
         }

@@ -1,9 +1,8 @@
 using NUnit.Framework;
-using UMVC.Editor;
 using UMVC.Editor.Interfaces;
 using UMVC.Editor.Windows;
 
-namespace UMVC.Tests
+namespace UMVC.Editor.Tests
 {
     [TestFixture]
     public class UMVCEditorWindowsTests

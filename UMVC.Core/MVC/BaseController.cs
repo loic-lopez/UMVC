@@ -1,3 +1,6 @@
+using System;
+using System.ComponentModel;
+using System.Reflection;
 using UMVC.Core.MVC.Interfaces;
 
 namespace UMVC.Core.MVC
@@ -7,28 +10,51 @@ namespace UMVC.Core.MVC
     {
         protected TModel Model { get; set; }
         protected IBaseView<TModel> View;
-        protected ModelProxy<TModel> ModelProxy;
+        public bool IsAlreadySetup { get; protected set; } = false;
+        protected MethodInfo OnFieldWillUpdate;
+        protected MethodInfo OnFieldDidUpdate;
+
+        protected const BindingFlags ViewEventsBindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
+        protected const string OnFieldWillUpdateViewMemberName = "OnFieldWillUpdate";
+        protected const string OnFieldDidUpdateViewMemberName = "OnFieldDidUpdate";
 
         public virtual void Setup(IBaseView<TModel> view)
         {
             View = view;
-            ModelProxy<TModel> modelProxy = ModelProxy<TModel>.Bind(View.GetModel());
-            Model = modelProxy.GetTransparentProxy();
+            Model = view.GetModel();
             Model.Initialize();
-            ModelProxy = modelProxy;
             SubscribeEvents();
+            IsAlreadySetup = true;
+            var viewType = View.GetType();
+            OnFieldWillUpdate = viewType.GetMethod(OnFieldWillUpdateViewMemberName, ViewEventsBindingFlags);
+            OnFieldDidUpdate = viewType.GetMethod(OnFieldDidUpdateViewMemberName, ViewEventsBindingFlags);
         }
 
         public virtual void LateSetup()
         {
         }
 
-        protected virtual void SubscribeEvents()
+        public virtual void Shutdown()
         {
-            ModelProxy.OnFieldWillUpdate += View.OnFieldWillUpdate;
-            ModelProxy.OnFieldDidUpdate += View.OnFieldDidUpdate;
+            Model.OnFieldWillUpdate += RaiseOnFieldWillUpdate;
+            Model.OnFieldDidUpdate += RaiseOnFieldDidUpdate;
+            IsAlreadySetup = false;
         }
 
+        protected virtual void SubscribeEvents()
+        {
+            Model.OnFieldWillUpdate += RaiseOnFieldWillUpdate;
+            Model.OnFieldDidUpdate += RaiseOnFieldDidUpdate;
+        }
 
+        protected virtual void RaiseOnFieldWillUpdate(object model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
+        {
+            OnFieldWillUpdate?.Invoke(View, new[] { model, newValue, oldValue, eventArgs });
+        }
+        
+        protected virtual void RaiseOnFieldDidUpdate(object model, object newValue, PropertyChangedEventArgs eventArgs)
+        {
+            OnFieldDidUpdate?.Invoke(View, new[] { model, newValue, eventArgs });
+        }
     }
 }

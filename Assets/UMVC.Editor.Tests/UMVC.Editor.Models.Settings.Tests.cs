@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using UMVC.Editor.Models;
-using UMVC.Tests.Extensions;
+using UMVC.Editor.Tests.Extensions;
 
-namespace UMVC.Tests
+namespace UMVC.Editor.Tests
 {
     [TestFixture]
     public class UMVCEditorModelsSettingsTests
@@ -10,7 +10,7 @@ namespace UMVC.Tests
         [Test]
         public void TestIfSettingsAreSuccessfullySerialized()
         {
-            var settings = SettingsModel.Initialize("Assets/UMVC.Tests/Settings.asset");
+            var settings = SettingsModel.Initialize("Assets/UMVC.Editor.Tests/Settings.asset");
 
             Assert.NotNull(settings);
 

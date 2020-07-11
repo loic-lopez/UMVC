@@ -1,11 +1,21 @@
 using System;
 using UMVC.Core.MVC;
+using UnityEngine;
 
 namespace UseCases.Mvc
 {
+    
+    
     [Serializable]
     public class MvcModel : BaseModel
     {
-        public int value;
+        [SerializeField] private int val;
+
+        public int Value
+        {
+            get => val;
+            set => Set(ref val, value, () => Value);
+        }
+
     }
 }

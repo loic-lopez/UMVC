@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UMVC.Editor.Utils;
 
-namespace UMVC.Tests
+namespace UMVC.Editor.Tests
 {
     [TestFixture]
     public class UtilsNamespaceTests

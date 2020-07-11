@@ -50,14 +50,8 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="Interfaces\IBaseModel.cs" />
     <Compile Include="Interfaces\IBaseView.cs" />
-    <Compile Include="ModelProxy.cs" />
+    <Compile Include="Interfaces\INotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Exceptions\Exceptions.csproj">
-      <Project>{0dc51167-a501-46fa-9aed-45cf0782c56d}</Project>
-      <Name>Exceptions</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

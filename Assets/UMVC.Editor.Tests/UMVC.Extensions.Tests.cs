@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using UMVC.Editor.Extensions;
 
-namespace UMVC.Tests
+namespace UMVC.Editor.Tests
 {
     public abstract class Dog
     {
