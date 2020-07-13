@@ -210,7 +210,7 @@ jobs:
           
 
       - name: 🚀 Create GitHub release
-        uses: actions/create-release@v1.1.0
+        uses: actions/create-release@v1
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.UMVC_PUSH_TAG_PAT }}
@@ -224,7 +224,7 @@ jobs:
           prerelease: false
           
       - name: 🚀 Upload UMVC.Core sources
-        uses: actions/upload-release-asset@v1.0.2
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
