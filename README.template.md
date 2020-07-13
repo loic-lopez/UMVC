@@ -46,8 +46,14 @@
 ### Model
 
 ✅ Model Events
-- ✅ OnFieldWillUpdate(Model model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
-- ✅ OnFieldDidUpdate(Model model, object newValue, PropertyChangedEventArgs eventArgs)
+```csharp
+// triggered before the update of the field
+OnFieldWillUpdate(Model model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
+```
+```csharp
+// triggered after the update of the field
+OnFieldDidUpdate(Model model, object newValue, PropertyChangedEventArgs eventArgs)
+```
 
 ✅ Generate field when creating a Model
 
