@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace UMVC.Editor
 {
-    public class WindowsManager
+    public static class WindowsManager
     {
         private static IWindow InstantiateWindow<T>() where T : IWindow
         {

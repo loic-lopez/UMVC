@@ -79,7 +79,12 @@ namespace UMVC.Editor.Windows
 
         protected override void DisplayEndButton()
         {
+#if UNITY_2019_3_OR_NEWER
             EditorGUILayout.Space(2);
+#else
+            EditorGUILayout.Space();
+#endif
+
             if (GUILayout.Button("Save"))
             {
                 Singleton.UMVC.Instance.Settings.outputNamespace = _outputNamespace;
