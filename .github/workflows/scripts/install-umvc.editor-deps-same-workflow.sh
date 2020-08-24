@@ -7,7 +7,7 @@ moveDllToDir() {
 
 
 # player deps
-moveDllToDir "UMVC.Core.Exceptions.dll" "Assets/UMVC/PlayerDependencies"
+# moveDllToDir "UMVC.Core.Exceptions.dll" "Assets/UMVC/PlayerDependencies"
 moveDllToDir "UMVC.Core.MVC.dll" "Assets/UMVC/PlayerDependencies"
 
 # Editor deps

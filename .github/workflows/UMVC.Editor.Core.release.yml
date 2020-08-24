@@ -61,11 +61,11 @@ jobs:
           name: UMVC.Core.Build
           path: UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll
 
-      - uses: actions/upload-artifact@v2
-        name: Upload UMVC.Core.Exceptions.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
+#      - uses: actions/upload-artifact@v2
+#        name: Upload UMVC.Core.Exceptions.dll
+#        with:
+#          name: UMVC.Core.Build
+#          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
 
       - uses: actions/upload-artifact@v2
         name: Upload UMVC.Core.Generation.dll
