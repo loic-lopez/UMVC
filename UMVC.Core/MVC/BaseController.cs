@@ -9,8 +9,9 @@ namespace UMVC.Core.MVC
     public abstract class BaseController<TModel> where TModel : BaseModel
     {
         protected TModel Model { get; set; }
-        protected IBaseView<TModel> View;
         public bool IsAlreadySetup { get; protected set; } = false;
+
+        protected IBaseView<TModel> View;
         protected MethodInfo OnFieldWillUpdate;
         protected MethodInfo OnFieldDidUpdate;
 
@@ -36,8 +37,8 @@ namespace UMVC.Core.MVC
 
         public virtual void Shutdown()
         {
-            Model.OnFieldWillUpdate += RaiseOnFieldWillUpdate;
-            Model.OnFieldDidUpdate += RaiseOnFieldDidUpdate;
+            Model.OnFieldWillUpdate -= RaiseOnFieldWillUpdate;
+            Model.OnFieldDidUpdate -= RaiseOnFieldDidUpdate;
             IsAlreadySetup = false;
         }
 
