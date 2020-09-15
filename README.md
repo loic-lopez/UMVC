@@ -8,7 +8,7 @@
 	Model-View-Controller Generator built for Unity
 </h3>
 <p align="center">
-	Fast, Simple and intuitive
+	Fast, Simple and Intuitive
 </p>
 
 <hr>
