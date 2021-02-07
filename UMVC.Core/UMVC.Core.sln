@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Templates", "Templates\Templates.csproj", "{2734C74D-F5F8-4B8E-8B19-16209153402E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTemplates", "TestTemplates\TestTemplates.csproj", "{C94C47E2-97DF-4D03-AE00-D685894D8419}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2EDC5796-3284-4EC0-96AC-521288D5144B} = {2EDC5796-3284-4EC0-96AC-521288D5144B}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{CBF9778F-CBB0-49CB-B8D2-D9BC113F25E0}"
 EndProject

@@ -1,4 +1,4 @@
-﻿﻿<#@ template debug="false" language="C#" #>
+﻿<#@ template debug="false" language="C#" #>
 <#@ output extension=".cs" #>
 <#
     _ClassNameField = "TestView";
@@ -8,4 +8,4 @@
     _ExtendsField = "BaseView";
     _BaseNamespaceField = "UMVC.Core.MVC";
 #>
-<#@ include file="$(ProjectDir)\..\Templates\ViewTemplate.tt"#>
+<#@ include file="$(SolutionDir)\Templates\ViewTemplate.tt"#>

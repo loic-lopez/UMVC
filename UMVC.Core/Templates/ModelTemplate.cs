@@ -15,34 +15,92 @@ namespace UMVC.Core.Templates
     /// <summary>
     /// Class to produce the template output
     /// </summary>
+    
+    #line 1 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ModelTemplate : ModelTemplateBase
     {
+#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
             this.Write("\r\nusing System;\r\nusing ");
+            
+            #line 5 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseNamespace));
+            
+            #line default
+            #line hidden
             this.Write(";\r\n\r\nnamespace ");
+            
+            #line 7 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
+            
+            #line default
+            #line hidden
             this.Write(" \r\n{\r\n    [Serializable]\r\n    public class ");
+            
+            #line 10 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
+            
+            #line default
+            #line hidden
             this.Write(" : ");
+            
+            #line 10 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Extends));
+            
+            #line default
+            #line hidden
             this.Write("\r\n    {\r\n");
+            
+            #line 12 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
  foreach (var field in Fields)
 { 
+            
+            #line default
+            #line hidden
             this.Write("        public ");
+            
+            #line 14 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.FieldType.ToString()));
+            
+            #line default
+            #line hidden
             this.Write(" ");
+            
+            #line 14 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.FieldName));
+            
+            #line default
+            #line hidden
             this.Write(";\r\n");
+            
+            #line 15 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
  } 
-            this.Write("    }\r\n}\r\n\r\n");
+            
+            #line default
+            #line hidden
+            this.Write("    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 1 "E:\Projects\UMVC\UMVC.Core\Templates\ModelTemplate.tt"
+
+private global::System.Collections.Generic.List<UMVC.Core.Components.ClassField> _FieldsField;
+
+/// <summary>
+/// Access the Fields parameter of the template.
+/// </summary>
+private global::System.Collections.Generic.List<UMVC.Core.Components.ClassField> Fields
+{
+    get
+    {
+        return this._FieldsField;
+    }
+}
 
 private string _ClassNameField;
 
@@ -67,6 +125,19 @@ private string Namespace
     get
     {
         return this._NamespaceField;
+    }
+}
+
+private string _ModelField;
+
+/// <summary>
+/// Access the Model parameter of the template.
+/// </summary>
+private string Model
+{
+    get
+    {
+        return this._ModelField;
     }
 }
 
@@ -96,19 +167,6 @@ private string BaseNamespace
     }
 }
 
-private global::System.Collections.Generic.List<UMVC.Core.Components.ClassField> _FieldsField;
-
-/// <summary>
-/// Access the Fields parameter of the template.
-/// </summary>
-private global::System.Collections.Generic.List<UMVC.Core.Components.ClassField> Fields
-{
-    get
-    {
-        return this._FieldsField;
-    }
-}
-
 
 /// <summary>
 /// Initialize the template
@@ -117,6 +175,20 @@ public virtual void Initialize()
 {
     if ((this.Errors.HasErrors == false))
     {
+bool FieldsValueAcquired = false;
+if (this.Session.ContainsKey("Fields"))
+{
+    this._FieldsField = ((global::System.Collections.Generic.List<UMVC.Core.Components.ClassField>)(this.Session["Fields"]));
+    FieldsValueAcquired = true;
+}
+if ((FieldsValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Fields");
+    if ((data != null))
+    {
+        this._FieldsField = ((global::System.Collections.Generic.List<UMVC.Core.Components.ClassField>)(data));
+    }
+}
 bool ClassNameValueAcquired = false;
 if (this.Session.ContainsKey("ClassName"))
 {
@@ -143,6 +215,20 @@ if ((NamespaceValueAcquired == false))
     if ((data != null))
     {
         this._NamespaceField = ((string)(data));
+    }
+}
+bool ModelValueAcquired = false;
+if (this.Session.ContainsKey("Model"))
+{
+    this._ModelField = ((string)(this.Session["Model"]));
+    ModelValueAcquired = true;
+}
+if ((ModelValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Model");
+    if ((data != null))
+    {
+        this._ModelField = ((string)(data));
     }
 }
 bool ExtendsValueAcquired = false;
@@ -173,27 +259,19 @@ if ((BaseNamespaceValueAcquired == false))
         this._BaseNamespaceField = ((string)(data));
     }
 }
-bool FieldsValueAcquired = false;
-if (this.Session.ContainsKey("Fields"))
-{
-    this._FieldsField = ((global::System.Collections.Generic.List<UMVC.Core.Components.ClassField>)(this.Session["Fields"]));
-    FieldsValueAcquired = true;
-}
-if ((FieldsValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Fields");
-    if ((data != null))
-    {
-        this._FieldsField = ((global::System.Collections.Generic.List<UMVC.Core.Components.ClassField>)(data));
-    }
-}
 
 
     }
 }
 
 
+        
+        #line default
+        #line hidden
     }
+    
+    #line default
+    #line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation

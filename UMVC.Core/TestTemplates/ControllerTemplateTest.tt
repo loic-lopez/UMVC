@@ -1,4 +1,4 @@
-﻿﻿<#@ template debug="false" language="C#" #>
+﻿<#@ template debug="false" language="C#" #>
 <#@ output extension=".cs" #>
 <#
     _ClassNameField = "TestController";
@@ -7,4 +7,4 @@
     _ExtendsField = "BaseController";
     _BaseNamespaceField = "UMVC.Core.MVC";
 #>
-<#@ include file="$(ProjectDir)\..\Templates\ControllerTemplate.tt"#>
+<#@ include file="$(SolutionDir)\Templates\ControllerTemplate.tt"#>

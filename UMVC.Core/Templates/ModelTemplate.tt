@@ -1,11 +1,6 @@
-﻿<#@ template language="C#" hostspecific="false" linePragmas="false" #>
-<#@ import namespace="UMVC.Core.Components" #>
-<#@ parameter name="ClassName" type="System.String"#>
-<#@ parameter name="Namespace" type="System.String"#>
-<#@ parameter name="Extends" type="System.String"#>
-<#@ parameter name="BaseNamespace" type="System.String"#>
+﻿<#@ import namespace="UMVC.Core.Components" #>
 <#@ parameter type="System.Collections.Generic.List<UMVC.Core.Components.ClassField>" name="Fields" #>
-
+<#@ include file="BaseParameters.ttinclude"#>
 using System;
 using <#= BaseNamespace #>;
 
@@ -20,4 +15,3 @@ namespace <#= Namespace #>
 <# } #>
     }
 }
-
