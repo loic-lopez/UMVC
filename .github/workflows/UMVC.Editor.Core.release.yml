@@ -183,11 +183,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow --tags
-          
-      - name: Get Git Version
-        uses: docker://gittools/gitversion:5.5.1-linux-alpine.3.10-x64-netcoreapp3.1
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.7
         with:
-          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
+          versionSpec: '5.x'
+          
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v0.9.7
 
       - name: ✏️Generate changelog
         id: changelog
@@ -215,10 +218,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.UMVC_PUSH_TAG_PAT }}
         with:
-          tag_name: v${{ env.GitVersion_SemVer }}
-          release_name: Release v${{ env.GitVersion_SemVer }}
+          tag_name: v${{ $GITVERSION_SEMVER }}
+          release_name: Release v${{ $GITVERSION_SEMVER }}
           body: |
-            ### Changes in release v${{ env.GitVersion_SemVer }}
+            ### Changes in release v${{ $GITVERSION_SEMVER }}
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
@@ -230,7 +233,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Core.zip
-          asset_name: UMVC.Core.${{ env.GitVersion_SemVer }}.zip
+          asset_name: UMVC.Core.${{ $GITVERSION_SEMVER }}.zip
           asset_content_type: application/zip
           
       - name: 🚀 Upload UMVC.Editor.PreBuiltDlls.unitypackage
@@ -240,7 +243,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.PreBuiltDlls.unitypackage
-          asset_name: UMVC.Editor.PreBuiltDlls.${{ env.GitVersion_SemVer }}.unitypackage
+          asset_name: UMVC.Editor.PreBuiltDlls.${{ $GITVERSION_SEMVER }}.unitypackage
           asset_content_type: application/gzip
       
       - name: 🚀 Upload UMVC.Editor.MsBuildForUnity.unitypackage
@@ -250,7 +253,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./UMVC.Editor.MsBuildForUnity.unitypackage
-          asset_name: UMVC.Editor.MsBuildForUnity.${{ env.GitVersion_SemVer }}.unitypackage
+          asset_name: UMVC.Editor.MsBuildForUnity.${{ $GITVERSION_SEMVER }}.unitypackage
           asset_content_type: application/gzip
         
     
