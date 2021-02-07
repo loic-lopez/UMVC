@@ -3,6 +3,3 @@ bin
 obj
 packages
 /.idea/
-TemplatesTest/ModelTemplateTest.cs
-ModelTemplateTest.cs
-/Tests/TestModel.cs

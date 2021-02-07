@@ -14,27 +14,57 @@ namespace UMVC.Core.Templates
     /// <summary>
     /// Class to produce the template output
     /// </summary>
+    
+    #line 1 "E:\Projects\UMVC\UMVC.Core\Templates\ControllerTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ControllerTemplate : ControllerTemplateBase
     {
+#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using ");
+            this.Write("\r\nusing ");
+            
+            #line 2 "E:\Projects\UMVC\UMVC.Core\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseNamespace));
+            
+            #line default
+            #line hidden
             this.Write(";\r\n\r\nnamespace ");
+            
+            #line 4 "E:\Projects\UMVC\UMVC.Core\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
+            
+            #line default
+            #line hidden
             this.Write(" \r\n{\r\n    public class ");
+            
+            #line 6 "E:\Projects\UMVC\UMVC.Core\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
+            
+            #line default
+            #line hidden
             this.Write(" : ");
+            
+            #line 6 "E:\Projects\UMVC\UMVC.Core\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Extends));
+            
+            #line default
+            #line hidden
             this.Write("<");
+            
+            #line 6 "E:\Projects\UMVC\UMVC.Core\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model));
+            
+            #line default
+            #line hidden
             this.Write(">\r\n    {\r\n\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 1 "E:\Projects\UMVC\UMVC.Core\Templates\ControllerTemplate.tt"
 
 private string _ClassNameField;
 
@@ -185,7 +215,13 @@ if ((BaseNamespaceValueAcquired == false))
 }
 
 
+        
+        #line default
+        #line hidden
     }
+    
+    #line default
+    #line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation

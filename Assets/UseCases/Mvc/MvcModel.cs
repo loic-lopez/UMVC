@@ -17,5 +17,11 @@ namespace UseCases.Mvc
             set => Set(ref val, value, () => Value);
         }
 
+        public override void Initialize()
+        {
+            base.Initialize();
+            isOnFieldDidUpdateEnabled = false;
+            isOnFieldWillUpdateEnabled = false;
+        }
     }
 }

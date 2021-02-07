@@ -1,5 +1,4 @@
 ﻿
-
 using System;
 using UMVC.Core.MVC;
 
@@ -12,4 +11,3 @@ namespace MyNamespace
         public System.Int32 intValue;
     }
 }
-

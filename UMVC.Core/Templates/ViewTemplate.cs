@@ -14,29 +14,65 @@ namespace UMVC.Core.Templates
     /// <summary>
     /// Class to produce the template output
     /// </summary>
+    
+    #line 1 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ViewTemplate : ViewTemplateBase
     {
+#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write("\r\n");
             this.Write("using ");
+            
+            #line 3 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseNamespace));
+            
+            #line default
+            #line hidden
             this.Write(";\r\n\r\nnamespace ");
+            
+            #line 5 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
+            
+            #line default
+            #line hidden
             this.Write(" \r\n{\r\n    public class ");
+            
+            #line 7 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
+            
+            #line default
+            #line hidden
             this.Write(" : ");
+            
+            #line 7 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Extends));
+            
+            #line default
+            #line hidden
             this.Write("<");
+            
+            #line 7 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model));
+            
+            #line default
+            #line hidden
             this.Write(", ");
+            
+            #line 7 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Controller));
+            
+            #line default
+            #line hidden
             this.Write(">\r\n    {\r\n\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 1 "E:\Projects\UMVC\UMVC.Core\Templates\ViewTemplate.tt"
 
 private string _ClassNameField;
 
@@ -77,19 +113,6 @@ private string Model
     }
 }
 
-private string _ControllerField;
-
-/// <summary>
-/// Access the Controller parameter of the template.
-/// </summary>
-private string Controller
-{
-    get
-    {
-        return this._ControllerField;
-    }
-}
-
 private string _ExtendsField;
 
 /// <summary>
@@ -113,6 +136,19 @@ private string BaseNamespace
     get
     {
         return this._BaseNamespaceField;
+    }
+}
+
+private string _ControllerField;
+
+/// <summary>
+/// Access the Controller parameter of the template.
+/// </summary>
+private string Controller
+{
+    get
+    {
+        return this._ControllerField;
     }
 }
 
@@ -166,20 +202,6 @@ if ((ModelValueAcquired == false))
         this._ModelField = ((string)(data));
     }
 }
-bool ControllerValueAcquired = false;
-if (this.Session.ContainsKey("Controller"))
-{
-    this._ControllerField = ((string)(this.Session["Controller"]));
-    ControllerValueAcquired = true;
-}
-if ((ControllerValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Controller");
-    if ((data != null))
-    {
-        this._ControllerField = ((string)(data));
-    }
-}
 bool ExtendsValueAcquired = false;
 if (this.Session.ContainsKey("Extends"))
 {
@@ -208,13 +230,33 @@ if ((BaseNamespaceValueAcquired == false))
         this._BaseNamespaceField = ((string)(data));
     }
 }
+bool ControllerValueAcquired = false;
+if (this.Session.ContainsKey("Controller"))
+{
+    this._ControllerField = ((string)(this.Session["Controller"]));
+    ControllerValueAcquired = true;
+}
+if ((ControllerValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Controller");
+    if ((data != null))
+    {
+        this._ControllerField = ((string)(data));
+    }
+}
 
 
     }
 }
 
 
+        
+        #line default
+        #line hidden
     }
+    
+    #line default
+    #line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation

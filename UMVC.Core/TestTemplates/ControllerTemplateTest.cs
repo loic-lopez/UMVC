@@ -1,4 +1,5 @@
-﻿using UMVC.Core.MVC;
+﻿
+using UMVC.Core.MVC;
 
 namespace MyNamespace 
 {
