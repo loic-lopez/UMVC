@@ -185,7 +185,7 @@ jobs:
       - run: git fetch --prune --unshallow --tags
           
       - name: Get Git Version
-        uses: docker://gittools/gitversion:5.6.5-alpine.3.12-x64-5.0
+        uses: docker://gittools/gitversion:5.5.1-linux-alpine.3.10-x64-netcoreapp3.1
         with:
           args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo \"::set-env name=GitVersion_SemVer::$GitVersion_SemVer\"\""
 
