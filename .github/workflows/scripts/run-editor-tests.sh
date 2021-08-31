@@ -27,3 +27,5 @@ elif [ $EDIT_MODE_EXIT_CODE -eq 3 ]; then
 else
   echo "Unexpected exit code $EDIT_MODE_EXIT_CODE";
 fi
+
+exit $EDIT_MODE_
