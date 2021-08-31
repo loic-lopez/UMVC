@@ -72,7 +72,9 @@ crashlytics-build.properties
 /Assets/UMVC/.idea/
 /Assets/Dependencies/
 /Assets/UMVC/Dependencies/
-/MSBuild/Output/
+/MSBuild/Output
+/MSBuild/Projects
+/MSBuildForUnity
 /Assets/UMVC/Dependencies.meta
 /Assets/Dependencies.meta
 /Dependencies/
@@ -83,3 +85,6 @@ crashlytics-build.properties
 /UMVC.Core/Tests/coverage.opencover.xml
 /UMVC.Core/Tests/TestController.cs
 /UMVC.Core/Tests/TestView.cs
+/MSBuildForUnity.Common.props
+/Assets/UMVC.Dependencies.msb4u.csproj
+/Assets/UMVC.Dependencies.msb4u.csproj.meta
