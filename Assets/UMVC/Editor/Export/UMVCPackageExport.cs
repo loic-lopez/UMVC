@@ -15,29 +15,38 @@ namespace UMVC.Export
         [MenuItem("UMVC Tools/ExportWithPreBuiltDlls")]
         public static void ExportWithPreBuiltDlls()
         {
-            File.Delete(
-                Path.Combine(Application.dataPath, $"{Root}Editor/EditorDependencies/UMVC.Dependencies.msb4u.csproj")
+            File.Move(
+                Path.Combine(Application.dataPath, $"{Root}Editor/EditorDependencies/UMVC.Dependencies.msb4u.csproj"),
+                Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.EditorDependencies.msb4u.csproj")
             );
-            File.Delete(Path.Combine(Application.dataPath, $"{Root}PlayerDependencies/UMVC.Dependencies.msb4u.csproj"));
+            
+            File.Move(
+                Path.Combine(Application.dataPath, $"{Root}PlayerDependencies/UMVC.Dependencies.msb4u.csproj"),
+                Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.PlayerDependencies.msb4u.csproj")
+            );
+            
             AssetDatabase.Refresh();
 
             Export(ExportWithDllsPath);
+            
+            File.Move(
+                Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.EditorDependencies.msb4u.csproj"),
+                Path.Combine(Application.dataPath, $"{Root}Editor/EditorDependencies/UMVC.Dependencies.msb4u.csproj")
+                
+            );
+            
+            File.Move(
+                Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.PlayerDependencies.msb4u.csproj"), 
+                Path.Combine(Application.dataPath, $"{Root}PlayerDependencies/UMVC.Dependencies.msb4u.csproj")
+            );
+
+
+            AssetDatabase.Refresh();
         }
 
         [MenuItem("UMVC Tools/ExportWithMsBuildForUnity")]
         public static void ExportWithMsBuildForUnity()
         {
-            File.Copy(
-                $"{Application.dataPath}/../MSBuildForUnity/EditorDependencies/UMVC.Dependencies.msb4u.csproj",
-                $"{Application.dataPath}/UMVC/Editor/EditorDependencies/UMVC.Dependencies.msb4u.csproj"
-                , true
-            );
-
-            File.Copy(
-                $"{Application.dataPath}/../MSBuildForUnity/PlayerDependencies/UMVC.Dependencies.msb4u.csproj",
-                $"{Application.dataPath}/UMVC/PlayerDependencies/UMVC.Dependencies.msb4u.csproj"
-                , true
-            );
             AssetDatabase.Refresh();
 
             Export(ExportMsBuildForUnityPath, true);
