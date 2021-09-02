@@ -17,6 +17,8 @@ EDIT_MODE_=$?
 # Print unity log output
 cat "$GITHUB_WORKSPACE/playmode.log"
 
+cat /__w/UMVC/UMVC/playmode-results.xml
+
 # Display results
 if [ $EDIT_MODE_ -eq 0 ]; then
   echo "Run succeeded, no failures occurred";
@@ -27,3 +29,5 @@ elif [ $EDIT_MODE_ -eq 3 ]; then
 else
   echo "Unexpected exit code $EDIT_MODE_";
 fi
+
+exit $EDIT_MODE_

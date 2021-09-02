@@ -16,14 +16,14 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
-        <PackageReference Include="NUnit" Version="3.13.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.11.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
+        <PackageReference Include="NUnit" Version="3.13.2" />
         <PackageReference Include="NUnit.Runners" Version="3.12.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-        <PackageReference Include="OpenCover" Version="4.7.922" />
-        <PackageReference Include="ReportGenerator" Version="4.8.5" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+        <PackageReference Include="OpenCover" Version="4.7.1221" />
+        <PackageReference Include="ReportGenerator" Version="4.8.12" />
     </ItemGroup>
 
     <ItemGroup>
