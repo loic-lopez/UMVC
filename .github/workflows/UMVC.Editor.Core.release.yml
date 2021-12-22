@@ -17,7 +17,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.101
+          dotnet-version: '3.1.x'
 
       - name: Install dotnet dependencies
         run: dotnet restore ./UMVC.Core/UMVC.Core.sln
@@ -47,7 +47,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.101
+          dotnet-version: '3.1.x'
 
       - name: Install dotnet dependencies
         run: dotnet restore ./UMVC.Core/UMVC.Core.sln
@@ -192,15 +192,9 @@ jobs:
       - name: Determine Version
         id:   gitversion
         uses: gittools/actions/gitversion/execute@v0.9.7
-
-      - name: ✏️Generate changelog
-        id: changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: 📦 Zip UMVC.Core Sources
-        run: zip -r UMVC.Core.zip UMVC.Core
+        run: zip -r UMVC.Core.${{ steps.gitversion.outputs.semVer }}.zip UMVC.Core
         
       - name: Download UMVC.Editor.MsBuildForUnity.unitypackage
         uses: actions/download-artifact@v2
@@ -212,52 +206,24 @@ jobs:
         with:
           name: UMVC.Editor.PreBuiltDlls.unitypackage
           
-
+      - name: Change assets names for release ${{ steps.gitversion.outputs.semVer }}
+        run: |
+          mv UMVC.Editor.MsBuildForUnity.unitypackage UMVC.Editor.MsBuildForUnity.${{ steps.gitversion.outputs.semVer }}.unitypackage
+          mv UMVC.Editor.PreBuiltDlls.unitypackage UMVC.Editor.PreBuiltDlls.${{ steps.gitversion.outputs.semVer }}.unitypackage
+          
       - name: 🚀 Create GitHub release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.UMVC_PUSH_TAG_PAT }}
         with:
           tag_name: v${{ steps.gitversion.outputs.semVer }}
-          release_name: Release v${{ steps.gitversion.outputs.semVer }}
           body: |
-            ### Changes in release v${{ steps.gitversion.outputs.semVer }}
-            ${{ steps.changelog.outputs.changelog }}
+            # Changes in release v${{ steps.gitversion.outputs.semVer }}
+          files: |
+            UMVC.Core.${{ steps.gitversion.outputs.semVer }}.zip
+            UMVC.Editor.PreBuiltDlls.${{ steps.gitversion.outputs.semVer }}.unitypackage
+            UMVC.Editor.MsBuildForUnity.${{ steps.gitversion.outputs.semVer }}.unitypackage
           draft: false
           prerelease: false
-          
-      - name: 🚀 Upload UMVC.Core sources
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./UMVC.Core.zip
-          asset_name: UMVC.Core.${{ steps.gitversion.outputs.semVer }}.zip
-          asset_content_type: application/zip
-          
-      - name: 🚀 Upload UMVC.Editor.PreBuiltDlls.unitypackage
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./UMVC.Editor.PreBuiltDlls.unitypackage
-          asset_name: UMVC.Editor.PreBuiltDlls.${{ steps.gitversion.outputs.semVer }}.unitypackage
-          asset_content_type: application/gzip
-      
-      - name: 🚀 Upload UMVC.Editor.MsBuildForUnity.unitypackage
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./UMVC.Editor.MsBuildForUnity.unitypackage
-          asset_name: UMVC.Editor.MsBuildForUnity.${{ steps.gitversion.outputs.semVer }}.unitypackage
-          asset_content_type: application/gzip
-        
-    
-    
-
-
+          generate_release_notes: true
