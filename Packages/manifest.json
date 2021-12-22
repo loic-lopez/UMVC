@@ -9,8 +9,9 @@
     }
   ],
   "dependencies": {
-    "com.microsoft.msbuildforunity": "0.9.2-20200131.11",
+    "com.microsoft.msbuildforunity": "0.9.2-20211109.1",
     "com.unity.ide.rider": "3.0.7",
+    "com.unity.ide.visualstudio": "2.0.12",
     "com.unity.test-framework": "1.1.29",
     "com.unity.testtools.codecoverage": "1.1.0",
     "com.unity.ugui": "1.0.0",
