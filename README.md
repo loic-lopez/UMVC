@@ -121,21 +121,21 @@ Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 - Add the following near the top of the file:
 
 ```json
-"scopedRegistries": [
-{
-"name": "Microsoft",
-"url": "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
-"scopes": [
-"com.microsoft"
+"scopedRegistries":[
+   {
+      "name":"Microsoft",
+      "url":"https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
+      "scopes":[
+         "com.microsoft"
+      ]
+   }
 ]
-}
-],
 ```
 
 - Add the following to the `dependencies` section of the file:
 
 ```json
-  "com.microsoft.msbuildforunity": "0.9.2-20200131.11",
+  "com.microsoft.msbuildforunity": "0.9.2-20211109.1",
 ```
 
 
