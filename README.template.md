@@ -135,7 +135,7 @@ Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 - Add the following to the `dependencies` section of the file:
 
 ```json
-  "com.microsoft.msbuildforunity": "0.9.2-20200131.11",
+  "com.microsoft.msbuildforunity": 0.9.2-20211109.1",
 ```
 
 
