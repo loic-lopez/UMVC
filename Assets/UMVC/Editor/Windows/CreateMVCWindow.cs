@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UMVC.Core.Generation.Generator;
@@ -12,6 +13,8 @@ using UnityEngine;
 
 namespace UMVC.Editor.Windows
 {
+    [CanEditMultipleObjects]
+    [Serializable]
     public sealed class CreateMVCWindow : Window
     {
         private const string ModelPrefix = "Model";
@@ -25,13 +28,13 @@ namespace UMVC.Editor.Windows
         private string _componentName;
         private string _newSubdir;
         private string _outputDir;
-
-        private SerializedProperty _serializedController;
+        private bool _wantCreateSubDir = true;
 
         private SerializedObject _serializedGameObject;
+
+        private SerializedProperty _serializedController;
         private SerializedProperty _serializedModel;
         private SerializedProperty _serializedView;
-        private bool _wantCreateSubDir = true;
 
 
         protected override void OnGUI()
@@ -54,7 +57,6 @@ namespace UMVC.Editor.Windows
 
             base.OnGUI();
         }
-
 
         public override void SetupWindow()
         {
@@ -85,6 +87,11 @@ namespace UMVC.Editor.Windows
                 BaseNamespace = baseViewSettings.BaseNamespace,
                 ClassExtends = baseViewSettings.ClassExtends
             };
+            
+            _serializedGameObject = new SerializedObject(this);
+            _serializedModel = _serializedGameObject.FindProperty("model");
+            _serializedController = _serializedGameObject.FindProperty("controller");
+            _serializedView = _serializedGameObject.FindProperty("view");
         }
 
         protected override void DisplayEndButton()
@@ -156,19 +163,15 @@ namespace UMVC.Editor.Windows
             controller.BaseNamespace = controller.ClassExtends.Type.Namespace;
             view.BaseNamespace = view.ClassExtends.Type.Namespace;
 
-
-            _serializedGameObject = new SerializedObject(this);
-            _serializedModel = _serializedGameObject.FindProperty("model");
-            _serializedController = _serializedGameObject.FindProperty("controller");
-            _serializedView = _serializedGameObject.FindProperty("view");
+            _serializedGameObject.Update();
 
             // Output
             GUILayout.Label("Generated", Label.Header);
-            EditorGUILayout.PropertyField(_serializedModel);
+            EditorGUILayout.PropertyField(_serializedModel, true);
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(_serializedView);
+            EditorGUILayout.PropertyField(_serializedView, true);
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(_serializedController);
+            EditorGUILayout.PropertyField(_serializedController, true);
             _serializedGameObject.ApplyModifiedProperties();
         }
 

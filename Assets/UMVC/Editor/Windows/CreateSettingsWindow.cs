@@ -56,17 +56,14 @@ namespace UMVC.Editor.Windows
 
             if (view.ClassExtends.Type != null)
                 view.BaseNamespace = view.ClassExtends.Type.Namespace;
+            
+            _serializedGameObject.Update();
 
-            _serializedGameObject = new SerializedObject(this);
-            _serializedModel = _serializedGameObject.FindProperty("model");
-            _serializedController = _serializedGameObject.FindProperty("controller");
-            _serializedView = _serializedGameObject.FindProperty("view");
-
-            EditorGUILayout.PropertyField(_serializedModel);
+            EditorGUILayout.PropertyField(_serializedModel, true);
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(_serializedView);
+            EditorGUILayout.PropertyField(_serializedView, true);
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(_serializedController);
+            EditorGUILayout.PropertyField(_serializedController, true);
             _serializedGameObject.ApplyModifiedProperties();
         }
 
