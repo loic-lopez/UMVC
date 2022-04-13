@@ -1,6 +1,18 @@
 {
-  "name": "UMVC.Editor",
-  "includePlatforms": [
-    "Editor"
-  ]
+    "name": "UMVC.Editor",
+    "references": [
+        "GUID:7fadca414dede194f95d4f8d2a1e32dc",
+        "GUID:ea6a6314f279f814facc8c48a7d3c9f1"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

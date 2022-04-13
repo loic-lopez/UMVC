@@ -1,14 +1,14 @@
 using System;
 using UMVC.Core.Components;
 using UMVC.Core.MVC;
-using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
+using TypeReferences;
 
 namespace UMVC.Editor.EditorDependencies.Implementations
 {
     [Serializable]
     public class UnitySerializableViewComponent : Component
     {
-        [ExtendsAttribute(typeof(BaseView<,>), Grouping = ClassGrouping.ByAddComponentMenu, AllowAbstract = true)]
+        [Inherits(typeof(BaseView<,>), AllowAbstract = true, IncludeBaseType = true, ShowNoneElement = false, ShowAllTypes = true)]
         public TypeReference ClassExtends;
     }
 }

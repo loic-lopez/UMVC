@@ -31,7 +31,7 @@ namespace UMVC.Editor.Windows
         private SerializedObject _serializedGameObject;
         private SerializedProperty _serializedModel;
         private SerializedProperty _serializedView;
-        private bool _wantCreateSubDir;
+        private bool _wantCreateSubDir = true;
 
 
         protected override void OnGUI()
@@ -60,6 +60,9 @@ namespace UMVC.Editor.Windows
         {
             base.SetupWindow();
             titleContent.text = WindowName();
+            _wantCreateSubDir = true;
+            _outputDir = Application.dataPath;
+            _newSubdir = Application.dataPath;
 
             var baseModelSettings = Singleton.UMVC.Instance.Settings.model;
             var baseControllerSettings = Singleton.UMVC.Instance.Settings.controller;
@@ -120,11 +123,9 @@ namespace UMVC.Editor.Windows
                 if (_wantCreateSubDir) Directory.CreateDirectory(outputDir);
 
                 model.CompileToSystemType();
-                model.Extends = model.ClassExtends.ToString();
-                controller.Extends = controller.ClassExtends.ToString();
-                view.Extends = view.ClassExtends.ToString();
-
-
+                model.Extends = model.ClassExtends.Type.GetNameWithoutGenerics();
+                controller.Extends = controller.ClassExtends.Type.GetNameWithoutGenerics();
+                view.Extends = view.ClassExtends.Type.GetNameWithoutGenerics();
                 Generator.GenerateMVC(
                     new GeneratorParameters.Builder()
                         .WithView(view)

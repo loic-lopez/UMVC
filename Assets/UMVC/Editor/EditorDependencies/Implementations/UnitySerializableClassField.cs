@@ -1,13 +1,13 @@
 using System;
 using UMVC.Core.Components;
-using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
+using TypeReferences;
 
 namespace UMVC.Editor.EditorDependencies.Implementations
 {
     [Serializable]
     public class UnitySerializableClassField : ClassField
     {
-        [AllowPrimitivesEnumsClassesInterfaces(Grouping = ClassGrouping.ByAddComponentMenu)]
+        [TypeOptions(Grouping = Grouping.ByAddComponentMenu, ShowNoneElement = false, ShowAllTypes = true)]
         public new TypeReference FieldType;
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UMVC.Core.Components;
 using UMVC.Core.MVC;
-using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
+using TypeReferences;
 
 namespace UMVC.Editor.EditorDependencies.Implementations
 {
@@ -11,7 +11,7 @@ namespace UMVC.Editor.EditorDependencies.Implementations
     {
         public List<UnitySerializableClassField> ClassFields;
 
-        [ExtendsAttribute(typeof(BaseModel), Grouping = ClassGrouping.ByAddComponentMenu, AllowAbstract = true)]
+        [Inherits(typeof(BaseModel), AllowAbstract = true, IncludeBaseType = true, ShowNoneElement = false, ShowAllTypes = true)]
         public TypeReference ClassExtends;
 
         public void CompileToSystemType()

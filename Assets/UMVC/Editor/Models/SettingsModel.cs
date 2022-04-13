@@ -21,13 +21,13 @@ namespace UMVC.Editor.Models
 
         public static SettingsModel Initialize(string settingsAssetPath)
         {
-            var instance = Instanciate(settingsAssetPath);
+            var instance = Instantiate(settingsAssetPath);
 
             instance._settingsAssetPath = settingsAssetPath;
             return instance;
         }
 
-        private static SettingsModel Instanciate(string settingsAssetPath)
+        private static SettingsModel Instantiate(string settingsAssetPath)
         {
             return Asset.CreateAssetIfNotExists<SettingsModel>(ObjName, settingsAssetPath);
         }

@@ -10,7 +10,7 @@ namespace UseCases.Mvc
         private void Update()
         {
             if (Input.anyKeyDown)
-            {
+            { 
                 Controller.UpdateValue();
             }
         }
