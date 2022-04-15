@@ -20,7 +20,7 @@ jobs:
         run: dotnet restore ./UMVC.Core/UMVC.Core.sln
 
       - name: Build
-        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Debug --no-restore
+        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Debug
 
       - name: Test
         run: .\UMVC.Core\packages\OpenCover\4.7.1221\tools\OpenCover.Console.exe -register -filter:"+[*]* -[*]*.Templates.* -[*]*.Mock.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.12.0\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net461\UMVC.Core.Tests.dll" -output:coverage.xml
@@ -48,7 +48,7 @@ jobs:
         run: dotnet restore ./UMVC.Core/UMVC.Core.sln
 
       - name: Build
-        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release --no-restore
+        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release
         
       - uses: actions/upload-artifact@v2
         name: Upload UMVC.Core.Components.dll
