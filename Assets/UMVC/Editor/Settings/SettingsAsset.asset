@@ -16,14 +16,23 @@ MonoBehaviour:
   model:
     BaseNamespace: UMVC.Core.MVC
     ClassExtends:
-      _classRef: UMVC.Core.MVC.BaseModel, UMVC.Core.MVC
+      GuidAssignmentFailed: 0
+      GUID: 
+      _typeNameAndAssembly: UMVC.Core.MVC.BaseModel, UMVC.Core.MVC
+      _suppressLogs: 0
   view:
     BaseNamespace: UMVC.Core.MVC
     ClassExtends:
-      _classRef: UMVC.Core.MVC.BaseView`2, UMVC.Core.MVC
+      GuidAssignmentFailed: 0
+      GUID: 00d76c32dd6d65224b2155e3a2947a44
+      _typeNameAndAssembly: UMVC.Core.MVC.BaseView`2, UMVC.Core.MVC
+      _suppressLogs: 0
   controller:
     BaseNamespace: UMVC.Core.MVC
     ClassExtends:
-      _classRef: UMVC.Core.MVC.BaseController`1, UMVC.Core.MVC
+      GuidAssignmentFailed: 0
+      GUID: 
+      _typeNameAndAssembly: UMVC.Core.MVC.BaseController`1, UMVC.Core.MVC
+      _suppressLogs: 0
   outputNamespace: 
   spritesDirectory: Sprites

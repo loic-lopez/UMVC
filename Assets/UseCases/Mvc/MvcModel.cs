@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace UseCases.Mvc
 {
-    
-    
     [Serializable]
     public class MvcModel : BaseModel
     {

@@ -1,7 +1,7 @@
 using System;
 using UMVC.Core.Components;
 using UMVC.Core.MVC;
-using UMVC.Editor.CustomPropertyDrawers.TypeReferences;
+using TypeReferences;
 
 namespace UMVC.Editor.EditorDependencies.Implementations
 {
@@ -9,7 +9,7 @@ namespace UMVC.Editor.EditorDependencies.Implementations
     // Inherit from BaseComponent in order to make the BaseComponent serialized by Unity ()
     public class BaseViewSettings : BaseComponent
     {
-        [Extends(typeof(BaseView<,>), Grouping = ClassGrouping.ByAddComponentMenu, AllowAbstract = true)]
+        [Inherits(typeof(BaseView<,>), AllowAbstract = true, IncludeBaseType = true, ShowNoneElement = false, ShowAllTypes = true)]
         public TypeReference ClassExtends;
     }
 }
