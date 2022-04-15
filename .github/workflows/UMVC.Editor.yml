@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install python-pip unzip curl -y && pip install requests
+        run: sudo apt-get update && sudo apt-get install python3-pip unzip curl -y && pip install requests
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py ${{ secrets.PERSONAL_TOKEN }}
