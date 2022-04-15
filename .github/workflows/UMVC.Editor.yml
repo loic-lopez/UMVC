@@ -36,7 +36,7 @@ jobs:
         run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
 
       # Test edit mode
-      - name: Run tests
+      - name: Run playmode tests
         uses: game-ci/unity-test-runner@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -44,10 +44,14 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: 2020.3.33f1
           testMode: playmode
-          customParameters: -testResults "$GITHUB_WORKSPACE/playmode-results.xml" -enableCodeCoverage -coverageResultsPath "$GITHUB_WORKSPACE/CodeCoverage/" -coverageOptions "assemblyFilters:-*unity*" 
+          customParameters: |
+            -testResults ${GITHUB_WORKSPACE}/playmode-results.xml 
+            -enableCodeCoverage 
+            -coverageResultsPath ${GITHUB_WORKSPACE}/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*" 
       
       # Test play mode
-      - name: Run tests
+      - name: Run editmode tests
         uses: game-ci/unity-test-runner@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -55,7 +59,11 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: 2020.3.33f1
           testMode: editmode
-          customParameters: -testResults "$GITHUB_WORKSPACE/editmode-results.xml" -enableCodeCoverage -coverageResultsPath "$GITHUB_WORKSPACE/CodeCoverage/" -coverageOptions "assemblyFilters:-*unity*"
+          customParameters: |
+            -testResults ${GITHUB_WORKSPACE}/editmode-results.xml 
+            -enableCodeCoverage 
+            -coverageResultsPath ${GITHUB_WORKSPACE}/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*"
         
       - name: Codecov
         uses: codecov/codecov-action@master
