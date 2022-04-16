@@ -42,7 +42,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2020.3.33f1
+          unityVersion: 2021.2.19f1
           testMode: playmode
           customParameters: |
             -enableCodeCoverage 
@@ -57,7 +57,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2020.3.33f1
+          unityVersion: 2021.2.19f1
           testMode: editmode
           customParameters: |
             -enableCodeCoverage 
