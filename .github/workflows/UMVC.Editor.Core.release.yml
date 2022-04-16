@@ -174,7 +174,7 @@ jobs:
         run: /opt/unity/Editor/Unity -password ${{ secrets.UNITY_PASSWORD }} -username ${{ secrets.UNITY_EMAIL }} -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_licence.ulf || exit 0
 
       - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
-        run:  /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -executeMethod UMVC.Export.UMVCPackageExport.ExportWithPreBuiltDlls
+        run:  /opt/unity/Editor/Unity -password ${{ secrets.UNITY_PASSWORD }} -username ${{ secrets.UNITY_EMAIL }} -quit -batchmode -nographics -silent-crashes -logFile -executeMethod UMVC.Export.UMVCPackageExport.ExportWithPreBuiltDlls
 
       - uses: actions/upload-artifact@v2
         name: Upload UMVC.Editor.PreBuiltDlls.unitypackage
@@ -183,7 +183,7 @@ jobs:
           path: ./UMVC.Editor.PreBuiltDlls.unitypackage
 
       - name: Create UMVC.Editor.MsBuildForUnity.unitypackage with unbundled UMVC.Core
-        run:  /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -executeMethod UMVC.Export.UMVCPackageExport.ExportWithMsBuildForUnity
+        run:  /opt/unity/Editor/Unity -password ${{ secrets.UNITY_PASSWORD }} -username ${{ secrets.UNITY_EMAIL }} -quit -batchmode -nographics -silent-crashes -logFile -executeMethod UMVC.Export.UMVCPackageExport.ExportWithMsBuildForUnity
 
       - uses: actions/upload-artifact@v2
         name: Upload UMVC.Editor.MsBuildForUnity.unitypackage
