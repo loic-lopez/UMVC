@@ -126,13 +126,24 @@ Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 
 ```json
 "scopedRegistries": [
-    {
-      "name": "Microsoft",
-      "url": "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
-      "scopes": [
-        "com.microsoft"
+   {
+      "name":"Microsoft",
+      "url":"https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
+      "scopes":[
+         "com.microsoft"
       ]
-    }
+   },
+   {
+      "name":"package.openupm.com",
+      "url":"https://package.openupm.com",
+      "scopes":[
+         "com.solidalloy.util",
+         "com.solidalloy.unity-dropdown",
+         "com.solidalloy.type-references",
+         "com.openupm",
+         "org.nuget"
+      ]
+   }
 ],
 ```
 
@@ -140,6 +151,7 @@ Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 
 ```json
   "com.microsoft.msbuildforunity": "0.9.2-20211109.1",
+  "com.solidalloy.type-references": "2.14.0",
 ```
 
 
