@@ -147,7 +147,7 @@ jobs:
   Build_UMVC_Editor:
     name: Build UMVC.Editor 🏗️
     runs-on: ubuntu-latest
-    container: unityci/editor:windows-2021.2.19f1-windows-il2cpp-1.0
+    container: unityci/editor:ubuntu-2021.2.19f1-base-1.0.0
     needs: Test_UMVC_Editor
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
