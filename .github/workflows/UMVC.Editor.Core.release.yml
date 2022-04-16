@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch: {}
 
 jobs:
   Test_UMVC_Core:
@@ -88,7 +89,6 @@ jobs:
   Test_UMVC_Editor:
     name: Test UMVC.Editor 🧪
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:2019.3.13f1
     needs: Build_UMVC_Core
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
@@ -101,41 +101,55 @@ jobs:
           name: UMVC.Core.Build
 
       - name: Install dependencies
-        run: apt-get update && apt-get install python-pip unzip curl -y && pip install requests
+        run: sudo apt-get update && apt-get install python-pip unzip curl -y && pip install requests
 
       - name: Unzip and move UMVC.Core dlls
         run: sh .github/workflows/scripts/install-umvc.editor-deps-same-workflow.sh
 
-      - name: Decrypt the license file
-        run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
-
-      # Activate unity
-      - name: Activate Unity
-        run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
-
-      # Run Editor tests
-      - name: Run Editor tests
-        run: sh .github/workflows/scripts/run-editor-tests.sh
-
-      # Run PlayMode tests
-      - name: Run PlayMode tests
-        run: sh .github/workflows/scripts/run-playmode-tests.sh
+      # Test edit mode
+      - name: Run playmode tests
+        uses: game-ci/unity-test-runner@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          testMode: playmode
+          customParameters: |
+            -enableCodeCoverage 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*"
+            -debugCodeOptimization
+      
+      # Test play mode
+      - name: Run editmode tests
+        uses: game-ci/unity-test-runner@v2.0.0
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          testMode: editmode
+          customParameters: |
+            -enableCodeCoverage 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*"
+            -debugCodeOptimization
 
       - name: Codecov
-        uses: codecov/codecov-action@master
+        uses: codecov/codecov-action@v3.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml,./CodeCoverage/UMVC-opencov/PlayMode/TestCoverageResults_0000.xml
+          files: ./artifacts/CodeCoverage/workspace-opencov/PlayMode/TestCoverageResults_0000.xml,./artifacts/CodeCoverage/workspace-opencov/EditMode/TestCoverageResults_0000.xml
           name: codecov-umbrella
           fail_ci_if_error: true
 
   Build_UMVC_Editor:
     name: Build UMVC.Editor 🏗️
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:2019.3.13f1
+    container: unityci/editor:windows-2021.2.19f1-windows-il2cpp-1.0
     needs: Test_UMVC_Editor
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
-
     steps:
       - uses: actions/checkout@v2
 
@@ -149,13 +163,6 @@ jobs:
 
       - name: Delete Tests directory
         run: rm -rf Assets/UMVC.Tests
-
-      - name: Decrypt the license file
-        run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
-
-      # Activate unity
-      - name: Activate Unity
-        run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
 
       - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
         run:  /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -executeMethod UMVC.Export.UMVCPackageExport.ExportWithPreBuiltDlls
@@ -179,7 +186,7 @@ jobs:
     name: Release UMVC 📦
     runs-on: ubuntu-latest
     needs: Build_UMVC_Editor
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && github.ref == 'refs/heads/master'"
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow --tags
