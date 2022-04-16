@@ -163,6 +163,15 @@ jobs:
 
       - name: Delete Tests directory
         run: rm -rf Assets/UMVC.Tests
+        
+      - name: Decrypt the license file
+        run: echo $UNITY_LICENSE > .github/Unity_licence.ulf
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+      # Activate unity
+      - name: Activate Unity
+        run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_licence.ulf || exit 0
 
       - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
         run:  /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -executeMethod UMVC.Export.UMVCPackageExport.ExportWithPreBuiltDlls
