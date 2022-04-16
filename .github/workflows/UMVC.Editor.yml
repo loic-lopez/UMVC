@@ -72,7 +72,7 @@ jobs:
         uses: codecov/codecov-action@v3.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./artifacts/CodeCoverage/workspace-opencov/*Mode/TestCoverageResults_0000.xml
+          files: ./artifacts/CodeCoverage/workspace-opencov/PlayMode/TestCoverageResults_0000.xml,./artifacts/CodeCoverage/workspace-opencov/EditMode/TestCoverageResults_0000.xml
           name: codecov-umbrella
           fail_ci_if_error: true
  
