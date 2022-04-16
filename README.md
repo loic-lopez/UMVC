@@ -29,9 +29,13 @@
 	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Core">
 	    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Core/badge.svg">
 	</a>
-
+	
 </p>
 <hr>
+
+# Requirements
+
+- Unity 2021.x
 
 # Features
 
@@ -90,11 +94,11 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 
 ## Choose your installation method
 
-| Requirements and use cases                                                                   | Release Archive(s)                                                                                                                                                                                                                                                                                                                                                                                  |  
-|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
+| Requirements and use cases | Release Archive(s) |  
+|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|    
 | **With Unity assets store (this version uses pre built UMVC.Core dlls)**                     | [UMVC - Model-View-Controller Generator built for Unity Unity Asset Store](https://u3d.as/1WKL)                                                                                                                                                                                                                                                                                                      |  
-| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup                     | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.4.5/UMVC.Editor.PreBuiltDlls.0.4.5.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>                                                                                                                                                                               
-| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.4.5/UMVC.Editor.MsBuildForUnity.0.4.5.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.4.5/UMVC.Core.0.4.5.zip)  
+| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.5.0/UMVC.Editor.PreBuiltDlls.0.5.0.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
+| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.5.0/UMVC.Editor.MsBuildForUnity.0.5.0.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.5.0/UMVC.Core.0.5.0.zip) 
 
 ## Basic usage using UMVC.Editor.PreBuiltDlls UnityPackage
 
@@ -121,15 +125,15 @@ Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 - Add the following near the top of the file:
 
 ```json
-"scopedRegistries":[
-   {
-      "name":"Microsoft",
-      "url":"https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
-      "scopes":[
-         "com.microsoft"
+"scopedRegistries": [
+    {
+      "name": "Microsoft",
+      "url": "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
+      "scopes": [
+        "com.microsoft"
       ]
-   }
-]
+    }
+],
 ```
 
 - Add the following to the `dependencies` section of the file:
