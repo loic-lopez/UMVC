@@ -46,7 +46,7 @@ jobs:
           testMode: playmode
           customParameters: |
             -enableCodeCoverage 
-            -coverageResultsPath /github/workspace/CodeCoverage/ 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
             -coverageOptions "assemblyFilters:-*unity*"
             -debugCodeOptimization
       
@@ -61,18 +61,18 @@ jobs:
           testMode: editmode
           customParameters: |
             -enableCodeCoverage 
-            -coverageResultsPath /github/workspace/CodeCoverage/ 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
             -coverageOptions "assemblyFilters:-*unity*"
             -debugCodeOptimization
         
-      - name: Display files in /github/workspace/CodeCoverage/
-        run: ls -R /github/workspace/CodeCoverage/workspace-opencov/
-        
+      - name: Display files in artifacts/CodeCoverage/
+        run: ls -R ./artifacts/CodeCoverage/
+      
       - name: Codecov
         uses: codecov/codecov-action@v3.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: /github/workspace/CodeCoverage/workspace-opencov/*Mode/TestCoverageResults_0000.xml
+          file: ./artifacts/CodeCoverage/workspace-opencov/*Mode/TestCoverageResults_0000.xml
           name: codecov-umbrella
           fail_ci_if_error: true
  
