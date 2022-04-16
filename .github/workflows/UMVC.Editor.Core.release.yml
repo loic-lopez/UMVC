@@ -101,7 +101,7 @@ jobs:
           name: UMVC.Core.Build
 
       - name: Install dependencies
-        run: sudo apt-get update && apt-get install python-pip unzip curl -y && pip install requests
+        run: sudo apt-get update && sudo apt-get install python3-pip unzip curl -y && pip install requests
 
       - name: Unzip and move UMVC.Core dlls
         run: sh .github/workflows/scripts/install-umvc.editor-deps-same-workflow.sh
