@@ -33,6 +33,10 @@
 </p>
 <hr>
 
+# Requirements
+
+- Unity 2021.x
+
 # Features
 
 ### Overall

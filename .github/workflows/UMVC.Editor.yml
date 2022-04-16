@@ -11,8 +11,6 @@ jobs:
   test:
     name: Test UMVC.Editor 🧪
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:2019.3.13f1
-
     steps:
       - name: Wait for build to succeed
         uses: fountainhead/action-wait-for-check@v1.0.0
@@ -29,7 +27,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: apt-get update && apt-get install python-pip unzip curl -y && pip install requests
+        run: sudo apt-get update && sudo apt-get install python3-pip unzip curl -y && pip install requests
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py ${{ secrets.PERSONAL_TOKEN }}
@@ -37,26 +35,44 @@ jobs:
       - name: Unzip and move UMVC.Core dlls
         run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
 
-      - name: Decrypt the license file
-        run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
-
-      # Activate unity
-      - name: Activate Unity
-        run: xvfb-run /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
-
-      # Run Editor tests
-      - name: Run Editor tests
-        run: sh .github/workflows/scripts/run-editor-tests.sh
-
-      # Run PlayMode tests
-      - name: Run PlayMode tests
-        run: sh .github/workflows/scripts/run-playmode-tests.sh
+      # Test edit mode
+      - name: Run playmode tests
+        uses: game-ci/unity-test-runner@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          testMode: playmode
+          customParameters: |
+            -enableCodeCoverage 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*"
+            -debugCodeOptimization
+      
+      # Test play mode
+      - name: Run editmode tests
+        uses: game-ci/unity-test-runner@v2.0.0
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          testMode: editmode
+          customParameters: |
+            -enableCodeCoverage 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*"
+            -debugCodeOptimization
         
+      - name: Display files in artifacts/CodeCoverage/
+        run: ls -R ./artifacts/CodeCoverage/
+      
       - name: Codecov
-        uses: codecov/codecov-action@master
+        uses: codecov/codecov-action@v3.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./CodeCoverage/UMVC-opencov/EditMode/TestCoverageResults_0000.xml,./CodeCoverage/UMVC-opencov/PlayMode/TestCoverageResults_0000.xml
+          files: ./artifacts/CodeCoverage/workspace-opencov/PlayMode/TestCoverageResults_0000.xml,./artifacts/CodeCoverage/workspace-opencov/EditMode/TestCoverageResults_0000.xml
           name: codecov-umbrella
           fail_ci_if_error: true
-#  
+ 
