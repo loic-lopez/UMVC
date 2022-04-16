@@ -147,7 +147,6 @@ jobs:
   Build_UMVC_Editor:
     name: Build UMVC.Editor 🏗️
     runs-on: ubuntu-latest
-    container: unityci/editor:ubuntu-2021.2.19f1-base-1.0.0
     needs: Test_UMVC_Editor
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
@@ -169,7 +168,8 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          versioning: None
           buildMethod: UMVC.Export.UMVCPackageExport.ExportWithPreBuiltDlls
         
       - uses: actions/upload-artifact@v2
@@ -183,7 +183,8 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          versioning: None
           buildMethod: UMVC.Export.UMVCPackageExport.ExportWithMsBuildForUnity
 
       - uses: actions/upload-artifact@v2
