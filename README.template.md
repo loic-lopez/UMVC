@@ -36,6 +36,34 @@
 # Requirements
 
 - Unity 2021.x
+- com.solidalloy.type-references (as version v0.5.0)
+
+# Install com.solidalloy.type-references (as version v0.5.0)
+
+- Edit the `Packages/manifest.json` file in your Unity project.
+- Add the following near the top of the file:
+
+```json
+"scopedRegistries": [
+   {
+      "name":"package.openupm.com",
+      "url":"https://package.openupm.com",
+      "scopes":[
+         "com.solidalloy.util",
+         "com.solidalloy.unity-dropdown",
+         "com.solidalloy.type-references",
+         "com.openupm",
+         "org.nuget"
+      ]
+   }
+],
+```
+
+- Add the following to the `dependencies` section of the file:
+
+```json
+  "com.solidalloy.type-references": "2.14.0",
+```
 
 # Features
 
@@ -121,29 +149,21 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 ### Add MSBuildForUnity to your manifest.json
 Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 
+### Add MSBuildForUnity to your manifest.json
+Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
+
 - Edit the `Packages/manifest.json` file in your Unity project.
 - Add the following near the top of the file:
 
 ```json
 "scopedRegistries": [
-   {
-      "name":"Microsoft",
-      "url":"https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
-      "scopes":[
-         "com.microsoft"
+    {
+      "name": "Microsoft",
+      "url": "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
+      "scopes": [
+        "com.microsoft"
       ]
-   },
-   {
-      "name":"package.openupm.com",
-      "url":"https://package.openupm.com",
-      "scopes":[
-         "com.solidalloy.util",
-         "com.solidalloy.unity-dropdown",
-         "com.solidalloy.type-references",
-         "com.openupm",
-         "org.nuget"
-      ]
-   }
+    }
 ],
 ```
 
@@ -151,11 +171,11 @@ Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 
 ```json
   "com.microsoft.msbuildforunity": "0.9.2-20211109.1",
-  "com.solidalloy.type-references": "2.14.0",
 ```
 
 
 # FAQ
 
 **See the associated wiki: [UMVC Wiki](https://github.com/loic-lopez/UMVC/wiki)**
+
 
