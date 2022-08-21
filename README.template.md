@@ -62,7 +62,7 @@
 - Add the following to the `dependencies` section of the file:
 
 ```json
-  "com.solidalloy.type-references": "2.14.0",
+  "com.solidalloy.type-references": "2.16.0",
 ```
 
 # Features
