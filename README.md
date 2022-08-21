@@ -62,7 +62,7 @@
 - Add the following to the `dependencies` section of the file:
 
 ```json
-  "com.solidalloy.type-references": "2.14.0",
+  "com.solidalloy.type-references": "2.16.0",
 ```
 
 # Features
@@ -125,8 +125,8 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 | Requirements and use cases | Release Archive(s) |  
 |----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|    
 | **With Unity assets store (this version uses pre built UMVC.Core dlls)**                     | [UMVC - Model-View-Controller Generator built for Unity Unity Asset Store](https://u3d.as/1WKL)                                                                                                                                                                                                                                                                                                      |  
-| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.5.0/UMVC.Editor.PreBuiltDlls.0.5.0.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
-| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.5.0/UMVC.Editor.MsBuildForUnity.0.5.0.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.5.0/UMVC.Core.0.5.0.zip) 
+| **For users who need basic usage:** Pre built UMVC.Core dlls, fast setup | <a href="https://github.com/loic-lopez/UMVC/releases/download/v0.5.1/UMVC.Editor.PreBuiltDlls.0.5.1.unitypackage" target="_blank"><img src="https://img.shields.io/badge/Download-UMVC.Editor.PreBuiltDlls-blue"></a>
+| **For users who need advanced usage:** customs Base Components, custom templates and more... | [![Download UMVC.Editor.MsBuildForUnity](https://img.shields.io/badge/Download-UMVC.Editor.MsBuildForUnity-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.5.1/UMVC.Editor.MsBuildForUnity.0.5.1.unitypackage)[![Download UMVC.Core Sources](https://img.shields.io/badge/Download-UMVC.Core-blue)](https://github.com/loic-lopez/UMVC/releases/download/v0.5.1/UMVC.Core.0.5.1.zip) 
 
 ## Basic usage using UMVC.Editor.PreBuiltDlls UnityPackage
 
@@ -149,18 +149,21 @@ In addition to dividing the application into these components, the modelâ€“viewâ
 ### Add MSBuildForUnity to your manifest.json
 Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 
+### Add MSBuildForUnity to your manifest.json
+Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
+
 - Edit the `Packages/manifest.json` file in your Unity project.
 - Add the following near the top of the file:
 
 ```json
 "scopedRegistries": [
-   {
-      "name":"Microsoft",
-      "url":"https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
-      "scopes":[
-         "com.microsoft"
+    {
+      "name": "Microsoft",
+      "url": "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/npm/registry/",
+      "scopes": [
+        "com.microsoft"
       ]
-   }
+    }
 ],
 ```
 
@@ -174,4 +177,5 @@ Add the `com.microsoft.msbuildforunity` UPM (Unity Package Manager) package.
 # FAQ
 
 **See the associated wiki: [UMVC Wiki](https://github.com/loic-lopez/UMVC/wiki)**
+
 
