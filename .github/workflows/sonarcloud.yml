@@ -77,7 +77,7 @@ jobs:
             /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}" \
             /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
             /d:sonar.scm.provider=git \
-            /d:sonar.projectDescription=UMVC.Core - Model-View-Controller Base classes for UMVC \
+            /d:sonar.projectDescription="UMVC.Core - Model-View-Controller Base classes for UMVC" \
             /d:sonar.host.url=https://sonarcloud.io
         working-directory: UMVC.Core
 
