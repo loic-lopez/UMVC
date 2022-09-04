@@ -82,7 +82,7 @@ jobs:
         working-directory: UMVC.Core
 
       - name: Build UMVC.Core
-        run: dotnet build –no-incremental
+        run: dotnet build --no-incremental
         working-directory: UMVC.Core
       
       - name: Test UMVC.Core
