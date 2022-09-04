@@ -11,6 +11,7 @@
 	Fast, Simple and intuitive
 </p>
 
+
 <hr>
 <p align="center">
 	<a href="https://github.com/loic-lopez/UMVC/blob/master/LICENSE">
@@ -20,16 +21,30 @@
 	    <img src="https://img.shields.io/github/v/release/loic-lopez/UMVC">
 	</a>
 	<br/>
-	<a href="https://codecov.io/gh/loic-lopez/UMVC">
+	<div align="center">
+	  <h4 align="center">UMVC.Editor Metrics</h4>
+	  <a href="https://codecov.io/gh/loic-lopez/UMVC">
            <img src="https://codecov.io/gh/loic-lopez/UMVC/branch/master/graph/badge.svg" />
-        </a>
-	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Editor">
+          </a>
+           <a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Editor">
 	    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Editor/badge.svg">
-	</a>
-	<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Core">
-	    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Core/badge.svg">
-	</a>
-	
+	   </a> 
+        </div>
+	<div align="center">
+		<h4 align="center">UMVC.Core Metrics</h4>
+		<a href="https://sonarcloud.io/summary/overall?id=UMVC.Core">
+		   <img src="https://sonarcloud.io/api/project_badges/measure?project=UMVC.Core&metric=alert_status" />
+		</a>
+		<a href="https://sonarcloud.io/summary/overall?id=UMVC.Core">
+		   <img src="https://sonarcloud.io/api/project_badges/measure?project=UMVC.Core&metric=code_smells" />
+		</a>
+		<a href="https://sonarcloud.io/summary/overall?id=UMVC.Core">
+		   <img src="https://sonarcloud.io/api/project_badges/measure?project=UMVC.Core&metric=bugs" />
+		</a>
+		<a href="https://github.com/loic-lopez/UMVC/actions?query=workflow%3AUMVC.Core">
+		    <img src="https://github.com/loic-lopez/UMVC/workflows/UMVC.Core/badge.svg">
+		</a>
+	</div>
 </p>
 <hr>
 
