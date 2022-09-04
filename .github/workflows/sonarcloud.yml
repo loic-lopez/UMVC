@@ -71,12 +71,12 @@ jobs:
         
       - name: Start SonarCloud scanner for UMVC.Core
         run: |
-          dotnet sonarscanner begin /k:"loic-lopez_UMVC_Core"
+          dotnet sonarscanner begin /k:"UMVC.Core"
+            /o:"loic-lopez"
             /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}"
             /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html
-            /d:sonar.organization=loic-lopez
             /d:sonar.scm.provider=git
-            /d:sonar.projectName=UMVC.Core - Model-View-Controller Base classes for UMVC
+            /d:sonar.projectDescription=UMVC.Core - Model-View-Controller Base classes for UMVC
             /d:sonar.projectVersion=${{ steps.gitversion.outputs.semVer }}
             /d:sonar.host.url=https://sonarcloud.io
         working-directory: UMVC.Core
