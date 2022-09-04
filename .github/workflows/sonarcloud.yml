@@ -44,6 +44,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow --tags
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v2
         with:
@@ -58,6 +59,7 @@ jobs:
       - name: Install dotnet dependencies for UMVC.Core
         run: dotnet restore
         working-directory: UMVC.Core
+      
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.11
         with:
