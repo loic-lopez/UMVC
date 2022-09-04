@@ -56,10 +56,6 @@ jobs:
       - name: install dotnet-sonarscanner
         run: dotnet tool install --global dotnet-sonarscanner
         
-      - name: Install dotnet dependencies for UMVC.Core
-        run: dotnet restore
-        working-directory: UMVC.Core
-      
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.11
         with:
@@ -69,15 +65,19 @@ jobs:
         id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.11
         
+      - name: Install dotnet dependencies for UMVC.Core
+        run: dotnet restore
+        working-directory: UMVC.Core
+      
       - name: Start SonarCloud scanner for UMVC.Core
         run: |
           dotnet sonarscanner begin /k:"UMVC.Core" \
             /o:"loic-lopez" \
+            /v:"${{ steps.gitversion.outputs.semVer }}" \
             /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}" \
             /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
             /d:sonar.scm.provider=git \
             /d:sonar.projectDescription=UMVC.Core - Model-View-Controller Base classes for UMVC \
-            /d:sonar.projectVersion=${{ steps.gitversion.outputs.semVer }} \
             /d:sonar.host.url=https://sonarcloud.io
         working-directory: UMVC.Core
 
