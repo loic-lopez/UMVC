@@ -43,11 +43,53 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Analyze with SonarCloud         
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '3.1.x'
+      
+      - name: install dotCover
+        run: dotnet tool install --global JetBrains.dotCover.GlobalTool   
+      
+      - name: install dotnet-sonarscanner
+        run: dotnet tool install --global dotnet-sonarscanner
+        
+      - name: Install dotnet dependencies for UMVC.Core
+        run: dotnet restore
+        working-directory: UMVC.Core
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.11
+        with:
+          versionSpec: '5.x'
 
-        # You can pin the exact commit or the version.
-        # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.11
+        
+      - name: Start SonarCloud scanner for UMVC.Core
+        run: |
+          dotnet sonarscanner begin /k:"<sonar-project-key>"
+            /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+            /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html
+            /d:sonar.projectKey=loic-lopez_UMVC
+            /d:sonar.organization=loic-lopez
+            /d:sonar.scm.provider=git
+            /d:sonar.projectName=UMVC.Core - Model-View-Controller Base classes for UMVC
+            /d:sonar.projectVersion=${{ steps.gitversion.outputs.semVer }}
+        working-directory: UMVC.Core
+
+      - name: Build UMVC.Core
+        run: dotnet build –no-incremental
+        working-directory: UMVC.Core
+      
+      - name: Test UMVC.Core
+        run: dotnet dotcover test --dcReportType=HTML
+        working-directory: UMVC.Core
+
+      - name: End SonarCloud scanner for UMVC.Core
+        run: |
+          dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        working-directory: UMVC.Core
+      
+      
