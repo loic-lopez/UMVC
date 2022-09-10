@@ -38,17 +38,6 @@ jobs:
 
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install python3-pip unzip curl -y && pip install requests
-
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '3.1.x'
-
-      - name: install dotCover
-        run: dotnet tool install --global JetBrains.dotCover.GlobalTool
-
-      - name: install dotnet-sonarscanner
-        run: dotnet tool install --global dotnet-sonarscanner
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py ${{ secrets.PERSONAL_TOKEN }}
@@ -97,18 +86,18 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: true
 
-      - uses: game-ci/unity-builder@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          allowDirtyBuild: true
-          buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
-          
-      - name: Create sonar dir
-        run: mkdir sonar
-
-      - name: Start SonarCloud scanner for UMVC
+      - name: SonarCloud scanner for UMVC.Editor
+        uses: shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
         run: |
+          dotnet tool install --global JetBrains.dotCover.GlobalTool
+          ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' unity-editor} \
+            -projectPath $UNITY_DIR \
+            -quit \
+            -batchmode \
+            -nographics \
+            -logFile /dev/stdout \
+            -executeMethod UMVC.Builder.SonarCloudBuilder.SyncSolution
+          mkdir sonar && cd sonar
           dotnet sonarscanner begin /k:"UMVC.Editor" \
             /o:"loic-lopez" \
             /n:"UMVC.Editor" \
@@ -118,18 +107,6 @@ jobs:
             /d:sonar.scm.provider=git \
             /d:sonar.projectDescription="UMVC - Model-View-Controller Generator built for Unity" \
             /d:sonar.host.url=https://sonarcloud.io
-        working-directory: sonar
-
-      - name: Build UMVC
-        run: dotnet build ../*.sln
-        working-directory: sonar
-
-      - name: Test UMVC
-        run: dotnet dotcover test --dcReportType=HTML
-        working-directory: sonar
-
-      - name: End SonarCloud scanner for UMVC
-        run: |
+          dotnet build ../*.sln
+          dotnet dotcover test --dcReportType=HTML
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}"
-        working-directory: sonar
- 
