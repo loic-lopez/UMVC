@@ -126,18 +126,20 @@ jobs:
         uses: docker://shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
         with: 
           args: >-
-            dotnet tool install --global JetBrains.dotCover.GlobalTool 
-            mkdir sonar 
-            cd sonar
-            dotnet sonarscanner begin /k:"UMVC.Editor" \
-              /o:"loic-lopez" \
-              /n:"UMVC.Editor" \
-              /v:"${{ steps.gitversion.outputs.semVer }}" \
-              /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}" \
-              /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
-              /d:sonar.scm.provider=git \
-              /d:sonar.projectDescription="UMVC - Model-View-Controller Generator built for Unity" \
-              /d:sonar.host.url=https://sonarcloud.io 
-            dotnet build ../*.sln 
-            dotnet dotcover test --dcReportType=HTML 
-            dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}"
+            sh -c "
+              dotnet tool install --global JetBrains.dotCover.GlobalTool && \
+              mkdir sonar && \
+              cd sonar && \
+              dotnet sonarscanner begin /k:'UMVC.Editor' \
+                /o:'loic-lopez' \
+                /n:'UMVC.Editor' \
+                /v:'${{ steps.gitversion.outputs.semVer }}' \
+                /d:sonar.login='${{ secrets.SONAR_TOKEN_EDITOR }}' \
+                /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
+                /d:sonar.scm.provider=git \
+                /d:sonar.projectDescription='UMVC - Model-View-Controller Generator built for Unity' \
+                /d:sonar.host.url=https://sonarcloud.io && \
+              dotnet build ../*.sln && \
+              dotnet dotcover test --dcReportType=HTML && \ 
+              dotnet sonarscanner end /d:sonar.login='${{ secrets.SONAR_TOKEN_EDITOR }}'
+            "
