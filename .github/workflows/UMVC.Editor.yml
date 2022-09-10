@@ -122,14 +122,15 @@ jobs:
           buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
           allowDirtyBuild: true
           
+      - name: print current dir
+        run: ls
+          
       - name: scan UMVC.Editor with SonarCloud
         uses: docker://shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
         with: 
           args: >-
             sh -c "
               dotnet tool install --global JetBrains.dotCover.GlobalTool && \
-              mkdir sonar && \
-              cd sonar && \
               dotnet sonarscanner begin /k:'UMVC.Editor' \
                 /o:'loic-lopez' \
                 /n:'UMVC.Editor' \
