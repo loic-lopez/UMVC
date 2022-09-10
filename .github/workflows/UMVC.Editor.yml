@@ -82,8 +82,12 @@ jobs:
     container:
       image: shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
     steps:
-      - name: Install dependencies
-        run: apt-get update && apt-get install git -y
+      - name: Upgrade git
+        run: |
+          add-apt-repository ppa:git-core/ppa -y
+          apt-get update
+          apt-get install git -y
+          git --version
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
