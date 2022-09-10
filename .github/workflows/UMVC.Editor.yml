@@ -81,7 +81,13 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
     steps:
+      - name: Install prerequisites
+        run: |
+          apt-get update
+          apt-get install software-properties-common -y
       - name: Upgrade git
         run: |
           add-apt-repository ppa:git-core/ppa -y
@@ -103,16 +109,14 @@ jobs:
         
       - name: Install dotcover
         run: dotnet tool install --global JetBrains.dotCover.GlobalTool
-      
+
       - name: Create .sln files
-        run: |
-          ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' unity-editor} \
-            -projectPath $UNITY_DIR \
-            -quit \
-            -batchmode \
-            -nographics \
-            -logFile /dev/stdout \
-            -executeMethod UMVC.Builder.SonarCloudBuilder.SyncSolution
+      - uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
+      
       - name: Create workdir
         run: mkdir sonar
       - name: Begin SonarCloud UMVC.Editor
