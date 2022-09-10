@@ -94,6 +94,10 @@ jobs:
           apt-get update
           apt-get install git -y
           git --version
+      
+      - name: Allow git directory
+        run: git config --global --add safe.directory $(realpath .)
+      
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
