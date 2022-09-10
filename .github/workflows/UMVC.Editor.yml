@@ -104,8 +104,8 @@ jobs:
           allowDirtyBuild: true
           buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
           
-      - name: print current dir
-        run: ls -l
+      - name: Create sonar dir
+        run: mkdir sonar
 
       - name: Start SonarCloud scanner for UMVC
         run: |
@@ -118,14 +118,18 @@ jobs:
             /d:sonar.scm.provider=git \
             /d:sonar.projectDescription="UMVC - Model-View-Controller Generator built for Unity" \
             /d:sonar.host.url=https://sonarcloud.io
+        working-directory: sonar
 
       - name: Build UMVC
-        run: dotnet build UMVC.sln
+        run: dotnet build ../*.sln
+        working-directory: sonar
 
       - name: Test UMVC
         run: dotnet dotcover test --dcReportType=HTML
+        working-directory: sonar
 
       - name: End SonarCloud scanner for UMVC
         run: |
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}"
+        working-directory: sonar
  
