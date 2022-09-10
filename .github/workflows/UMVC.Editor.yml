@@ -58,7 +58,7 @@ jobs:
 
       # Test edit mode
       - name: Run playmode tests
-        uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v2.0.0
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
@@ -73,7 +73,7 @@ jobs:
       
       # Test play mode
       - name: Run editmode tests
-        uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v2.0.0
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
@@ -90,7 +90,7 @@ jobs:
         run: ls -R ./artifacts/CodeCoverage/
       
       - name: Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v3.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./artifacts/CodeCoverage/workspace-opencov/PlayMode/TestCoverageResults_0000.xml,./artifacts/CodeCoverage/workspace-opencov/EditMode/TestCoverageResults_0000.xml
@@ -98,7 +98,10 @@ jobs:
           fail_ci_if_error: true
 
       - uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
+          allowDirtyBuild: true
           buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
 
       - name: Start SonarCloud scanner for UMVC
