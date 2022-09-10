@@ -25,9 +25,30 @@ jobs:
         run: echo "::error There is a problem with your UMVC.Core build! Exiting!!" && exit 1
       
       - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow --tags
+        
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.11
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.11
 
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install python3-pip unzip curl -y && pip install requests
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '3.1.x'
+
+      - name: install dotCover
+        run: dotnet tool install --global JetBrains.dotCover.GlobalTool
+
+      - name: install dotnet-sonarscanner
+        run: dotnet tool install --global dotnet-sonarscanner
         
       - name: Download UMVC.Core Build
         run: python .github/workflows/scripts/downloadArtifacts.py ${{ secrets.PERSONAL_TOKEN }}
@@ -75,4 +96,26 @@ jobs:
           files: ./artifacts/CodeCoverage/workspace-opencov/PlayMode/TestCoverageResults_0000.xml,./artifacts/CodeCoverage/workspace-opencov/EditMode/TestCoverageResults_0000.xml
           name: codecov-umbrella
           fail_ci_if_error: true
+
+      - name: Start SonarCloud scanner for UMVC
+        run: |
+          dotnet sonarscanner begin /k:"UMVC.Editor" \
+            /o:"loic-lopez" \
+            /n:"UMVC.Editor" \
+            /v:"${{ steps.gitversion.outputs.semVer }}" \
+            /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}" \
+            /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
+            /d:sonar.scm.provider=git \
+            /d:sonar.projectDescription="UMVC - Model-View-Controller Generator built for Unity" \
+            /d:sonar.host.url=https://sonarcloud.io
+
+      - name: Build UMVC
+        run: dotnet build ../*.sln
+
+      - name: Test UMVC
+        run: dotnet dotcover test --dcReportType=HTML
+
+      - name: End SonarCloud scanner for UMVC
+        run: |
+          dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}"
  
