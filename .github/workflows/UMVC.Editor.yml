@@ -79,25 +79,8 @@ jobs:
   SonarCloud_Scan:
     name: Analyse UMVC.Editor with SonarCloud 🧪
     runs-on: ubuntu-latest
-    container:
-      image: shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
-      env:
-        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
     steps:
-      - name: Install prerequisites
-        run: |
-          apt-get update
-          apt-get install software-properties-common -y
-      - name: Upgrade git
-        run: |
-          add-apt-repository ppa:git-core/ppa -y
-          apt-get update
-          apt-get install git -y
-          git --version
-      
-      - name: Allow git directory
-        run: git config --global --add safe.directory $(realpath .)
-      
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -120,30 +103,21 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
-      
-      - name: Create workdir
-        run: mkdir sonar
-      - name: Begin SonarCloud UMVC.Editor
-        run: |
-          dotnet sonarscanner begin /k:"UMVC.Editor" \
-          /o:"loic-lopez" \
-          /n:"UMVC.Editor" \
-          /v:"${{ steps.gitversion.outputs.semVer }}" \
-          /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}" \
-          /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
-          /d:sonar.scm.provider=git \
-          /d:sonar.projectDescription="UMVC - Model-View-Controller Generator built for Unity" \
-          /d:sonar.host.url=https://sonarcloud.io
-        working-directory: mkdir sonar
-      
-      - name: Build UMVC.Editor
-        run: dotnet build ../*.sln
-        working-directory: mkdir sonar
-      
-      - name: Test with DotCover
-        run: dotnet dotcover test --dcReportType=HTML
-        working-directory: mkdir sonar
-
-      - name: End SonarCloud UMVC.Editor
-        run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}"
-        working-directory: mkdir sonar
+          
+      - name: scan UMVC.Editor with SonarCloud
+        uses: docker://shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
+        with: 
+          args: |
+            dotnet tool install --global JetBrains.dotCover.GlobalTool && \
+            mkdir sonar && cd sonar && dotnet sonarscanner begin /k:"UMVC.Editor" \
+            /o:"loic-lopez" \
+            /n:"UMVC.Editor" \
+            /v:"${{ steps.gitversion.outputs.semVer }}" \
+            /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}" \
+            /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
+            /d:sonar.scm.provider=git \
+            /d:sonar.projectDescription="UMVC - Model-View-Controller Generator built for Unity" \
+            /d:sonar.host.url=https://sonarcloud.io && \
+            dotnet build ../*.sln && \
+            dotnet dotcover test --dcReportType=HTML && \
+            dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}"
