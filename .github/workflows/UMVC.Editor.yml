@@ -103,6 +103,9 @@ jobs:
         with:
           allowDirtyBuild: true
           buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
+          
+      - name: print current dir
+        run: ls -l
 
       - name: Start SonarCloud scanner for UMVC
         run: |
