@@ -124,6 +124,9 @@ jobs:
           
       - name: print current dir
         run: ls
+
+      - name: remove unwanted files
+        run: rm -f *.csproj && rm -f UMVC.Core.Build.zip
           
       - name: scan UMVC.Editor with SonarCloud
         uses: docker://shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
