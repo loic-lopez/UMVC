@@ -111,7 +111,7 @@ jobs:
         run: dotnet tool install --global JetBrains.dotCover.GlobalTool
 
       - name: Create .sln files
-      - uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
@@ -130,9 +130,16 @@ jobs:
           /d:sonar.scm.provider=git \
           /d:sonar.projectDescription="UMVC - Model-View-Controller Generator built for Unity" \
           /d:sonar.host.url=https://sonarcloud.io
+        working-directory: mkdir sonar
+      
       - name: Build UMVC.Editor
         run: dotnet build ../*.sln
+        working-directory: mkdir sonar
+      
       - name: Test with DotCover
         run: dotnet dotcover test --dcReportType=HTML
+        working-directory: mkdir sonar
+
       - name: End SonarCloud UMVC.Editor
         run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_EDITOR }}"
+        working-directory: mkdir sonar
