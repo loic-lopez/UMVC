@@ -157,9 +157,6 @@ jobs:
 
       - name: remove unwanted files
         run: rm -f UMVC.Core.Build.zip
-      
-      - name: move csproj to another dir
-        run: mkdir csproj_bkp && mv *.csproj csproj_bkp
           
       - name: scan UMVC.Editor with SonarCloud
         uses: docker://shadowbert/unityci:2021.3.3f1-sonarqube-1.0.1
@@ -169,7 +166,7 @@ jobs:
               dotnet tool install --global JetBrains.dotCover.GlobalTool && \
               dotnet tool install --global dotnet-sonarscanner && \
               export PATH=$PATH:$HOME/.dotnet/tools && \
-              dotnet sonarscanner begin /k:'UMVC.Editor' \
+              dotnet-sonarscanner.exe begin /k:'UMVC.Editor' \
                 /o:'loic-lopez' \
                 /n:'UMVC.Editor' \
                 /v:'${{ steps.gitversion.outputs.semVer }}' \
@@ -178,8 +175,6 @@ jobs:
                 /d:sonar.scm.provider=git \
                 /d:sonar.projectDescription='UMVC - Model-View-Controller Generator built for Unity' \
                 /d:sonar.host.url=https://sonarcloud.io && \
-              mv csproj_bkp/*.csproj . && \
               dotnet build workspace.sln && \
-              mv *.csproj csproj_bkp && \
-              dotnet sonarscanner end /d:sonar.login='${{ secrets.SONAR_TOKEN_EDITOR }}'
+              dotnet-sonarscanner.exe end /d:sonar.login='${{ secrets.SONAR_TOKEN_EDITOR }}'
             "
