@@ -135,7 +135,7 @@ jobs:
             sh -c "
               dotnet tool install --global JetBrains.dotCover.GlobalTool && \
               dotnet tool install --global dotnet-sonarscanner && \
-              echo "$HOME/.dotnet/tools" >> $GITHUB_PATH && \
+              export PATH=$PATH:$HOME/.dotnet/tools && \
               dotnet sonarscanner begin /k:'UMVC.Editor' \
                 /o:'loic-lopez' \
                 /n:'UMVC.Editor' \
