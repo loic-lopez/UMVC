@@ -122,6 +122,36 @@ jobs:
           buildMethod: UMVC.Builder.SonarCloudBuilder.SyncSolution
           allowDirtyBuild: true
           
+      # Test edit mode
+      - name: Run playmode tests
+        uses: game-ci/unity-test-runner@v2.0.0
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          testMode: playmode
+          customParameters: |
+            -enableCodeCoverage 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*"
+            -debugCodeOptimization
+
+      # Test play mode
+      - name: Run editmode tests
+        uses: game-ci/unity-test-runner@v2.0.0
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2021.2.19f1
+          testMode: editmode
+          customParameters: |
+            -enableCodeCoverage 
+            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
+            -coverageOptions "assemblyFilters:-*unity*"
+            -debugCodeOptimization
+          
       - name: print current dir
         run: ls
 
@@ -144,12 +174,12 @@ jobs:
                 /n:'UMVC.Editor' \
                 /v:'${{ steps.gitversion.outputs.semVer }}' \
                 /d:sonar.login='${{ secrets.SONAR_TOKEN_EDITOR }}' \
-                /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
+                /d:sonar.cs.opencover.reportsPaths=./artifacts/CodeCoverage/workspace-opencov/PlayMode/TestCoverageResults_0000.xml,./artifacts/CodeCoverage/workspace-opencov/EditMode/TestCoverageResults_0000.xml \
                 /d:sonar.scm.provider=git \
                 /d:sonar.projectDescription='UMVC - Model-View-Controller Generator built for Unity' \
                 /d:sonar.host.url=https://sonarcloud.io && \
               mv csproj_bkp/*.csproj . && \
               dotnet build workspace.sln && \
-              dotnet-dotcover test --dcReportType=HTML && \ 
+              mv *.csproj csproj_bkp && \
               dotnet sonarscanner end /d:sonar.login='${{ secrets.SONAR_TOKEN_EDITOR }}'
             "
