@@ -26,7 +26,7 @@ jobs:
         run: .\UMVC.Core\packages\OpenCover\4.7.1221\tools\OpenCover.Console.exe -register -filter:"+[*]* -[*]*.Templates.* -[*]*.Mock.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.12.0\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net461\UMVC.Core.Tests.dll" -output:coverage.xml
 
       - name: Codecov
-        uses: codecov/codecov-action@master
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
@@ -40,7 +40,7 @@ jobs:
 
       - uses: actions/checkout@v3
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '3.1.x'
 
@@ -50,7 +50,7 @@ jobs:
       - name: Build
         run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release
         
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.Components.dll
         with:
           name: UMVC.Core.Build
@@ -62,19 +62,19 @@ jobs:
 #          name: UMVC.Core.Build
 #          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
           
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.Generation.dll
         with:
           name: UMVC.Core.Build
           path: UMVC.Core/Generation/obj/Release/UMVC.Core.Generation.dll
           
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.Templates.dll
         with:
           name: UMVC.Core.Build
           path: UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll
           
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.MVC.dll
         with:
           name: UMVC.Core.Build
