@@ -56,7 +56,7 @@ namespace UMVC.Editor.Singleton
                 _instance.RootPath = Path.GetFullPath(currentDirectory + "/../");
             }
 
-            _instance.RelativePath = "Assets" + $"{_instance.RootPath}".Substring(Application.dataPath.Length);
+            _instance.RelativePath = "Assets" + $"{_instance.RootPath}"[Application.dataPath.Length..];
 
             var settingsAssetPath = $"{_instance.RelativePath}/{SettingsFolder}/SettingsAsset.asset";
 

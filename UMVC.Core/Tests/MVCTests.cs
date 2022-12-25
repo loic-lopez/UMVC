@@ -89,7 +89,7 @@ namespace UMVC.Core.Tests
         [Test]
         public void TestEvents()
         {
-            TestModel testModel = new TestModel();
+            TestModel testModel = new();
             testModel.Initialize();
             int value = new Random().Next();
             const string fieldName = "Value";

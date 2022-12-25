@@ -1,23 +1,20 @@
-using System;
 using System.ComponentModel;
 using System.Reflection;
 using UMVC.Core.MVC.Interfaces;
 
 namespace UMVC.Core.MVC
 {
-
     public abstract class BaseController<TModel> where TModel : BaseModel
     {
-        protected TModel Model { get; set; }
-        public bool IsAlreadySetup { get; protected set; } = false;
-
-        protected IBaseView<TModel> View;
-        protected MethodInfo OnFieldWillUpdate;
-        protected MethodInfo OnFieldDidUpdate;
-
         protected const BindingFlags ViewEventsBindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
         protected const string OnFieldWillUpdateViewMemberName = "OnFieldWillUpdate";
         protected const string OnFieldDidUpdateViewMemberName = "OnFieldDidUpdate";
+        protected MethodInfo OnFieldDidUpdate;
+        protected MethodInfo OnFieldWillUpdate;
+
+        protected IBaseView<TModel> View;
+        protected TModel Model { get; set; }
+        public bool IsAlreadySetup { get; protected set; }
 
         public virtual void Setup(IBaseView<TModel> view)
         {
@@ -48,11 +45,12 @@ namespace UMVC.Core.MVC
             Model.OnFieldDidUpdate += RaiseOnFieldDidUpdate;
         }
 
-        protected virtual void RaiseOnFieldWillUpdate(object model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
+        protected virtual void RaiseOnFieldWillUpdate(object model, object newValue, object oldValue,
+            PropertyChangedEventArgs eventArgs)
         {
             OnFieldWillUpdate?.Invoke(View, new[] { model, newValue, oldValue, eventArgs });
         }
-        
+
         protected virtual void RaiseOnFieldDidUpdate(object model, object newValue, PropertyChangedEventArgs eventArgs)
         {
             OnFieldDidUpdate?.Invoke(View, new[] { model, newValue, eventArgs });

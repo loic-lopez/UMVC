@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using UMVC.Editor.Extensions;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ namespace UMVC.Editor.Utils
             }
 
             outputNamespace = outputNamespace?.ToNamespacePascalCase();
-            
+
             return outputNamespace;
         }
     }

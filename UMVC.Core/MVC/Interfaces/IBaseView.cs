@@ -1,8 +1,6 @@
-﻿using System.ComponentModel;
-
-namespace UMVC.Core.MVC.Interfaces
+﻿namespace UMVC.Core.MVC.Interfaces
 {
-    public interface IBaseView<TModel> where TModel : BaseModel
+    public interface IBaseView<out TModel> where TModel : BaseModel
     {
         TModel GetModel();
     }

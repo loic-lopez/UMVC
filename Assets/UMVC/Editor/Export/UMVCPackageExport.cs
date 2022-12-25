@@ -19,24 +19,23 @@ namespace UMVC.Export
                 Path.Combine(Application.dataPath, $"{Root}Editor/EditorDependencies/UMVC.Dependencies.msb4u.csproj"),
                 Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.EditorDependencies.msb4u.csproj")
             );
-            
+
             File.Move(
                 Path.Combine(Application.dataPath, $"{Root}PlayerDependencies/UMVC.Dependencies.msb4u.csproj"),
                 Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.PlayerDependencies.msb4u.csproj")
             );
-            
+
             AssetDatabase.Refresh();
 
             Export(ExportWithDllsPath);
-            
+
             File.Move(
                 Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.EditorDependencies.msb4u.csproj"),
                 Path.Combine(Application.dataPath, $"{Root}Editor/EditorDependencies/UMVC.Dependencies.msb4u.csproj")
-                
             );
-            
+
             File.Move(
-                Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.PlayerDependencies.msb4u.csproj"), 
+                Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.PlayerDependencies.msb4u.csproj"),
                 Path.Combine(Application.dataPath, $"{Root}PlayerDependencies/UMVC.Dependencies.msb4u.csproj")
             );
 
@@ -59,7 +58,7 @@ namespace UMVC.Export
                 .Where(x => !x.Contains("Export"));
             ;
 
-            if (disableDlls) assets = assets.Where(x => Path.GetExtension(x) != ".dll" && !x.Contains("net46"));
+            if (disableDlls) assets = assets.Where(x => Path.GetExtension(x) != ".dll" && !x.Contains("net48"));
 
             assets = assets.Select(x => "Assets" + x.Replace(Application.dataPath, "").Replace(@"\", "/"));
 

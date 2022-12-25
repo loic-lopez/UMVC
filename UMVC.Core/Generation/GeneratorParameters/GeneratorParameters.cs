@@ -1,5 +1,4 @@
-﻿using System;
-using UMVC.Core.Components;
+﻿using UMVC.Core.Components;
 
 namespace UMVC.Core.Generation.GeneratorParameters
 {
@@ -13,12 +12,12 @@ namespace UMVC.Core.Generation.GeneratorParameters
 
         public class Builder
         {
-
+            private Component _controller;
             private Component _view;
             private ModelComponent _model;
-            private Component _controller;
             private string _namespaceName;
             private string _outputDir;
+
 
             public Builder WithView(Component view)
             {
@@ -31,7 +30,7 @@ namespace UMVC.Core.Generation.GeneratorParameters
                 _controller = controller;
                 return this;
             }
-            
+
             public Builder WithModel(ModelComponent model)
             {
                 _model = model;
@@ -43,13 +42,13 @@ namespace UMVC.Core.Generation.GeneratorParameters
                 _namespaceName = value;
                 return this;
             }
-            
+
             public Builder WithOutputDir(string value)
             {
                 _outputDir = value;
                 return this;
             }
-        
+
             public GeneratorParameters Build()
             {
                 return new GeneratorParameters

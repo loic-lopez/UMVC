@@ -13,46 +13,39 @@ namespace UMVC.Core.MVC
     {
         public bool isOnFieldWillUpdateEnabled = true;
         public bool isOnFieldDidUpdateEnabled = true;
-        
-        public virtual event Delegates.OnFieldWillUpdate OnFieldWillUpdate;
-        public virtual event Delegates.OnFieldDidUpdate OnFieldDidUpdate;
 
         public virtual void Initialize()
         {
         }
+
+        public virtual event Delegates.OnFieldWillUpdate OnFieldWillUpdate;
+        public virtual event Delegates.OnFieldDidUpdate OnFieldDidUpdate;
 
 
         protected virtual void RaiseOnFieldWillUpdate<T>(T newValue, [CallerMemberName] string propertyName = null)
         {
             var eventArgs = new PropertyChangedEventArgs(propertyName);
 
-            object oldValue;
-
             var type = GetType();
             var field = type.GetField(eventArgs.PropertyName);
 
-            if (field != null)
-            {
-                oldValue = field.GetValue(this);
-            }
-            else
-            {
-                oldValue = type.GetProperty(eventArgs.PropertyName)?.GetValue(this);
-            }
-            
+            var oldValue = field != null
+                ? field.GetValue(this)
+                : type.GetProperty(eventArgs.PropertyName)?.GetValue(this);
+
             OnFieldWillUpdate?.Invoke(this, newValue, oldValue, eventArgs);
         }
-        
-        protected virtual void RaiseOnFieldDidUpdate<T>(T newValue,[CallerMemberName] string propertyName = null)
+
+        protected virtual void RaiseOnFieldDidUpdate<T>(T newValue, [CallerMemberName] string propertyName = null)
         {
             OnFieldDidUpdate?.Invoke(this, newValue, new PropertyChangedEventArgs(propertyName));
         }
-        
+
         protected virtual bool Set<T>(ref T field, T value, Expression<Func<T>> property)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            
-            string propertyName = ((MemberExpression)property.Body).Member.Name;
+
+            var propertyName = ((MemberExpression)property.Body).Member.Name;
 
             if (isOnFieldWillUpdateEnabled)
                 RaiseOnFieldWillUpdate(value, propertyName);
@@ -62,7 +55,5 @@ namespace UMVC.Core.MVC
 
             return true;
         }
-
-        
     }
 }

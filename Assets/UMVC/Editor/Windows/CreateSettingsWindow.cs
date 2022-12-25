@@ -56,7 +56,7 @@ namespace UMVC.Editor.Windows
 
             if (view.ClassExtends.Type != null)
                 view.BaseNamespace = view.ClassExtends.Type.Namespace;
-            
+
             _serializedGameObject.Update();
 
             EditorGUILayout.PropertyField(_serializedModel, true);
@@ -71,7 +71,7 @@ namespace UMVC.Editor.Windows
         {
             var outputNamespace = EditorGUILayout.TextField("Output Namespace", _outputNamespace);
 
-            if (outputNamespace != _outputNamespace) _outputNamespace = outputNamespace;
+            if (!outputNamespace.Equals(_outputNamespace)) _outputNamespace = outputNamespace;
         }
 
         protected override void DisplayEndButton()

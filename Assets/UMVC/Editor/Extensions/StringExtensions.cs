@@ -19,10 +19,7 @@ namespace UMVC.Editor.Extensions
         {
             if (str.IsNullOrEmpty()) return "";
 
-            string CapitalizeWord(string word)
-            {
-                return char.ToUpper(word[0]) + word.Substring(1);
-            }
+            static string CapitalizeWord(string word) => char.ToUpper(word[0]) + word[1..];
 
             var wordList = str.Replace("[^A-Za-z0-9]", "").Split(' ');
 

@@ -47,8 +47,6 @@ jobs:
       - run: git fetch --prune --unshallow --tags
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '3.1.x'
       
       - name: install dotCover
         run: dotnet tool install --global JetBrains.dotCover.GlobalTool   

@@ -23,7 +23,7 @@ jobs:
         run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Debug
 
       - name: Test
-        run: .\UMVC.Core\packages\OpenCover\4.7.1221\tools\OpenCover.Console.exe -register -filter:"+[*]* -[*]*.Templates.* -[*]*.Mock.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.12.0\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net461\UMVC.Core.Tests.dll" -output:coverage.xml
+        run: .\UMVC.Core\packages\OpenCover\4.7.1221\tools\OpenCover.Console.exe -register -filter:"+[*]* -[*]*.Templates.* -[*]*.Mock.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.12.0\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net481\UMVC.Core.Tests.dll" -output:coverage.xml
 
       - name: Codecov
         uses: codecov/codecov-action@v3

@@ -28,13 +28,13 @@ namespace UMVC.Editor.Windows
         private string _componentName;
         private string _newSubdir;
         private string _outputDir;
-        private bool _wantCreateSubDir = true;
-
-        private SerializedObject _serializedGameObject;
 
         private SerializedProperty _serializedController;
+
+        private SerializedObject _serializedGameObject;
         private SerializedProperty _serializedModel;
         private SerializedProperty _serializedView;
+        private bool _wantCreateSubDir = true;
 
 
         protected override void OnGUI()
@@ -87,7 +87,7 @@ namespace UMVC.Editor.Windows
                 BaseNamespace = baseViewSettings.BaseNamespace,
                 ClassExtends = baseViewSettings.ClassExtends
             };
-            
+
             _serializedGameObject = new SerializedObject(this);
             _serializedModel = _serializedGameObject.FindProperty("model");
             _serializedController = _serializedGameObject.FindProperty("controller");
@@ -106,17 +106,14 @@ namespace UMVC.Editor.Windows
 
                 var outputDir = _wantCreateSubDir ? _newSubdir : _outputDir;
 
-                if (_wantCreateSubDir && Directory.Exists(outputDir)
+                if ((_wantCreateSubDir && Directory.Exists(outputDir))
                     || File.Exists($"{outputDir}/{view.Name}.cs")
                     || File.Exists($"{outputDir}/{model.Name}.cs")
                     || File.Exists($"{outputDir}/{controller.Name}.cs")
-                )
-                {
-                    if (!EditorUtility.DisplayDialog("UMVC", $"Are you sure to overwrite your files in directory: {outputDir}", "Overwrite", "Cancel"))
-                    {
-                        return;   
-                    }
-                }
+                   )
+                    if (!EditorUtility.DisplayDialog("UMVC",
+                            $"Are you sure to overwrite your files in directory: {outputDir}", "Overwrite", "Cancel"))
+                        return;
 
 
                 var outputNamespace = Namespace.GenerateOutputNamespace(_wantCreateSubDir, _newSubdir, _outputDir);
