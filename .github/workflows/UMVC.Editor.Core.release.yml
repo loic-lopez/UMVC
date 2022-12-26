@@ -60,31 +60,25 @@ jobs:
         name: Upload UMVC.Core.Components.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll
-
-#      - uses: actions/upload-artifact@v3
-#        name: Upload UMVC.Core.Exceptions.dll
-#        with:
-#          name: UMVC.Core.Build
-#          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
+          path: UMVC.Core/Components/bin/Release/net48/UMVC.Core.Components.dll
 
       - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.Generation.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/Generation/obj/Release/UMVC.Core.Generation.dll
+          path: UMVC.Core/Generation/bin/Release/net48/UMVC.Core.Generation.dll
 
       - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.Templates.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll
+          path: UMVC.Core/Templates/bin/Release/net48/UMVC.Core.Templates.dll
 
       - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.MVC.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll
+          path: UMVC.Core/MVC/bin/Release/net48/UMVC.Core.MVC.dll
 
   Test_UMVC_Editor:
     name: Test UMVC.Editor 🧪

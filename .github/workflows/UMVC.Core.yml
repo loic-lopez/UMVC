@@ -54,45 +54,23 @@ jobs:
         name: Upload UMVC.Core.Components.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/Components/bin/Release/UMVC.Core.Components.dll
-          
-#      - uses: actions/upload-artifact@v3
-#        name: Upload UMVC.Core.Exceptions.dll
-#        with:
-#          name: UMVC.Core.Build
-#          path: UMVC.Core/Exceptions/obj/Release/UMVC.Core.Exceptions.dll
+          path: UMVC.Core/Components/bin/Release/net48/UMVC.Core.Components.dll
           
       - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.Generation.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/Generation/obj/Release/UMVC.Core.Generation.dll
+          path: UMVC.Core/Generation/bin/Release/net48/UMVC.Core.Generation.dll
           
       - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.Templates.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/Templates/bin/Release/UMVC.Core.Templates.dll
+          path: UMVC.Core/Templates/bin/Release/net48/UMVC.Core.Templates.dll
           
       - uses: actions/upload-artifact@v3
         name: Upload UMVC.Core.MVC.dll
         with:
           name: UMVC.Core.Build
-          path: UMVC.Core/MVC/bin/Release/UMVC.Core.MVC.dll
-        
-#      - name: Convert OpenCover format to lcov
-#        run: dotnet .\UMVC.Core\packages\reportgenerator\4.5.8\tools\netcoreapp3.0\ReportGenerator.dll "-reports:coverage.xml" -reporttypes:lcov "-targetdir:coveragereport"
-#        
-#      - name: Coveralls
-#        uses: coverallsapp/github-action@master
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          path-to-lcov: ./coveragereport/lcov.info
-        
-#      - name: Download Coveralls
-#        run: dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
-#        
-#      - name: Upload to Coveralls
-#        run: .\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --useRelativePaths
-#        env:
-#          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          path: UMVC.Core/MVC/bin/Release/net48/UMVC.Core.MVC.dll
+  
