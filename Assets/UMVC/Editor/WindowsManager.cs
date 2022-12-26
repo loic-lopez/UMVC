@@ -8,7 +8,7 @@ namespace UMVC.Editor
     {
         private static IWindow InstantiateWindow<T>() where T : IWindow
         {
-            var window = (IWindow) EditorWindow.GetWindow(typeof(T));
+            var window = (IWindow)EditorWindow.GetWindow(typeof(T));
             window.SetupWindow();
 
             return window;

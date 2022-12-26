@@ -8,7 +8,7 @@ namespace UMVC.Editor.Extensions
         {
             var name = t.Name;
             var index = name.IndexOf('`');
-            return index == -1 ? name : name.Substring(0, index);
+            return index == -1 ? name : name[..index];
         }
     }
 }

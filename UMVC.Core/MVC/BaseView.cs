@@ -8,12 +8,9 @@ namespace UMVC.Core.MVC
         where TModel : BaseModel
         where TController : BaseController<TModel>, new()
     {
-        protected readonly TController Controller = new TController();
-
         // ReSharper disable once InconsistentNaming
         public TModel Model;
-        
-        public TModel GetModel() => Model;
+        protected readonly TController Controller = new();
 
         protected virtual void Awake()
         {
@@ -25,25 +22,29 @@ namespace UMVC.Core.MVC
             Controller.LateSetup();
         }
 
-        protected virtual void OnDisable()
-        {
-            Controller.Shutdown();
-        }
-
         protected virtual void OnEnable()
         {
             if (!Controller.IsAlreadySetup)
                 Controller.Setup(this);
         }
 
-        protected virtual void OnFieldWillUpdate(TModel model, object newValue, object oldValue, PropertyChangedEventArgs eventArgs)
+        protected virtual void OnDisable()
         {
-            
+            Controller.Shutdown();
+        }
+
+        public TModel GetModel()
+        {
+            return Model;
+        }
+
+        protected virtual void OnFieldWillUpdate(TModel model, object newValue, object oldValue,
+            PropertyChangedEventArgs eventArgs)
+        {
         }
 
         protected virtual void OnFieldDidUpdate(TModel model, object newValue, PropertyChangedEventArgs eventArgs)
         {
-            
         }
     }
 }

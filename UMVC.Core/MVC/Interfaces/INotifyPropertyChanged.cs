@@ -1,5 +1,4 @@
-﻿
-namespace UMVC.Core.MVC.Interfaces
+﻿namespace UMVC.Core.MVC.Interfaces
 {
     public interface INotifyPropertyChanged
     {

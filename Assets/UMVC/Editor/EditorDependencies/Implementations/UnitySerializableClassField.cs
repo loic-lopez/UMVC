@@ -1,6 +1,6 @@
 using System;
-using UMVC.Core.Components;
 using TypeReferences;
+using UMVC.Core.Components;
 
 namespace UMVC.Editor.EditorDependencies.Implementations
 {

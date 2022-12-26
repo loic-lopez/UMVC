@@ -25,7 +25,7 @@ namespace UMVC.Editor.Abstracts
         public virtual void SetupWindow()
         {
             Instance = this;
-            titleContent.image = (Texture) EditorGUIUtility.Load(Singleton.UMVC.Instance.LogoPath);
+            titleContent.image = (Texture)EditorGUIUtility.Load(Singleton.UMVC.Instance.LogoPath);
         }
 
         public abstract string WindowName();

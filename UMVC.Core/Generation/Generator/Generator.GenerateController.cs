@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// ReSharper disable once RedundantUsingDirective
+using System.Collections.Generic;
 using System.IO;
-// ReSharper disable once RedundantUsingDirective
 using UMVC.Core.Templates;
 
 
@@ -10,7 +10,7 @@ namespace UMVC.Core.Generation.Generator
     {
         public static void GenerateController(GeneratorParameters.GeneratorParameters generatorParameters)
         {
-            ControllerTemplate template = new ControllerTemplate
+            ControllerTemplate template = new()
             {
                 //Create our session.
                 Session = new Dictionary<string, object>()
@@ -24,9 +24,8 @@ namespace UMVC.Core.Generation.Generator
 
             template.Initialize();
 
-            string classDef = template.TransformText();
-
-            File.WriteAllText($"{generatorParameters.OutputDir}/{generatorParameters.Controller.Name}.cs", classDef);
+            File.WriteAllText($"{generatorParameters.OutputDir}/{generatorParameters.Controller.Name}.cs",
+                template.TransformText());
         }
     }
 }
