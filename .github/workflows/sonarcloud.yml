@@ -49,7 +49,7 @@ jobs:
         uses: actions/setup-dotnet@v3
       
       - name: install dotCover
-        run: dotnet tool install --global JetBrains.dotCover.GlobalTool   
+        run: dotnet tool install --global JetBrains.dotCover.GlobalTool
       
       - name: install dotnet-sonarscanner
         run: dotnet tool install --global dotnet-sonarscanner
@@ -74,7 +74,7 @@ jobs:
             /n:"UMVC.Core" \
             /v:"${{ steps.gitversion.outputs.semVer }}" \
             /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}" \
-            /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
+            /d:sonar.cs.dotcover.reportsPaths=./dotCover.Output.html \
             /d:sonar.scm.provider=git \
             /d:sonar.projectDescription="UMVC.Core - Model-View-Controller Base classes for UMVC" \
             /d:sonar.host.url=https://sonarcloud.io
@@ -92,5 +92,4 @@ jobs:
         run: |
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}"
         working-directory: UMVC.Core
-      
       
