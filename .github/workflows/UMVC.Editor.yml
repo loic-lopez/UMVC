@@ -58,6 +58,6 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./artifacts/CodeCoverage/editmode-results.xml,./artifacts/CodeCoverage/playmode-results.xml
-          name: codecov-umbrella
+          name: codecov-umbrella-editor
           fail_ci_if_error: true
  

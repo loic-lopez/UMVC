@@ -30,7 +30,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
-          name: codecov-umbrella
+          name: codecov-umbrella-core
           fail_ci_if_error: true
           
   Build:
