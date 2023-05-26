@@ -7,152 +7,34 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  Test_UMVC_Core:
-    name: Test UMVC.Core 🧪
-    runs-on: windows-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-
-      - uses: actions/checkout@v3  
-
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '3.1.x'
-
-      - name: Install dotnet dependencies
-        run: dotnet restore ./UMVC.Core/UMVC.Core.sln
-
-      - name: Build
-        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Debug
-
-      - name: Test
-        run: .\UMVC.Core\packages\OpenCover\4.7.1221\tools\OpenCover.Console.exe -register -filter:"+[*]* -[*]*.Templates.* -[*]*.Mock.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.12.0\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net48\UMVC.Core.Tests.dll" -output:coverage.xml
-
-      - name: Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-          name: codecov-umbrella
-          fail_ci_if_error: true
-
-  Build_UMVC_Core:
-    name: Build UMVC.Core 🏗️
-    runs-on: windows-latest
-    needs: Test_UMVC_Core
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-
-      - uses: actions/checkout@v3
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '3.1.x'
-
-      - name: Install dotnet dependencies
-        run: dotnet restore ./UMVC.Core/UMVC.Core.sln
-
-      - name: Build
-        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Release
-
-      - uses: actions/upload-artifact@v3
-        name: Upload UMVC.Core.Components.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Components/bin/Release/net48/UMVC.Core.Components.dll
-
-      - uses: actions/upload-artifact@v3
-        name: Upload UMVC.Core.Generation.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Generation/bin/Release/net48/UMVC.Core.Generation.dll
-
-      - uses: actions/upload-artifact@v3
-        name: Upload UMVC.Core.Templates.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/Templates/bin/Release/net48/UMVC.Core.Templates.dll
-
-      - uses: actions/upload-artifact@v3
-        name: Upload UMVC.Core.MVC.dll
-        with:
-          name: UMVC.Core.Build
-          path: UMVC.Core/MVC/bin/Release/net48/UMVC.Core.MVC.dll
-
-  Test_UMVC_Editor:
-    name: Test UMVC.Editor 🧪
-    runs-on: ubuntu-latest
-    needs: Build_UMVC_Core
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download UMVC.Core Build
-        uses: actions/download-artifact@v2
-        with:
-          name: UMVC.Core.Build
-
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install python3-pip unzip curl -y && pip install requests
-
-      - name: Unzip and move UMVC.Core dlls
-        run: sh .github/workflows/scripts/install-umvc.editor-deps-same-workflow.sh
-
-      # Test edit mode
-      - name: Run playmode tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2021.3.16f1
-          testMode: playmode
-          customParameters: |
-            -enableCodeCoverage 
-            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
-            -coverageOptions "assemblyFilters:-*unity*"
-            -debugCodeOptimization
-      
-      # Test play mode
-      - name: Run editmode tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2021.3.16f1
-          testMode: editmode
-          customParameters: |
-            -enableCodeCoverage 
-            -coverageResultsPath /github/workspace/artifacts/CodeCoverage/ 
-            -coverageOptions "assemblyFilters:-*unity*"
-            -debugCodeOptimization
-
-      - name: Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./artifacts/CodeCoverage/workspace-opencov/PlayMode/TestCoverageResults_0000.xml,./artifacts/CodeCoverage/workspace-opencov/EditMode/TestCoverageResults_0000.xml
-          name: codecov-umbrella
-          fail_ci_if_error: true
 
   Build_UMVC_Editor:
     name: Build UMVC.Editor 🏗️
     runs-on: ubuntu-latest
-    needs: Test_UMVC_Editor
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.1.0
+        id: wait-for-build
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Build UMVC.Core 🏗️
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Is UMVC.Core failing?
+        if: ${{ steps.wait-for-build.outputs.conclusion == 'failure' }}
+        run: echo "::error There is a problem with your UMVC.Core build! Exiting!!" && exit 1
+
       - uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install python3-pip unzip curl -y && pip install requests
+
       - name: Download UMVC.Core Build
-        uses: actions/download-artifact@v2
-        with:
-          name: UMVC.Core.Build
+        run: python .github/workflows/scripts/downloadArtifacts.py ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Unzip and move UMVC.Core dlls
-        run: sh .github/workflows/scripts/install-umvc.editor-deps-same-workflow.sh
+        run: sh .github/workflows/scripts/install-umvc.editor-deps.sh
 
       - name: Delete Tests directory
         run: rm -rf Assets/UMVC.Tests

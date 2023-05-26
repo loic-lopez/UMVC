@@ -1,6 +1,9 @@
 name: UMVC.Core
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches: [ master ]
 
