@@ -3,6 +3,9 @@ name: UMVC.Editor
 # Ref: https://gist.github.com/chatrat12/9780fffe59bc46a63bc0b9b665489e08
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches: [ master ]
 
