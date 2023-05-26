@@ -45,7 +45,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2021.3.16f1
+          unityVersion: 2021.3.25f1
           testMode: All
           artifactsPath: ./artifacts/CodeCoverage/
           customParameters: |
@@ -61,6 +61,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./artifacts/CodeCoverage/editmode-results.xml,./artifacts/CodeCoverage/playmode-results.xml
-          name: codecov-umbrella-editor
           fail_ci_if_error: true
  
