@@ -4,6 +4,9 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  pull-requests: read # allows SonarCloud to decorate PRs with analysis results
+
 jobs:
   Test:
     name: Test UMVC.Core 🧪
@@ -11,27 +14,55 @@ jobs:
     steps:
     
       - uses: actions/checkout@v3
-      - name: Setup .NET Core
+        with:
+          fetch-depth: 0
+
+      - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '3.1.x'
-
-      - name: Install dotnet dependencies
-        run: dotnet restore ./UMVC.Core/UMVC.Core.sln
-
-      - name: Build
-        run: dotnet build ./UMVC.Core/UMVC.Core.sln --configuration Debug
-
-      - name: Test
-        run: .\UMVC.Core\packages\OpenCover\4.7.1221\tools\OpenCover.Console.exe -register -filter:"+[*]* -[*]*.Templates.* -[*]*.Mock.*" -target:".\UMVC.Core\packages\NUnit.ConsoleRunner\3.12.0\tools\nunit3-console.exe" -targetargs:"/domain:single .\UMVC.Core\Tests\bin\Debug\net48\UMVC.Core.Tests.dll" -output:coverage.xml
-
-      - name: Codecov
-        uses: codecov/codecov-action@v3
+          dotnet-version: |
+            3.1.x
+            5.0.x
+            6.0.x
+            7.0.x
+      - uses: actions/setup-java@v3  # Used for sonarcloud scanner
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-          name: codecov-umbrella
-          fail_ci_if_error: true
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: install dotnet-coverage
+        run: dotnet tool install --global dotnet-coverage
+
+      - name: install dotnet-sonarscanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.15
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.15
+
+      - name: Start SonarCloud scanner for UMVC.Core
+        run: >
+          dotnet sonarscanner begin /k:"UMVC.Core" `
+            /o:"loic-lopez" `
+            /n:"UMVC.Core" `
+            /v:"${{ steps.gitversion.outputs.semVer }}" `
+            /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}" `
+            /d:sonar.cs.vscoveragexml.reportsPaths="UMVC.Core/coverage.xml" `
+            /d:sonar.scm.provider=git `
+            /d:sonar.projectDescription="UMVC.Core - Model-View-Controller Base classes for UMVC" `
+            /d:sonar.host.url=https://sonarcloud.io /d:sonar.verbose=true `
+
+      - name: Test UMVC.Core
+        run: dotnet-coverage collect 'dotnet test UMVC.Core/UMVC.Core.sln' -f xml -o 'UMVC.Core/coverage.xml'
+
+      - name: End SonarCloud scanner for UMVC.Core
+        run: |
+          dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}"
           
   Build:
     name: Build UMVC.Core 🏗️
