@@ -41,26 +41,19 @@ jobs:
       # Test edit mode
       - name: Run playmode & editmode tests
         uses: game-ci/unity-test-runner@v2
+        id: tests
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2021.3.16f1
+          unityVersion: 2021.3.25f1
           testMode: All
-          artifactsPath: ./artifacts/CodeCoverage/
-          customParameters: |
-            -enableCodeCoverage
-            -coverageOptions "assemblyFilters:-*unity*"
-            -debugCodeOptimization
-        
-      - name: Display files in artifacts/CodeCoverage/
-        run: ls -R ./artifacts/CodeCoverage/
-      
-      - name: Codecov
+          coverageOptions: useProjectSettings;generateAdditionalMetrics
+          customParameters: -debugCodeOptimization -enableCodeCoverage
+
+      - name: Upload coverage report
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./artifacts/CodeCoverage/editmode-results.xml,./artifacts/CodeCoverage/playmode-results.xml
-          name: codecov-umbrella-editor
+          files: ${{ steps.tests.outputs.coveragePath }}/**/*.xml
           fail_ci_if_error: true
  

@@ -18,8 +18,8 @@ namespace UMVC.Core.MVC
         {
         }
 
-        public virtual event Delegates.OnFieldWillUpdate OnFieldWillUpdate;
-        public virtual event Delegates.OnFieldDidUpdate OnFieldDidUpdate;
+        public event Delegates.OnFieldWillUpdate OnFieldWillUpdate;
+        public event Delegates.OnFieldDidUpdate OnFieldDidUpdate;
 
 
         protected virtual void RaiseOnFieldWillUpdate<T>(T newValue, [CallerMemberName] string propertyName = null)
