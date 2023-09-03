@@ -40,7 +40,7 @@ jobs:
         run: rm -rf Assets/UMVC.Tests
 
       - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v3
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
@@ -55,7 +55,7 @@ jobs:
           path: ./UMVC.Editor.PreBuiltDlls.unitypackage
 
       - name: Create UMVC.Editor.MsBuildForUnity.unitypackage with unbundled UMVC.Core
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v3
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
