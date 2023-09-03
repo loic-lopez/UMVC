@@ -40,13 +40,13 @@ jobs:
 
       # Test edit mode
       - name: Run playmode & editmode tests
-        uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v3
         id: tests
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2021.3.25f1
+          unityVersion: 2022.3.8f1
           testMode: All
           coverageOptions: useProjectSettings;generateAdditionalMetrics
           customParameters: -debugCodeOptimization -enableCodeCoverage
