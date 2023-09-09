@@ -11,7 +11,7 @@ jobs:
         id: getManualLicenseFile
         uses: game-ci/unity-request-activation-file@v2.0.0
         with:
-          unityVersion: 2022.3.8f1
+          unityVersion: 2021.3.30f1
       # Upload artifact (Unity_v20XX.X.XXXX.alf)
       - name: Expose as artifact
         uses: actions/upload-artifact@v3
