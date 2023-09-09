@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-java@v3  # Used for sonarcloud scanner
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '11'
 
       - name: install dotnet-coverage
         run: dotnet tool install --global dotnet-coverage
@@ -54,11 +54,11 @@ jobs:
             /o:"loic-lopez" `
             /n:"UMVC.Core" `
             /v:"${{ steps.gitversion.outputs.semVer }}" `
-            /d:sonar.token="${{ secrets.SONAR_TOKEN_CORE }}" `
+            /d:sonar.login="${{ secrets.SONAR_TOKEN_CORE }}" `
             /d:sonar.cs.vscoveragexml.reportsPaths="UMVC.Core/coverage.xml" `
             /d:sonar.scm.provider=git `
             /d:sonar.projectDescription="UMVC.Core - Model-View-Controller Base classes for UMVC" `
-            /d:sonar.host.url=https://sonarcloud.io `
+            /d:sonar.host.url=https://sonarcloud.io /d:sonar.verbose=true `
 
       - name: Test UMVC.Core
         run: dotnet-coverage collect 'dotnet test UMVC.Core/UMVC.Core.sln' -f xml -o 'UMVC.Core/coverage.xml'
