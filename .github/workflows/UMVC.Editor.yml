@@ -46,7 +46,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2021.3.30f1
+          unityVersion: 2021.3.16f1
           testMode: All
           coverageOptions: useProjectSettings;generateAdditionalMetrics
           customParameters: -debugCodeOptimization -enableCodeCoverage

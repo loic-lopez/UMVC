@@ -11,7 +11,6 @@ jobs:
   Build_UMVC_Editor:
     name: Build UMVC.Editor 🏗️
     runs-on: ubuntu-latest
-    continue-on-error: true # the action game-ci/unity-builder successfully export the package but fails...
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - name: Wait for build to succeed
@@ -45,7 +44,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          unityVersion: 2021.3.30f1
+          unityVersion: 2021.3.16f1
           versioning: None
           buildMethod: UMVC.Export.UMVCPackageExport.ExportWithPreBuiltDlls
         
@@ -60,7 +59,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          unityVersion: 2021.3.30f1
+          unityVersion: 2021.3.16f1
           versioning: None
           buildMethod: UMVC.Export.UMVCPackageExport.ExportWithMsBuildForUnity
 
