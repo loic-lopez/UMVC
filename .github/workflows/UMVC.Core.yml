@@ -40,13 +40,13 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.15
+        uses: gittools/actions/gitversion/setup@v0
         with:
           versionSpec: '5.x'
 
       - name: Determine Version
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.15
+        uses: gittools/actions/gitversion/execute@v0
 
       - name: Start SonarCloud scanner for UMVC.Core
         run: >

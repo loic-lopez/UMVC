@@ -40,7 +40,7 @@ jobs:
         run: rm -rf Assets/UMVC.Tests
 
       - name: Create UMVC.Editor.PreBuiltDlls.unitypackage with prebundled UMVC.Core
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v3
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
@@ -55,7 +55,7 @@ jobs:
           path: ./UMVC.Editor.PreBuiltDlls.unitypackage
 
       - name: Create UMVC.Editor.MsBuildForUnity.unitypackage with unbundled UMVC.Core
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v3
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
@@ -79,24 +79,24 @@ jobs:
       - run: git fetch --prune --unshallow --tags
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.15
+        uses: gittools/actions/gitversion/setup@v0
         with:
           versionSpec: '5.x'
           
       - name: Determine Version
         id:   gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.15
+        uses: gittools/actions/gitversion/execute@v0
       
       - name: 📦 Zip UMVC.Core Sources
         run: zip -r UMVC.Core.${{ steps.gitversion.outputs.semVer }}.zip UMVC.Core
         
       - name: Download UMVC.Editor.MsBuildForUnity.unitypackage
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: UMVC.Editor.MsBuildForUnity.unitypackage
           
       - name: Download UMVC.Editor.PreBuiltDlls.unitypackage
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: UMVC.Editor.PreBuiltDlls.unitypackage
           
