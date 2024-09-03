@@ -91,12 +91,12 @@ jobs:
         run: zip -r UMVC.Core.${{ steps.gitversion.outputs.semVer }}.zip UMVC.Core
         
       - name: Download UMVC.Editor.MsBuildForUnity.unitypackage
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: UMVC.Editor.MsBuildForUnity.unitypackage
           
       - name: Download UMVC.Editor.PreBuiltDlls.unitypackage
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: UMVC.Editor.PreBuiltDlls.unitypackage
           
