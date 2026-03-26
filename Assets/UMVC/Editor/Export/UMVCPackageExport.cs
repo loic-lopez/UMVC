@@ -25,7 +25,7 @@ namespace UMVC.Export
                 Path.Combine(Application.dataPath, $"{Application.dataPath}/../UMVC.PlayerDependencies.msb4u.csproj")
             );
 
-            AssetDatabase.Refresh();
+            // AssetDatabase.Refresh();
 
             Export(ExportWithDllsPath);
 
